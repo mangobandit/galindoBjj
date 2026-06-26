@@ -1,0 +1,253 @@
+{
+  "common": {
+    "brand": "Galindo BJJ",
+    "tagline": "Jiu-Jitsu Brasileño · Marbella",
+    "nav": {
+      "home": "Inicio",
+      "signup": "Apúntate",
+      "contact": "Contacto",
+      "admin": "Acceso"
+    },
+    "languageLabel": "Idioma",
+    "languages": {
+      "es": "Español",
+      "en": "English",
+      "de": "Deutsch",
+      "it": "Italiano"
+    },
+    "days": {
+      "mon": "Lunes",
+      "tue": "Martes",
+      "wed": "Miércoles",
+      "thu": "Jueves",
+      "fri": "Viernes",
+      "sat": "Sábado"
+    },
+    "footer": {
+      "tagline": "El tatami te está esperando.",
+      "rights": "Todos los derechos reservados.",
+      "note": "Hecho con respeto por el arte."
+    }
+  },
+  "home": {
+    "hero": {
+      "kicker": "Jiu-Jitsu Brasileño",
+      "title": "Aprende en el tatami, a tu ritmo.",
+      "subtitle": "Una academia de barrio donde se entrena con técnica, respeto y buena gente. Niños y adultos, todos los niveles.",
+      "ctaPrimary": "Apúntate",
+      "ctaSecondary": "Contacto"
+    },
+    "about": {
+      "kicker": "El Profesor",
+      "title": "Quién te va a enseñar",
+      "body1": "Galindo lleva años sobre el tatami, primero como competidor y desde hace tiempo como profesor. Su forma de enseñar es sencilla: fundamentos sólidos, repetición con sentido y un ambiente donde nadie se siente fuera de lugar.",
+      "body2": "Aquí no buscamos espectáculo. Buscamos que entiendas lo que haces, que entrenes seguro y que vuelvas con ganas la semana siguiente."
+    },
+    "values": {
+      "title": "Lo que vas a encontrar",
+      "technique": {
+        "title": "Técnica primero",
+        "body": "Detalles bien explicados, paso a paso. Progresas porque entiendes, no porque te machacas."
+      },
+      "community": {
+        "title": "Buena gente",
+        "body": "Un grupo que te cuida desde el primer día. Se entrena fuerte y se respeta siempre."
+      },
+      "everyone": {
+        "title": "Para todos",
+        "body": "Niños y adultos, principiantes y veteranos. Cada uno entrena a su ritmo."
+      }
+    },
+    "schedule": {
+      "kicker": "Horario",
+      "title": "Cuándo entrenamos",
+      "note": "Horario orientativo. Confirma los detalles al apuntarte — pueden cambiar según la temporada.",
+      "kids": "Niños",
+      "adults": "Adultos"
+    },
+    "finalCta": {
+      "title": "La primera clase es para probar.",
+      "body": "Escríbenos, ven a ver una clase y decide sin compromiso. Te esperamos en el tatami.",
+      "button": "Apúntate"
+    }
+  },
+  "signup": {
+    "kicker": "Apúntate",
+    "title": "Reserva tu primera clase",
+    "intro": "Déjanos tus datos y el Profesor se pondrá en contacto contigo. Sin compromiso.",
+    "form": {
+      "name": "Nombre completo",
+      "namePlaceholder": "Tu nombre",
+      "contact": "Teléfono o email",
+      "contactPlaceholder": "Para poder responderte",
+      "section": "¿Para quién es?",
+      "sectionAdults": "Adultos",
+      "sectionKids": "Niños",
+      "sectionHelp": "Elige «Niños» si te apuntas en nombre de un menor.",
+      "language": "Idioma preferido",
+      "parentName": "Nombre del padre/madre o tutor",
+      "parentNamePlaceholder": "Quién es responsable del menor",
+      "emergency": "Contacto de emergencia",
+      "emergencyPlaceholder": "Nombre y teléfono",
+      "message": "Mensaje",
+      "messagePlaceholder": "¿Alguna duda o algo que debamos saber?",
+      "optional": "opcional",
+      "submit": "Enviar solicitud",
+      "submitting": "Enviando…"
+    },
+    "validation": {
+      "name": "Dime tu nombre, por favor.",
+      "contact": "Necesito un teléfono o email para responderte.",
+      "section": "Elige adultos o niños."
+    },
+    "errors": {
+      "generic": "No se ha podido enviar. Vuelve a intentarlo en un momento.",
+      "notConfigured": "El formulario aún no está conectado a la base de datos. Configura Supabase para activarlo."
+    },
+    "success": {
+      "title": "¡Recibido! Gracias.",
+      "body": "Hemos guardado tu solicitud. El Profesor te escribirá pronto para darte la bienvenida.",
+      "again": "Enviar otra solicitud",
+      "home": "Volver al inicio"
+    }
+  },
+  "contact": {
+    "kicker": "Contacto",
+    "title": "Hablemos",
+    "intro": "¿Dudas antes de apuntarte? Escríbenos o pásate por la academia.",
+    "emailLabel": "Email",
+    "phoneLabel": "Teléfono",
+    "addressLabel": "Dónde estamos",
+    "hoursLabel": "Atención",
+    "email": "hola@galindobjj.es",
+    "phone": "+34 600 000 000",
+    "address": "Marbella, España",
+    "hours": "Por las tardes, en horario de clases",
+    "note": "Para apuntarte, usa el formulario — es lo más rápido.",
+    "ctaSignup": "Ir al formulario"
+  },
+  "admin": {
+    "nav": {
+      "panel": "Panel",
+      "overview": "Resumen",
+      "members": "Miembros",
+      "payments": "Pagos",
+      "signups": "Solicitudes",
+      "logout": "Salir",
+      "viewSite": "Ver la web"
+    },
+    "login": {
+      "title": "Acceso del profesor",
+      "subtitle": "Entra para gestionar miembros y pagos.",
+      "email": "Email",
+      "password": "Contraseña",
+      "submit": "Entrar",
+      "signingIn": "Entrando…",
+      "error": "Email o contraseña incorrectos.",
+      "notConfigured": "Supabase no está configurado todavía. Añade las variables de entorno para activar el acceso."
+    },
+    "overview": {
+      "title": "Resumen",
+      "subtitle": "Un vistazo rápido a tu academia.",
+      "activeMembers": "Miembros activos",
+      "kidsAdults": "Niños / Adultos",
+      "kids": "Niños",
+      "adults": "Adultos",
+      "dueThisMonth": "Pagos pendientes",
+      "dueHint": "este mes",
+      "newSignups": "Solicitudes nuevas",
+      "collected": "Cobrado este mes",
+      "period": "Periodo",
+      "quickActions": "Acciones rápidas",
+      "reviewSignups": "Revisar solicitudes",
+      "goPayments": "Ir a pagos",
+      "paidOf": "{paid} de {total} al día"
+    },
+    "members": {
+      "title": "Miembros",
+      "subtitle": "Tu lista completa. Busca y filtra.",
+      "new": "Nuevo miembro",
+      "searchPlaceholder": "Buscar por nombre…",
+      "filterSection": "Sección",
+      "filterStatus": "Estado",
+      "all": "Todos",
+      "kids": "Niños",
+      "adults": "Adultos",
+      "prospect": "Interesado",
+      "active": "Activo",
+      "inactive": "Inactivo",
+      "belt": "Cinturón",
+      "joined": "Desde",
+      "empty": "No hay miembros que coincidan.",
+      "activate": "Activar",
+      "edit": "Editar",
+      "count": "{count} miembros"
+    },
+    "memberForm": {
+      "newTitle": "Nuevo miembro",
+      "editTitle": "Editar miembro",
+      "fullName": "Nombre completo",
+      "phone": "Teléfono",
+      "email": "Email",
+      "language": "Idioma",
+      "section": "Sección",
+      "belt": "Cinturón",
+      "beltNone": "Sin cinturón",
+      "status": "Estado",
+      "dateJoined": "Fecha de alta",
+      "notes": "Notas",
+      "kidsFields": "Datos del menor",
+      "parentName": "Padre/madre o tutor",
+      "emergency": "Contacto de emergencia",
+      "save": "Guardar",
+      "saving": "Guardando…",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "deleteConfirm": "¿Eliminar este miembro? No se puede deshacer.",
+      "back": "Volver a miembros",
+      "required": "El nombre es obligatorio."
+    },
+    "payments": {
+      "title": "Pagos",
+      "subtitle": "Marca quién ha pagado este mes. Un toque.",
+      "period": "Periodo",
+      "member": "Miembro",
+      "status": "Estado",
+      "paid": "Pagado",
+      "due": "Pendiente",
+      "markPaid": "Marcar pagado",
+      "markDue": "Deshacer",
+      "paidOn": "Pagado el",
+      "method": "Método",
+      "cash": "Efectivo",
+      "transfer": "Transferencia",
+      "other": "Otro",
+      "collected": "Cobrado",
+      "summary": "{paid} de {total} al día",
+      "empty": "No hay miembros activos todavía.",
+      "section": "Sección"
+    },
+    "signups": {
+      "title": "Solicitudes",
+      "subtitle": "Gente nueva que quiere apuntarse.",
+      "empty": "No hay solicitudes pendientes. ¡Bandeja limpia!",
+      "received": "Recibida",
+      "interest": "Interés",
+      "contact": "Contacto",
+      "message": "Mensaje",
+      "language": "Idioma",
+      "convert": "Convertir a miembro",
+      "converting": "Convirtiendo…",
+      "dismiss": "Descartar",
+      "kids": "Niños",
+      "adults": "Adultos",
+      "parentName": "Tutor",
+      "emergency": "Emergencia"
+    },
+    "common": {
+      "saveError": "Algo ha fallado. Inténtalo de nuevo.",
+      "notConfigured": "Supabase no está configurado. Añade las variables de entorno (.env.local) para usar el panel.",
+      "loading": "Cargando…"
+    }
+  }
+}

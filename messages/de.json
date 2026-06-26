@@ -1,0 +1,129 @@
+{
+  "common": {
+    "brand": "Galindo BJJ",
+    "tagline": "Brasilianisches Jiu-Jitsu · Marbella",
+    "nav": {
+      "home": "Start",
+      "signup": "Anmelden",
+      "contact": "Kontakt",
+      "admin": "Login"
+    },
+    "languageLabel": "Sprache",
+    "languages": {
+      "es": "Español",
+      "en": "English",
+      "de": "Deutsch",
+      "it": "Italiano"
+    },
+    "days": {
+      "mon": "Montag",
+      "tue": "Dienstag",
+      "wed": "Mittwoch",
+      "thu": "Donnerstag",
+      "fri": "Freitag",
+      "sat": "Samstag"
+    },
+    "footer": {
+      "tagline": "Die Matte wartet.",
+      "rights": "Alle Rechte vorbehalten.",
+      "note": "Mit Respekt für die Kunst gemacht."
+    }
+  },
+  "home": {
+    "hero": {
+      "kicker": "Brasilianisches Jiu-Jitsu",
+      "title": "Lerne auf der Matte, in deinem Tempo.",
+      "subtitle": "Eine Akademie im Viertel, getragen von Technik, Respekt und guten Leuten. Kinder und Erwachsene, alle Niveaus.",
+      "ctaPrimary": "Anmelden",
+      "ctaSecondary": "Kontakt"
+    },
+    "about": {
+      "kicker": "Der Professor",
+      "title": "Wer dich unterrichtet",
+      "body1": "Galindo steht seit Jahren auf der Matte — erst als Wettkämpfer, seit Langem als Trainer. Sein Ansatz ist einfach: solide Grundlagen, sinnvolle Wiederholung und eine Atmosphäre, in der sich niemand fehl am Platz fühlt.",
+      "body2": "Es geht uns nicht um Show. Es geht darum, dass du verstehst, was du tust, sicher trainierst und in der nächsten Woche gern wiederkommst."
+    },
+    "values": {
+      "title": "Was dich hier erwartet",
+      "technique": {
+        "title": "Technik zuerst",
+        "body": "Details gut erklärt, Schritt für Schritt. Du machst Fortschritte, weil du verstehst — nicht weil du zermalmt wirst."
+      },
+      "community": {
+        "title": "Gute Leute",
+        "body": "Eine Gruppe, die sich vom ersten Tag an um dich kümmert. Wir trainieren hart und respektieren uns immer."
+      },
+      "everyone": {
+        "title": "Für alle",
+        "body": "Kinder und Erwachsene, Anfänger und Erfahrene. Jeder trainiert in seinem Tempo."
+      }
+    },
+    "schedule": {
+      "kicker": "Trainingszeiten",
+      "title": "Wann wir trainieren",
+      "note": "Die Zeiten sind ein Richtwert. Bestätige die Details bei der Anmeldung — sie können sich je nach Saison ändern.",
+      "kids": "Kinder",
+      "adults": "Erwachsene"
+    },
+    "finalCta": {
+      "title": "Deine erste Stunde ist zum Ausprobieren.",
+      "body": "Schreib uns, schau dir eine Stunde an und entscheide ganz ohne Druck. Wir sehen uns auf der Matte.",
+      "button": "Anmelden"
+    }
+  },
+  "signup": {
+    "kicker": "Anmelden",
+    "title": "Buche deine erste Stunde",
+    "intro": "Hinterlasse uns deine Daten und der Professor meldet sich bei dir. Unverbindlich.",
+    "form": {
+      "name": "Vollständiger Name",
+      "namePlaceholder": "Dein Name",
+      "contact": "Telefon oder E-Mail",
+      "contactPlaceholder": "Damit wir dir antworten können",
+      "section": "Für wen ist es?",
+      "sectionAdults": "Erwachsene",
+      "sectionKids": "Kinder",
+      "sectionHelp": "Wähle „Kinder“, wenn du eine minderjährige Person anmeldest.",
+      "language": "Bevorzugte Sprache",
+      "parentName": "Name des Elternteils oder Erziehungsberechtigten",
+      "parentNamePlaceholder": "Wer ist für das Kind verantwortlich",
+      "emergency": "Notfallkontakt",
+      "emergencyPlaceholder": "Name und Telefon",
+      "message": "Nachricht",
+      "messagePlaceholder": "Fragen oder etwas, das wir wissen sollten?",
+      "optional": "optional",
+      "submit": "Anfrage senden",
+      "submitting": "Wird gesendet…"
+    },
+    "validation": {
+      "name": "Bitte nenn uns deinen Namen.",
+      "contact": "Wir brauchen Telefon oder E-Mail, um dir zu antworten.",
+      "section": "Wähle Erwachsene oder Kinder."
+    },
+    "errors": {
+      "generic": "Das konnte nicht gesendet werden. Bitte versuch es gleich noch einmal.",
+      "notConfigured": "Das Formular ist noch nicht mit der Datenbank verbunden. Konfiguriere Supabase, um es zu aktivieren."
+    },
+    "success": {
+      "title": "Angekommen — danke!",
+      "body": "Wir haben deine Anfrage gespeichert. Der Professor schreibt dir bald zur Begrüßung.",
+      "again": "Weitere Anfrage senden",
+      "home": "Zurück zur Startseite"
+    }
+  },
+  "contact": {
+    "kicker": "Kontakt",
+    "title": "Sprechen wir",
+    "intro": "Fragen vor der Anmeldung? Schreib uns oder komm in der Akademie vorbei.",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon",
+    "addressLabel": "Wo wir sind",
+    "hoursLabel": "Zeiten",
+    "email": "hola@galindobjj.es",
+    "phone": "+34 600 000 000",
+    "address": "Marbella, Spanien",
+    "hours": "Abends, während der Trainingszeiten",
+    "note": "Zum Anmelden bitte das Formular nutzen — das geht am schnellsten.",
+    "ctaSignup": "Zum Formular"
+  }
+}

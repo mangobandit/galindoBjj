@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark, earthy, grounded — a neighbourhood dojo, not a startup. */
+    --background: 20 14% 7%;
+    --foreground: 40 30% 92%;
+
+    --card: 20 12% 10%;
+    --card-foreground: 40 30% 92%;
+
+    --muted: 24 8% 15%;
+    --muted-foreground: 36 10% 64%;
+
+    --secondary: 24 8% 15%;
+    --secondary-foreground: 40 30% 92%;
+
+    --accent: 38 55% 55%;
+    --accent-foreground: 20 14% 7%;
+
+    /* clay / tatami red */
+    --primary: 8 72% 50%;
+    --primary-foreground: 40 40% 97%;
+
+    --destructive: 0 70% 45%;
+    --destructive-foreground: 40 40% 97%;
+
+    --success: 142 42% 40%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 24 8% 18%;
+    --input: 24 8% 22%;
+    --ring: 8 72% 50%;
+
+    --radius: 0.55rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(
+        60rem 40rem at 75% -10%,
+        hsl(8 72% 50% / 0.06),
+        transparent 60%
+      ),
+      radial-gradient(
+        50rem 40rem at 0% 0%,
+        hsl(38 55% 55% / 0.05),
+        transparent 55%
+      );
+    background-attachment: fixed;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  .kicker {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-primary;
+  }
+  /* edge-to-edge faint divider used between sections */
+  .hairline {
+    @apply border-t border-border/70;
+  }
+}

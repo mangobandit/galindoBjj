@@ -1,0 +1,129 @@
+{
+  "common": {
+    "brand": "Galindo BJJ",
+    "tagline": "Jiu-Jitsu Brasiliano · Marbella",
+    "nav": {
+      "home": "Home",
+      "signup": "Iscriviti",
+      "contact": "Contatti",
+      "admin": "Accedi"
+    },
+    "languageLabel": "Lingua",
+    "languages": {
+      "es": "Español",
+      "en": "English",
+      "de": "Deutsch",
+      "it": "Italiano"
+    },
+    "days": {
+      "mon": "Lunedì",
+      "tue": "Martedì",
+      "wed": "Mercoledì",
+      "thu": "Giovedì",
+      "fri": "Venerdì",
+      "sat": "Sabato"
+    },
+    "footer": {
+      "tagline": "Il tatami ti aspetta.",
+      "rights": "Tutti i diritti riservati.",
+      "note": "Fatto con rispetto per l'arte."
+    }
+  },
+  "home": {
+    "hero": {
+      "kicker": "Jiu-Jitsu Brasiliano",
+      "title": "Impara sul tatami, al tuo ritmo.",
+      "subtitle": "Un'accademia di quartiere costruita su tecnica, rispetto e brave persone. Bambini e adulti, tutti i livelli.",
+      "ctaPrimary": "Iscriviti",
+      "ctaSecondary": "Contatti"
+    },
+    "about": {
+      "kicker": "Il Maestro",
+      "title": "Chi ti insegnerà",
+      "body1": "Galindo è da anni sul tatami — prima da agonista, da tempo come insegnante. Il suo metodo è semplice: fondamentali solidi, ripetizione con criterio e un ambiente in cui nessuno si sente fuori posto.",
+      "body2": "Non cerchiamo lo spettacolo. Vogliamo che tu capisca quello che fai, che ti alleni in sicurezza e che torni volentieri la settimana dopo."
+    },
+    "values": {
+      "title": "Cosa troverai qui",
+      "technique": {
+        "title": "Prima la tecnica",
+        "body": "Dettagli spiegati bene, passo dopo passo. Migliori perché capisci — non perché vieni schiacciato."
+      },
+      "community": {
+        "title": "Brave persone",
+        "body": "Un gruppo che ti accoglie dal primo giorno. Ci si allena duro e ci si rispetta sempre."
+      },
+      "everyone": {
+        "title": "Per tutti",
+        "body": "Bambini e adulti, principianti e veterani. Ognuno si allena al proprio ritmo."
+      }
+    },
+    "schedule": {
+      "kicker": "Orari",
+      "title": "Quando ci alleniamo",
+      "note": "Gli orari sono indicativi. Conferma i dettagli quando ti iscrivi — possono cambiare con la stagione.",
+      "kids": "Bambini",
+      "adults": "Adulti"
+    },
+    "finalCta": {
+      "title": "La prima lezione è di prova.",
+      "body": "Scrivici, vieni a vedere una lezione e decidi senza impegno. Ci vediamo sul tatami.",
+      "button": "Iscriviti"
+    }
+  },
+  "signup": {
+    "kicker": "Iscriviti",
+    "title": "Prenota la tua prima lezione",
+    "intro": "Lasciaci i tuoi dati e il Maestro ti contatterà. Senza impegno.",
+    "form": {
+      "name": "Nome completo",
+      "namePlaceholder": "Il tuo nome",
+      "contact": "Telefono o email",
+      "contactPlaceholder": "Per poterti rispondere",
+      "section": "Per chi è?",
+      "sectionAdults": "Adulti",
+      "sectionKids": "Bambini",
+      "sectionHelp": "Scegli «Bambini» se ti iscrivi per conto di un minore.",
+      "language": "Lingua preferita",
+      "parentName": "Nome del genitore o tutore",
+      "parentNamePlaceholder": "Chi è responsabile del minore",
+      "emergency": "Contatto di emergenza",
+      "emergencyPlaceholder": "Nome e telefono",
+      "message": "Messaggio",
+      "messagePlaceholder": "Domande o qualcosa che dovremmo sapere?",
+      "optional": "facoltativo",
+      "submit": "Invia richiesta",
+      "submitting": "Invio in corso…"
+    },
+    "validation": {
+      "name": "Dicci il tuo nome, per favore.",
+      "contact": "Ci serve un telefono o un'email per risponderti.",
+      "section": "Scegli adulti o bambini."
+    },
+    "errors": {
+      "generic": "Non è stato possibile inviare. Riprova tra un momento.",
+      "notConfigured": "Il modulo non è ancora collegato al database. Configura Supabase per attivarlo."
+    },
+    "success": {
+      "title": "Ricevuto — grazie!",
+      "body": "Abbiamo salvato la tua richiesta. Il Maestro ti scriverà presto per darti il benvenuto.",
+      "again": "Invia un'altra richiesta",
+      "home": "Torna alla home"
+    }
+  },
+  "contact": {
+    "kicker": "Contatti",
+    "title": "Parliamone",
+    "intro": "Dubbi prima di iscriverti? Scrivici o passa in accademia.",
+    "emailLabel": "Email",
+    "phoneLabel": "Telefono",
+    "addressLabel": "Dove siamo",
+    "hoursLabel": "Orari",
+    "email": "hola@galindobjj.es",
+    "phone": "+34 600 000 000",
+    "address": "Marbella, Spagna",
+    "hours": "Di sera, durante gli orari delle lezioni",
+    "note": "Per iscriverti, usa il modulo — è il modo più veloce.",
+    "ctaSignup": "Vai al modulo"
+  }
+}
