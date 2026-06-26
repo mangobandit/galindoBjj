@@ -125,11 +125,12 @@
     "login": {
       "title": "Acceso del profesor",
       "subtitle": "Entra para gestionar miembros y pagos.",
-      "email": "Email",
+      "username": "Usuario",
+      "usernamePlaceholder": "p. ej. admin o profe",
       "password": "Contraseña",
       "submit": "Entrar",
       "signingIn": "Entrando…",
-      "error": "Email o contraseña incorrectos.",
+      "error": "Usuario o contraseña incorrectos.",
       "notConfigured": "Supabase no está configurado todavía. Añade las variables de entorno para activar el acceso."
     },
     "overview": {

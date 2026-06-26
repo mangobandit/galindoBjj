@@ -9,10 +9,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+// Coach-friendly login: people type a username ("admin", "profe") and we map
+// it to a real e-mail behind the scenes, because Supabase Auth logs in by
+// e-mail. Create the Supabase users as <username>@galindobjj.es.
+const LOGIN_DOMAIN = "galindobjj.es";
+
 export function LoginForm() {
   const t = useTranslations("admin.login");
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -25,6 +30,10 @@ export function LoginForm() {
       setError(t("notConfigured"));
       return;
     }
+
+    // "admin" -> "admin@galindobjj.es" (already-typed e-mails pass through).
+    const id = username.trim().toLowerCase();
+    const email = id.includes("@") ? id : `${id}@${LOGIN_DOMAIN}`;
 
     setLoading(true);
     const supabase = createClient();
@@ -46,14 +55,16 @@ export function LoginForm() {
   return (
     <form onSubmit={onSubmit} className="space-y-5">
       <div className="space-y-2">
-        <Label htmlFor="email">{t("email")}</Label>
+        <Label htmlFor="username">{t("username")}</Label>
         <Input
-          id="email"
-          type="email"
-          autoComplete="email"
+          id="username"
+          type="text"
+          autoComplete="username"
+          autoCapitalize="none"
           required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          placeholder={t("usernamePlaceholder")}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
       </div>
 
