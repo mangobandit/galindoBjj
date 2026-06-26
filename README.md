@@ -30,7 +30,9 @@ project, one Vercel project, redeploy on `git push`.
 ## What Phase 1 ships
 
 **Public site** (Spanish-first, language switcher → en/de/it, mobile-first)
-- Home — intro to the dojo + the Professor, a sample class schedule, clear CTA.
+- Home — a **calm, logo-forward** landing: short honest intro, what we train
+  (**BJJ only — Gi & No-Gi**, not MMA), a sample schedule, and a sign-up CTA.
+  Deliberately minimal for now; the richer marketing site is Phase 2.
 - Sign-up — name, contact, preferred language, section (kids/adults). Choosing
   **kids** reveals parent name + emergency contact. Submits to the `signups`
   table; friendly confirmation screen. **All four locales fully translated.**
@@ -127,6 +129,14 @@ supabase/
 middleware.ts              next-intl locale routing + Supabase session refresh
 ```
 
+### Branding
+- Strict **black & white**, matching the Galindo Jiu-Jitsu badge.
+- Display/brand type is **Chakra Petch** (geometric/technical, close to the
+  wordmark); body text is Inter.
+- The logo is a faithful **SVG stand-in** ([`components/Logo.tsx`](components/Logo.tsx)
+  + [`app/icon.svg`](app/icon.svg) favicon). To use the official artwork, drop it
+  at `public/galindo-logo.png` and swap `<LogoMark>` for a Next `<Image>`.
+
 ### Internationalisation
 - **Public flow is fully translated in all four locales.**
 - **Admin is Spanish-first.** Admin copy lives in the i18n system (not
@@ -172,7 +182,11 @@ No business internals (members, money) are ever exposed publicly.
 
 ## Roadmap
 
-### Phase 2 — scaffolded, **no UI yet**
+### Phase 2 — scaffolded / planned, **no UI yet**
+- **The "real" website + turning it into a business** — the current public site
+  is intentionally simple so it's useful without being intimidating. Phase 2 is
+  the richer marketing site: photos, story, SEO, lead capture and client
+  acquisition.
 - **Merchandise requests** — the `merch_requests` table already exists (see the
   migration) with admin-only RLS. The public request form and the admin
   fulfilment view are **not built**.
@@ -196,6 +210,9 @@ No business internals (members, money) are ever exposed publicly.
   `emergency_contact` so a kid's details survive conversion to a member.
 - All marketing copy (the Professor's bio, address, phone, email, schedule) is
   **placeholder** — edit `messages/*.json` and the schedule array before going live.
+- The offering is **BJJ only — Gi & No-Gi** (no MMA/other disciplines). The
+  Professor trained at [Fusion BJJ](https://www.fusionbjj.es/), noted on the
+  home page; verify exact wording with him before launch.
 
 ## Scripts
 ```bash

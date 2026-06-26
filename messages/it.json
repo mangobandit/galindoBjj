@@ -1,7 +1,7 @@
 {
   "common": {
-    "brand": "Galindo BJJ",
-    "tagline": "Jiu-Jitsu Brasiliano · Marbella",
+    "brand": "Galindo Jiu-Jitsu",
+    "tagline": "Jiu-Jitsu Brasiliano · Gi e No-Gi · Marbella",
     "nav": {
       "home": "Home",
       "signup": "Iscriviti",
@@ -32,43 +32,29 @@
   "home": {
     "hero": {
       "kicker": "Jiu-Jitsu Brasiliano",
-      "title": "Impara sul tatami, al tuo ritmo.",
-      "subtitle": "Un'accademia di quartiere costruita su tecnica, rispetto e brave persone. Bambini e adulti, tutti i livelli.",
+      "title": "Vieni ad allenarti sul tatami.",
+      "subtitle": "Solo Jiu-Jitsu, insegnato bene. Gi e No-Gi, per bambini e adulti di ogni livello. La prima lezione è di prova, senza impegno.",
       "ctaPrimary": "Iscriviti",
       "ctaSecondary": "Contatti"
     },
-    "about": {
-      "kicker": "Il Maestro",
-      "title": "Chi ti insegnerà",
-      "body1": "Galindo è da anni sul tatami — prima da agonista, da tempo come insegnante. Il suo metodo è semplice: fondamentali solidi, ripetizione con criterio e un ambiente in cui nessuno si sente fuori posto.",
-      "body2": "Non cerchiamo lo spettacolo. Vogliamo che tu capisca quello che fai, che ti alleni in sicurezza e che torni volentieri la settimana dopo."
-    },
-    "values": {
-      "title": "Cosa troverai qui",
-      "technique": {
-        "title": "Prima la tecnica",
-        "body": "Dettagli spiegati bene, passo dopo passo. Migliori perché capisci — non perché vieni schiacciato."
-      },
-      "community": {
-        "title": "Brave persone",
-        "body": "Un gruppo che ti accoglie dal primo giorno. Ci si allena duro e ci si rispetta sempre."
-      },
-      "everyone": {
-        "title": "Per tutti",
-        "body": "Bambini e adulti, principianti e veterani. Ognuno si allena al proprio ritmo."
-      }
+    "offer": {
+      "title": "Cosa alleniamo",
+      "gi": "Con Gi",
+      "giDesc": "Il kimono tradizionale: prese, controllo e una solida base tecnica.",
+      "nogi": "No-Gi",
+      "nogiDesc": "Senza kimono: più dinamico, con ritmo e molte transizioni."
     },
     "schedule": {
       "kicker": "Orari",
       "title": "Quando ci alleniamo",
-      "note": "Gli orari sono indicativi. Conferma i dettagli quando ti iscrivi — possono cambiare con la stagione.",
+      "note": "Gli orari sono indicativi. Confermali quando ti iscrivi.",
       "kids": "Bambini",
       "adults": "Adulti"
     },
-    "finalCta": {
-      "title": "La prima lezione è di prova.",
-      "body": "Scrivici, vieni a vedere una lezione e decidi senza impegno. Ci vediamo sul tatami.",
-      "button": "Iscriviti"
+    "about": {
+      "title": "Il Maestro",
+      "body": "Galindo è da anni sul tatami — prima da agonista, da tempo come insegnante. Lezioni semplici e sicure: fondamentali solidi, ripetizione con criterio e un buon ambiente. Qui si fa solo Jiu-Jitsu, fatto bene.",
+      "lineage": "Formato alla Fusion BJJ"
     }
   },
   "signup": {

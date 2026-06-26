@@ -1,7 +1,7 @@
 {
   "common": {
-    "brand": "Galindo BJJ",
-    "tagline": "Brazilian Jiu-Jitsu · Marbella",
+    "brand": "Galindo Jiu-Jitsu",
+    "tagline": "Brazilian Jiu-Jitsu · Gi & No-Gi · Marbella",
     "nav": {
       "home": "Home",
       "signup": "Sign up",
@@ -32,43 +32,29 @@
   "home": {
     "hero": {
       "kicker": "Brazilian Jiu-Jitsu",
-      "title": "Learn on the mat, at your own pace.",
-      "subtitle": "A neighbourhood academy built on technique, respect and good people. Kids and adults, all levels.",
+      "title": "Come train on the mat.",
+      "subtitle": "Just Jiu-Jitsu, taught well. Gi and No-Gi, for kids and adults of all levels. Your first class is a trial, no commitment.",
       "ctaPrimary": "Sign up",
       "ctaSecondary": "Contact"
     },
-    "about": {
-      "kicker": "The Professor",
-      "title": "Who you'll train with",
-      "body1": "Galindo has spent years on the mat — first as a competitor, and for a long time now as a coach. His approach is simple: solid fundamentals, purposeful repetition, and a room where nobody feels out of place.",
-      "body2": "We're not here for the spectacle. We're here so you understand what you're doing, train safely, and come back keen the following week."
-    },
-    "values": {
-      "title": "What you'll find here",
-      "technique": {
-        "title": "Technique first",
-        "body": "Details explained well, step by step. You progress because you understand — not because you get crushed."
-      },
-      "community": {
-        "title": "Good people",
-        "body": "A group that looks after you from day one. We train hard and always respect each other."
-      },
-      "everyone": {
-        "title": "For everyone",
-        "body": "Kids and adults, beginners and veterans. Everyone trains at their own pace."
-      }
+    "offer": {
+      "title": "What we train",
+      "gi": "With Gi",
+      "giDesc": "The traditional kimono: grips, control and a solid technical base.",
+      "nogi": "No-Gi",
+      "nogiDesc": "No kimono: faster and more dynamic, with lots of transitions."
     },
     "schedule": {
       "kicker": "Schedule",
       "title": "When we train",
-      "note": "Times are a guide. Confirm the details when you sign up — they can change by season.",
+      "note": "Times are a guide. Confirm them when you sign up.",
       "kids": "Kids",
       "adults": "Adults"
     },
-    "finalCta": {
-      "title": "Your first class is a trial.",
-      "body": "Message us, come watch a class, and decide with no pressure. We'll see you on the mat.",
-      "button": "Sign up"
+    "about": {
+      "title": "The Professor",
+      "body": "Galindo has spent years on the mat — first competing, and for a long time now teaching. Simple, safe classes: solid fundamentals, purposeful repetition and a good atmosphere. Here it's only Jiu-Jitsu, done well.",
+      "lineage": "Trained at Fusion BJJ"
     }
   },
   "signup": {

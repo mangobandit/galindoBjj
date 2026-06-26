@@ -1,7 +1,7 @@
 {
   "common": {
-    "brand": "Galindo BJJ",
-    "tagline": "Brasilianisches Jiu-Jitsu · Marbella",
+    "brand": "Galindo Jiu-Jitsu",
+    "tagline": "Brasilianisches Jiu-Jitsu · Gi & No-Gi · Marbella",
     "nav": {
       "home": "Start",
       "signup": "Anmelden",
@@ -32,43 +32,29 @@
   "home": {
     "hero": {
       "kicker": "Brasilianisches Jiu-Jitsu",
-      "title": "Lerne auf der Matte, in deinem Tempo.",
-      "subtitle": "Eine Akademie im Viertel, getragen von Technik, Respekt und guten Leuten. Kinder und Erwachsene, alle Niveaus.",
+      "title": "Komm auf die Matte.",
+      "subtitle": "Nur Jiu-Jitsu, gut unterrichtet. Gi und No-Gi, für Kinder und Erwachsene aller Niveaus. Die erste Stunde ist zum Ausprobieren, unverbindlich.",
       "ctaPrimary": "Anmelden",
       "ctaSecondary": "Kontakt"
     },
-    "about": {
-      "kicker": "Der Professor",
-      "title": "Wer dich unterrichtet",
-      "body1": "Galindo steht seit Jahren auf der Matte — erst als Wettkämpfer, seit Langem als Trainer. Sein Ansatz ist einfach: solide Grundlagen, sinnvolle Wiederholung und eine Atmosphäre, in der sich niemand fehl am Platz fühlt.",
-      "body2": "Es geht uns nicht um Show. Es geht darum, dass du verstehst, was du tust, sicher trainierst und in der nächsten Woche gern wiederkommst."
-    },
-    "values": {
-      "title": "Was dich hier erwartet",
-      "technique": {
-        "title": "Technik zuerst",
-        "body": "Details gut erklärt, Schritt für Schritt. Du machst Fortschritte, weil du verstehst — nicht weil du zermalmt wirst."
-      },
-      "community": {
-        "title": "Gute Leute",
-        "body": "Eine Gruppe, die sich vom ersten Tag an um dich kümmert. Wir trainieren hart und respektieren uns immer."
-      },
-      "everyone": {
-        "title": "Für alle",
-        "body": "Kinder und Erwachsene, Anfänger und Erfahrene. Jeder trainiert in seinem Tempo."
-      }
+    "offer": {
+      "title": "Was wir trainieren",
+      "gi": "Mit Gi",
+      "giDesc": "Der klassische Kimono: Griffe, Kontrolle und eine solide technische Basis.",
+      "nogi": "No-Gi",
+      "nogiDesc": "Ohne Kimono: schneller und dynamischer, mit vielen Übergängen."
     },
     "schedule": {
       "kicker": "Trainingszeiten",
       "title": "Wann wir trainieren",
-      "note": "Die Zeiten sind ein Richtwert. Bestätige die Details bei der Anmeldung — sie können sich je nach Saison ändern.",
+      "note": "Die Zeiten sind ein Richtwert. Bestätige sie bei der Anmeldung.",
       "kids": "Kinder",
       "adults": "Erwachsene"
     },
-    "finalCta": {
-      "title": "Deine erste Stunde ist zum Ausprobieren.",
-      "body": "Schreib uns, schau dir eine Stunde an und entscheide ganz ohne Druck. Wir sehen uns auf der Matte.",
-      "button": "Anmelden"
+    "about": {
+      "title": "Der Professor",
+      "body": "Galindo steht seit Jahren auf der Matte — erst als Wettkämpfer, seit Langem als Trainer. Einfache, sichere Stunden: solide Grundlagen, sinnvolle Wiederholung und gute Atmosphäre. Hier gibt es nur Jiu-Jitsu, richtig gemacht.",
+      "lineage": "Ausgebildet bei Fusion BJJ"
     }
   },
   "signup": {

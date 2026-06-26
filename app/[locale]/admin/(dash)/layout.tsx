@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { ExternalLink, Settings } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Link, redirect } from "@/i18n/navigation";
+import { Logo } from "@/components/Logo";
 import { AdminNav } from "../_components/AdminNav";
 import { LogoutButton } from "../_components/LogoutButton";
 
@@ -50,14 +51,13 @@ export default async function DashLayout({
     <div className="min-h-dvh">
       <header className="border-b border-border bg-card/40">
         <div className="container flex h-16 items-center justify-between gap-4">
-          <Link href="/admin" className="flex items-baseline gap-2">
-            <span className="font-display text-lg font-semibold tracking-tight">
-              Galindo
-            </span>
-            <span className="font-display text-lg font-semibold tracking-tight text-primary">
-              BJJ
-            </span>
-            <span className="ml-1 hidden text-sm text-muted-foreground sm:inline">
+          <Link
+            href="/admin"
+            className="flex items-center gap-3"
+            aria-label="Galindo Jiu-Jitsu"
+          >
+            <Logo subtitle={false} />
+            <span className="hidden text-sm text-muted-foreground sm:inline">
               · {t("nav.panel")}
             </span>
           </Link>

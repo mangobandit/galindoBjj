@@ -1,7 +1,7 @@
 {
   "common": {
-    "brand": "Galindo BJJ",
-    "tagline": "Jiu-Jitsu Brasileño · Marbella",
+    "brand": "Galindo Jiu-Jitsu",
+    "tagline": "Jiu-Jitsu Brasileño · Gi y No-Gi · Marbella",
     "nav": {
       "home": "Inicio",
       "signup": "Apúntate",
@@ -32,43 +32,29 @@
   "home": {
     "hero": {
       "kicker": "Jiu-Jitsu Brasileño",
-      "title": "Aprende en el tatami, a tu ritmo.",
-      "subtitle": "Una academia de barrio donde se entrena con técnica, respeto y buena gente. Niños y adultos, todos los niveles.",
+      "title": "Ven a entrenar al tatami.",
+      "subtitle": "Solo Jiu-Jitsu, bien enseñado. Gi y No-Gi, para niños y adultos de todos los niveles. La primera clase es de prueba, sin compromiso.",
       "ctaPrimary": "Apúntate",
       "ctaSecondary": "Contacto"
     },
-    "about": {
-      "kicker": "El Profesor",
-      "title": "Quién te va a enseñar",
-      "body1": "Galindo lleva años sobre el tatami, primero como competidor y desde hace tiempo como profesor. Su forma de enseñar es sencilla: fundamentos sólidos, repetición con sentido y un ambiente donde nadie se siente fuera de lugar.",
-      "body2": "Aquí no buscamos espectáculo. Buscamos que entiendas lo que haces, que entrenes seguro y que vuelvas con ganas la semana siguiente."
-    },
-    "values": {
-      "title": "Lo que vas a encontrar",
-      "technique": {
-        "title": "Técnica primero",
-        "body": "Detalles bien explicados, paso a paso. Progresas porque entiendes, no porque te machacas."
-      },
-      "community": {
-        "title": "Buena gente",
-        "body": "Un grupo que te cuida desde el primer día. Se entrena fuerte y se respeta siempre."
-      },
-      "everyone": {
-        "title": "Para todos",
-        "body": "Niños y adultos, principiantes y veteranos. Cada uno entrena a su ritmo."
-      }
+    "offer": {
+      "title": "Qué entrenamos",
+      "gi": "Con Gi",
+      "giDesc": "El kimono tradicional: agarres, controles y una base técnica sólida.",
+      "nogi": "Sin Gi · No-Gi",
+      "nogiDesc": "Sin kimono: más dinámico, con ritmo y muchas transiciones."
     },
     "schedule": {
       "kicker": "Horario",
       "title": "Cuándo entrenamos",
-      "note": "Horario orientativo. Confirma los detalles al apuntarte — pueden cambiar según la temporada.",
+      "note": "Horario orientativo. Confírmalo al apuntarte.",
       "kids": "Niños",
       "adults": "Adultos"
     },
-    "finalCta": {
-      "title": "La primera clase es para probar.",
-      "body": "Escríbenos, ven a ver una clase y decide sin compromiso. Te esperamos en el tatami.",
-      "button": "Apúntate"
+    "about": {
+      "title": "El Profesor",
+      "body": "Galindo lleva años sobre el tatami, primero como competidor y desde hace tiempo enseñando. Clases sencillas y seguras: fundamentos sólidos, repetición con sentido y buen ambiente. Aquí solo se entrena Jiu-Jitsu, bien hecho.",
+      "lineage": "Formado en Fusion BJJ"
     }
   },
   "signup": {

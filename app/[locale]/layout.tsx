@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Oswald } from "next/font/google";
+import { Inter, Chakra_Petch } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -12,7 +12,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const oswald = Oswald({
+const chakra = Chakra_Petch({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-display",
@@ -57,7 +57,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${inter.variable} ${oswald.variable}`}>
+    <html lang={locale} className={`${inter.variable} ${chakra.variable}`}>
       <body className="min-h-dvh font-sans">
         <NextIntlClientProvider messages={messages}>
           {children}

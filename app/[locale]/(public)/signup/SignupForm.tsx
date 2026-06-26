@@ -23,8 +23,8 @@ export function SignupForm() {
 
   if (state.status === "success") {
     return (
-      <div className="rounded-xl border border-success/40 bg-success/10 p-8 text-center">
-        <CheckCircle2 className="mx-auto size-12 text-success" />
+      <div className="rounded-xl border border-border bg-card p-8 text-center">
+        <CheckCircle2 className="mx-auto size-12 text-foreground" />
         <h2 className="mt-4 text-2xl font-bold">{t("success.title")}</h2>
         <p className="mx-auto mt-2 max-w-md text-muted-foreground">
           {t("success.body")}

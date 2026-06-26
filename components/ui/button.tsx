@@ -15,11 +15,13 @@ const buttonVariants = cva(
         outline:
           "border border-border bg-transparent hover:bg-secondary hover:text-secondary-foreground",
         ghost: "hover:bg-secondary hover:text-secondary-foreground",
+        // monochrome: same solid white as default (used for mark-paid / activate)
         success:
-          "bg-success text-success-foreground hover:bg-success/90 shadow-sm",
+          "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+        // monochrome destructive: outline that inverts on hover
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        link: "text-primary underline-offset-4 hover:underline",
+          "border border-foreground/30 bg-transparent text-foreground hover:bg-foreground hover:text-background",
+        link: "text-foreground underline underline-offset-4 hover:no-underline",
       },
       size: {
         default: "h-11 px-5 py-2",

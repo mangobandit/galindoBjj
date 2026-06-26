@@ -9,11 +9,12 @@ const badgeVariants = cva(
       variant: {
         default: "border-transparent bg-secondary text-secondary-foreground",
         outline: "border-border text-foreground",
-        success: "border-transparent bg-success/15 text-success",
-        warning:
-          "border-transparent bg-amber-500/15 text-amber-400",
+        // black & white: "paid"/"active" read as a solid white chip…
+        success: "border-transparent bg-foreground text-background",
+        // …and "due"/"prospect" as a quiet outline.
+        warning: "border-border text-muted-foreground",
         muted: "border-transparent bg-muted text-muted-foreground",
-        primary: "border-transparent bg-primary/15 text-primary",
+        primary: "border-transparent bg-foreground text-background",
       },
     },
     defaultVariants: { variant: "default" },

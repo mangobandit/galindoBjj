@@ -74,13 +74,13 @@ export default async function OverviewPage({
       value: due,
       hint: t("dueHint"),
       Icon: AlertCircle,
-      tone: due > 0 ? "text-amber-400" : "text-success",
+      tone: due > 0 ? "text-foreground" : "text-muted-foreground",
     },
     {
       label: t("newSignups"),
       value: newSignups,
       Icon: Inbox,
-      tone: newSignups > 0 ? "text-primary" : "text-foreground",
+      tone: newSignups > 0 ? "text-foreground" : "text-muted-foreground",
     },
   ];
 

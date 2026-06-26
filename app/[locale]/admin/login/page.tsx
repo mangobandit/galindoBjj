@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Link, redirect } from "@/i18n/navigation";
+import { Logo } from "@/components/Logo";
 import { LoginForm } from "../_components/LoginForm";
 
 // Reads the auth cookie to skip the form when already signed in.
@@ -38,14 +39,9 @@ export default async function LoginPage({
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center bg-background px-5 py-12">
       <div className="w-full max-w-sm">
-        <div className="mb-8 text-center">
-          <Link href="/" className="inline-flex items-baseline gap-2">
-            <span className="font-display text-2xl font-semibold tracking-tight">
-              Galindo
-            </span>
-            <span className="font-display text-2xl font-semibold tracking-tight text-primary">
-              BJJ
-            </span>
+        <div className="mb-8 flex justify-center">
+          <Link href="/" aria-label="Galindo Jiu-Jitsu">
+            <Logo markClassName="size-11" />
           </Link>
         </div>
 
