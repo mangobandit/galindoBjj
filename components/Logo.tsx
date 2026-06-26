@@ -1,46 +1,17 @@
 import { cn } from "@/lib/utils";
 
 /**
- * On-brand black & white badge: ring + double diamond + "G" monogram.
- * A faithful SVG stand-in for the official Galindo Jiu-Jitsu logo — drop the
- * real artwork at `public/galindo-logo.png` and swap this for an <Image> if you
- * prefer the exact asset. Uses currentColor so it inherits the text colour.
+ * Official Galindo Jiu-Jitsu badge (public/galindo-logo.svg — a circular black
+ * & white mark). Round-cropped so the square edges disappear on the dark page.
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 100 100"
-      className={className}
-      fill="none"
-      role="img"
-      aria-label="Galindo Jiu-Jitsu"
-    >
-      <circle cx="50" cy="50" r="47" stroke="currentColor" strokeWidth="2.4" />
-      <polygon
-        points="50,15 85,50 50,85 15,50"
-        stroke="currentColor"
-        strokeWidth="2.4"
-        strokeLinejoin="round"
-      />
-      <polygon
-        points="50,22 78,50 50,78 22,50"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinejoin="round"
-      />
-      <text
-        x="50"
-        y="52"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="var(--font-display), system-ui, sans-serif"
-        fontWeight={700}
-        fontSize="40"
-        fill="currentColor"
-      >
-        G
-      </text>
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src="/galindo-logo.svg"
+      alt="Galindo Jiu-Jitsu"
+      className={cn("rounded-full object-cover", className)}
+    />
   );
 }
 
