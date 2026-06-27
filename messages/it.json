@@ -5,6 +5,7 @@
     "nav": {
       "home": "Home",
       "signup": "Iscriviti",
+      "seminars": "Seminari",
       "contact": "Contatti",
       "admin": "Accedi"
     },
@@ -94,6 +95,45 @@
       "title": "Ricevuto — grazie!",
       "body": "Abbiamo salvato la tua richiesta. Il Maestro ti scriverà presto per darti il benvenuto.",
       "again": "Invia un'altra richiesta",
+      "home": "Torna alla home"
+    }
+  },
+  "seminars": {
+    "kicker": "Seminari",
+    "title": "Seminari ed eventi",
+    "intro": "Lezioni speciali, masterclass con ospiti e open mat. Iscriviti per riservare il tuo posto e far sapere al Professore che ci sarai.",
+    "empty": "Nessun seminario in programma al momento. Torna a trovarci presto.",
+    "free": "Gratis",
+    "limited": "Posti limitati: {count}",
+    "attend": "Iscriviti",
+    "backToList": "Tutti i seminari",
+    "signUpHeading": "Riserva il tuo posto",
+    "form": {
+      "name": "Nome completo",
+      "namePlaceholder": "Il tuo nome",
+      "contact": "Telefono o email",
+      "contactPlaceholder": "Per poterti confermare",
+      "belt": "Cintura",
+      "beltPlaceholder": "es. Blu",
+      "language": "Lingua preferita",
+      "message": "Messaggio",
+      "messagePlaceholder": "Qualcosa che dovremmo sapere?",
+      "optional": "facoltativo",
+      "submit": "Riserva il posto",
+      "submitting": "Invio…"
+    },
+    "validation": {
+      "name": "Dicci il tuo nome, per favore.",
+      "contact": "Ci serve un telefono o un'email per confermarti."
+    },
+    "errors": {
+      "generic": "Non è stato possibile inviare. Riprova tra un momento.",
+      "notConfigured": "Il modulo non è ancora collegato al database. Configura Supabase per attivarlo."
+    },
+    "success": {
+      "title": "Posto riservato!",
+      "body": "Sei nella lista per questo seminario. Il Professore conta su di te. Se qualcosa cambia, ti contatteremo al recapito che hai lasciato.",
+      "more": "Vedi altri seminari",
       "home": "Torna alla home"
     }
   },
