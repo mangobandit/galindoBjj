@@ -2,7 +2,9 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { redirect } from "@/i18n/navigation";
 import { currentPeriod } from "@/lib/format";
+import { routing } from "@/i18n/routing";
 import type {
   LanguagePref,
   MemberStatus,
@@ -31,6 +33,14 @@ function assertOk(
     console.error(`${where} failed:`, error.message);
     throw new Error(`${where} failed: ${error.message}`);
   }
+}
+
+/** Read the active locale from a hidden form field, falling back to default. */
+function formLocale(formData: FormData): (typeof routing.locales)[number] {
+  const loc = String(formData.get("locale") || "");
+  return (routing.locales as readonly string[]).includes(loc)
+    ? (loc as (typeof routing.locales)[number])
+    : routing.defaultLocale;
 }
 
 function revalidateAdmin() {
@@ -167,6 +177,8 @@ export async function deleteMember(formData: FormData) {
     .eq("id", String(formData.get("id")));
   assertOk(error, "deleteMember");
   revalidateAdmin();
+  // Leave the now-deleted member's edit page instead of 404-ing on re-render.
+  redirect({ href: "/admin/members", locale: formLocale(formData) });
 }
 
 // ── Sign-ups inbox ────────────────────────────────────────────────────────
@@ -283,6 +295,8 @@ export async function deleteSeminar(formData: FormData) {
     .eq("id", String(formData.get("id")));
   assertOk(error, "deleteSeminar");
   revalidateAdmin();
+  // Return to the list rather than 404-ing on the deleted seminar's page.
+  redirect({ href: "/admin/seminars", locale: formLocale(formData) });
 }
 
 /** Remove a single attendee from a seminar's list (e.g. a cancellation). */
@@ -293,84 +307,5 @@ export async function removeAttendee(formData: FormData) {
     .delete()
     .eq("id", String(formData.get("id")));
   assertOk(error, "removeAttendee");
-  revalidateAdmin();
-}
-
-// ── Seminars ────────────────────────────────────────────────────────────
-export type SaveSeminarState = {
-  status: "idle" | "success" | "error";
-  error?: string;
-};
-
-export async function saveSeminar(
-  _prev: SaveSeminarState,
-  formData: FormData,
-): Promise<SaveSeminarState> {
-  const supabase = await createClient();
-  if (!supabase) return { status: "error", error: "notConfigured" };
-
-  const id = String(formData.get("id") || "");
-  const title = String(formData.get("title") || "").trim();
-  const startsAtRaw = String(formData.get("starts_at") || "").trim();
-
-  if (!title) return { status: "error", error: "required" };
-  if (!startsAtRaw) return { status: "error", error: "required" };
-
-  // <input type="datetime-local"> gives "YYYY-MM-DDTHH:mm" — store as ISO.
-  const startsAt = new Date(startsAtRaw);
-  if (Number.isNaN(startsAt.getTime())) {
-    return { status: "error", error: "required" };
-  }
-
-  const text = (key: string) => {
-    const v = String(formData.get(key) || "").trim();
-    return v.length ? v : null;
-  };
-  const num = (key: string) => {
-    const v = String(formData.get(key) || "").trim();
-    if (!v.length) return null;
-    const n = Number(v);
-    return Number.isFinite(n) ? n : null;
-  };
-
-  const payload = {
-    title,
-    starts_at: startsAt.toISOString(),
-    description: text("description"),
-    location: text("location"),
-    capacity: num("capacity"),
-    price: num("price"),
-    published: String(formData.get("published")) === "1",
-  };
-
-  const { error } = id
-    ? await supabase.from("seminars").update(payload).eq("id", id)
-    : await supabase.from("seminars").insert(payload);
-
-  if (error) {
-    console.error("saveSeminar failed:", error.message);
-    return { status: "error", error: "generic" };
-  }
-
-  revalidateAdmin();
-  return { status: "success" };
-}
-
-export async function deleteSeminar(formData: FormData) {
-  const supabase = await client();
-  await supabase
-    .from("seminars")
-    .delete()
-    .eq("id", String(formData.get("id")));
-  revalidateAdmin();
-}
-
-/** Remove a single attendee from a seminar's list (e.g. a cancellation). */
-export async function removeAttendee(formData: FormData) {
-  const supabase = await client();
-  await supabase
-    .from("seminar_signups")
-    .delete()
-    .eq("id", String(formData.get("id")));
   revalidateAdmin();
 }

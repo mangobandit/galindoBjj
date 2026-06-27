@@ -64,15 +64,3 @@ export function formatDateTime(iso: string | null, locale = "es"): string {
     minute: "2-digit",
   }).format(d);
 }
-
-/** Date + time, e.g. "12 jul 2026, 11:00" — used for seminars (one-off events). */
-export function formatDateTime(iso: string | null, locale = "es"): string {
-  if (!iso) return "—";
-  return new Intl.DateTimeFormat(locale, {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(iso));
-}
