@@ -6,6 +6,7 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 
 export default function DashError({
   error,
@@ -30,7 +31,7 @@ export default function DashError({
           Reintentar
         </Button>
         <Button asChild variant="outline" size="sm">
-          <a href="/admin">Ir al panel</a>
+          <Link href="/admin">Ir al panel</Link>
         </Button>
       </div>
       {error.digest ? (

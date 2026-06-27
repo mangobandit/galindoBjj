@@ -3,6 +3,8 @@
 import { useActionState } from "react";
 import { Check } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
 import { togglePayment, type TogglePaymentState } from "../../actions";
 import { SubmitButton } from "../../_components/SubmitButton";
 
@@ -28,25 +30,54 @@ export function PaymentToggleForm({
   const [state, formAction] = useActionState(togglePayment, INITIAL);
 
   return (
-    <form action={formAction} className="flex shrink-0 flex-col items-end gap-1">
-      <input type="hidden" name="memberId" value={memberId} />
-      <input type="hidden" name="period" value={period} />
-      <input type="hidden" name="paid" value={isPaid ? "1" : "0"} />
-      <input type="hidden" name="amount" value={amount} />
-      <SubmitButton
-        variant={isPaid ? "outline" : "success"}
-        size="sm"
-        pendingLabel={tc("loading")}
-      >
+    <form
+      action={formAction}
+      className="flex shrink-0 flex-col items-start gap-1 sm:items-end"
+    >
+      <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+        <input type="hidden" name="memberId" value={memberId} />
+        <input type="hidden" name="period" value={period} />
+        <input type="hidden" name="paid" value={isPaid ? "1" : "0"} />
         {isPaid ? (
-          t("markDue")
+          <input type="hidden" name="amount" value={amount} />
         ) : (
           <>
-            <Check />
-            {t("markPaid")}
+            <Input
+              name="amount"
+              type="number"
+              min="0"
+              step="1"
+              defaultValue={amount}
+              aria-label={t("collected")}
+              className="h-9 w-24 text-right text-sm"
+            />
+            <Select
+              name="method"
+              defaultValue="cash"
+              aria-label={t("method")}
+              className="h-9 w-36 text-sm"
+            >
+              <option value="cash">{t("cash")}</option>
+              <option value="transfer">{t("transfer")}</option>
+              <option value="other">{t("other")}</option>
+            </Select>
           </>
         )}
-      </SubmitButton>
+        <SubmitButton
+          variant={isPaid ? "outline" : "success"}
+          size="sm"
+          pendingLabel={tc("loading")}
+        >
+          {isPaid ? (
+            t("markDue")
+          ) : (
+            <>
+              <Check />
+              {t("markPaid")}
+            </>
+          )}
+        </SubmitButton>
+      </div>
       {state.status === "error" ? (
         <span role="alert" className="text-xs text-destructive-foreground">
           {tc("saveError")}

@@ -5,6 +5,13 @@ import { Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
+import {
+  BELT_COLORS,
+  BELT_DEGREES,
+  formatBeltColorLabel,
+  formatBeltDegreeLabel,
+  parseBeltRank,
+} from "@/lib/belts";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,30 +25,19 @@ import {
 import { SubmitButton } from "../../_components/SubmitButton";
 import type { Member } from "@/lib/supabase/types";
 
-const BELTS = [
-  "Blanca",
-  "Gris",
-  "Amarilla",
-  "Naranja",
-  "Verde",
-  "Azul",
-  "Morada",
-  "Marrón",
-  "Negra",
-];
-
 const INITIAL: SaveMemberState = { status: "idle" };
 
 export function MemberForm({ member }: { member?: Member }) {
+  const locale = useLocale();
   const t = useTranslations("admin.memberForm");
   const tc = useTranslations("common");
   const tm = useTranslations("admin.members");
   const tcommon = useTranslations("admin.common");
   const router = useRouter();
-  const locale = useLocale();
   const [section, setSection] = useState<"adults" | "kids">(
     member?.section ?? "adults",
   );
+  const parsedBelt = parseBeltRank(member?.belt_rank);
   const [state, formAction] = useActionState(saveMember, INITIAL);
 
   useEffect(() => {
@@ -62,7 +58,10 @@ export function MemberForm({ member }: { member?: Member }) {
 
   return (
     <div className="space-y-6">
-      <form action={formAction} className="space-y-6">
+      <form
+        action={formAction}
+        className="space-y-6 rounded-lg border border-border bg-card p-5"
+      >
         {member ? <input type="hidden" name="id" value={member.id} /> : null}
 
         <div className="space-y-2">
@@ -71,6 +70,8 @@ export function MemberForm({ member }: { member?: Member }) {
             id="full_name"
             name="full_name"
             required
+            autoFocus={!member}
+            autoComplete="name"
             defaultValue={member?.full_name ?? ""}
           />
         </div>
@@ -105,7 +106,13 @@ export function MemberForm({ member }: { member?: Member }) {
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="phone">{t("phone")}</Label>
-            <Input id="phone" name="phone" defaultValue={member?.phone ?? ""} />
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              defaultValue={member?.phone ?? ""}
+            />
           </div>
           <div className="space-y-2">
             <Label htmlFor="email">{t("email")}</Label>
@@ -113,25 +120,41 @@ export function MemberForm({ member }: { member?: Member }) {
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
               defaultValue={member?.email ?? ""}
             />
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-4">
           <div className="space-y-2">
-            <Label htmlFor="belt_rank">{t("belt")}</Label>
-            <Input
-              id="belt_rank"
-              name="belt_rank"
-              list="belts"
-              defaultValue={member?.belt_rank ?? ""}
-            />
-            <datalist id="belts">
-              {BELTS.map((b) => (
-                <option key={b} value={b} />
+            <Label htmlFor="belt_color">{t("belt")}</Label>
+            <Select
+              id="belt_color"
+              name="belt_color"
+              defaultValue={parsedBelt.color}
+            >
+              <option value="">{t("beltNone")}</option>
+              {BELT_COLORS.map((belt) => (
+                <option key={belt.value} value={belt.value}>
+                  {formatBeltColorLabel(belt.value, locale)}
+                </option>
               ))}
-            </datalist>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="belt_degree">{t("degree")}</Label>
+            <Select
+              id="belt_degree"
+              name="belt_degree"
+              defaultValue={parsedBelt.degree}
+            >
+              {BELT_DEGREES.map((degree) => (
+                <option key={degree} value={degree}>
+                  {formatBeltDegreeLabel(degree, locale)}
+                </option>
+              ))}
+            </Select>
           </div>
           <div className="space-y-2">
             <Label htmlFor="language_pref">{t("language")}</Label>
@@ -159,7 +182,7 @@ export function MemberForm({ member }: { member?: Member }) {
         </div>
 
         {section === "kids" ? (
-          <fieldset className="space-y-4 rounded-lg border border-border bg-card/50 p-5">
+          <fieldset className="space-y-4 rounded-lg border border-border bg-background p-5">
             <legend className="px-1 text-sm font-medium text-muted-foreground">
               {t("kidsFields")}
             </legend>
@@ -169,6 +192,7 @@ export function MemberForm({ member }: { member?: Member }) {
                 <Input
                   id="parent_name"
                   name="parent_name"
+                  autoComplete="name"
                   defaultValue={member?.parent_name ?? ""}
                 />
               </div>
@@ -177,6 +201,8 @@ export function MemberForm({ member }: { member?: Member }) {
                 <Input
                   id="emergency_contact"
                   name="emergency_contact"
+                  type="tel"
+                  autoComplete="tel"
                   defaultValue={member?.emergency_contact ?? ""}
                 />
               </div>
@@ -198,7 +224,7 @@ export function MemberForm({ member }: { member?: Member }) {
           </p>
         ) : null}
 
-        <div className="flex items-center gap-3">
+        <div className="sticky bottom-4 z-10 flex items-center gap-3 rounded-lg border border-border bg-card/95 p-3 shadow-lg backdrop-blur">
           <SubmitButton size="lg" pendingLabel={t("saving")}>
             {t("save")}
           </SubmitButton>

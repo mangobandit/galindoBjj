@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "@/i18n/navigation";
+import { serializeBeltRank } from "@/lib/belts";
 import { currentPeriod } from "@/lib/format";
 import { routing } from "@/i18n/routing";
 import type {
@@ -148,7 +149,10 @@ export async function saveMember(
     phone: text("phone"),
     email: text("email"),
     language_pref: (String(formData.get("language_pref") || "es") as LanguagePref),
-    belt_rank: text("belt_rank"),
+    belt_rank: serializeBeltRank(
+      String(formData.get("belt_color") || ""),
+      String(formData.get("belt_degree") || "0"),
+    ),
     status: (String(formData.get("status") || "active") as MemberStatus),
     date_joined: text("date_joined") ?? new Date().toISOString().slice(0, 10),
     notes: text("notes"),

@@ -18,7 +18,10 @@ export function AdminNav({ newSignups = 0 }: { newSignups?: number }) {
   const pathname = usePathname();
 
   return (
-    <nav className="-mx-1 flex gap-1 overflow-x-auto pb-1">
+    <nav
+      aria-label={t("panel")}
+      className="-mx-1 flex gap-1 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    >
       {ITEMS.map(({ href, key, Icon, exact }) => {
         const active = exact
           ? pathname === href
@@ -27,11 +30,12 @@ export function AdminNav({ newSignups = 0 }: { newSignups?: number }) {
           <Link
             key={href}
             href={href}
+            aria-current={active ? "page" : undefined}
             className={cn(
-              "flex shrink-0 items-center gap-2 rounded-md px-4 py-2.5 text-sm font-medium transition-colors",
+              "group flex h-11 shrink-0 items-center gap-2 rounded-md border px-4 text-sm font-medium transition-colors",
               active
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+                ? "border-foreground bg-primary text-primary-foreground shadow-sm"
+                : "border-transparent text-muted-foreground hover:border-border hover:bg-secondary hover:text-foreground",
             )}
           >
             <Icon className="size-4" />
@@ -39,7 +43,7 @@ export function AdminNav({ newSignups = 0 }: { newSignups?: number }) {
             {key === "signups" && newSignups > 0 ? (
               <span
                 className={cn(
-                  "ml-1 inline-flex min-w-5 items-center justify-center rounded-full px-1.5 text-xs font-semibold",
+                  "ml-1 inline-flex min-w-5 items-center justify-center rounded-full px-1.5 text-xs font-semibold tabular-nums",
                   active
                     ? "bg-primary-foreground/20 text-primary-foreground"
                     : "bg-primary/20 text-primary",

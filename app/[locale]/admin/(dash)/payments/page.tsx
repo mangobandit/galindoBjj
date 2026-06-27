@@ -12,6 +12,7 @@ import {
   formatDate,
 } from "@/lib/format";
 import { PaymentToggleForm } from "./PaymentToggleForm";
+import { AdminMetric, AdminProgress, PageHeader } from "../../_components/AdminMetric";
 import type { Member, Payment } from "@/lib/supabase/types";
 
 const DEFAULT_AMOUNT = { adults: 45, kids: 35 } as const;
@@ -54,52 +55,79 @@ export default async function PaymentsPage({
   const paidById = new Map(payments.map((p) => [p.member_id, p]));
 
   const paidCount = members.filter((m) => paidById.has(m.id)).length;
+  const dueCount = Math.max(members.length - paidCount, 0);
+  const paymentRate = members.length ? Math.round((paidCount / members.length) * 100) : 0;
   const collected = members.reduce(
     (sum, m) => sum + (Number(paidById.get(m.id)?.amount) || 0),
     0,
   );
+  const orderedMembers = [...members].sort((a, b) => {
+    const aPaid = paidById.has(a.id) ? 1 : 0;
+    const bPaid = paidById.has(b.id) ? 1 : 0;
+    if (aPaid !== bPaid) return aPaid - bPaid;
+    return a.full_name.localeCompare(b.full_name);
+  });
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-bold">{t("title")}</h1>
-          <p className="mt-1 text-muted-foreground">{t("subtitle")}</p>
-        </div>
-        <form className="flex items-center gap-2">
-          <label className="text-sm text-muted-foreground">{t("period")}</label>
-          <Select
-            name="period"
-            defaultValue={period}
-            aria-label={t("period")}
-            className="w-44"
-          >
-            {periods.map((p) => (
-              <option key={p} value={p}>
-                {formatPeriod(p, locale)}
-              </option>
-            ))}
-          </Select>
-          <Button type="submit" variant="secondary" size="icon" aria-label={t("period")}>
-            <Check />
-          </Button>
-        </form>
+      <PageHeader
+        title={t("title")}
+        subtitle={t("subtitle")}
+        action={
+          <form className="flex items-center gap-2">
+            <label className="text-sm text-muted-foreground">{t("period")}</label>
+            <Select
+              name="period"
+              defaultValue={period}
+              aria-label={t("period")}
+              className="w-44"
+            >
+              {periods.map((p) => (
+                <option key={p} value={p}>
+                  {formatPeriod(p, locale)}
+                </option>
+              ))}
+            </Select>
+            <Button type="submit" variant="secondary" size="icon" aria-label={t("period")}>
+              <Check />
+            </Button>
+          </form>
+        }
+      />
+
+      <div className="grid gap-3 sm:grid-cols-3">
+        <AdminMetric
+          label={t("summary", { paid: paidCount, total: members.length })}
+          value={`${paymentRate}%`}
+          Icon={CheckCircle2}
+        />
+        <AdminMetric
+          label={t("due")}
+          value={dueCount}
+          Icon={Clock}
+          tone={dueCount ? "urgent" : "quiet"}
+        />
+        <AdminMetric
+          label={t("collected")}
+          value={formatEuros(collected, locale)}
+          tone="quiet"
+        />
       </div>
 
-      {/* Summary */}
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg border border-border bg-card p-4">
-        <div className="flex items-center gap-2">
-          <CheckCircle2 className="size-5 text-success" />
+      <div className="rounded-lg border border-border bg-card p-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="font-medium">
             {t("summary", { paid: paidCount, total: members.length })}
           </span>
-        </div>
-        <div className="text-muted-foreground">
-          {t("collected")}:{" "}
-          <span className="font-semibold text-foreground tabular-nums">
-            {formatEuros(collected, locale)}
+          <span className="text-sm text-muted-foreground">
+            {formatPeriod(period, locale)}
           </span>
         </div>
+        <AdminProgress
+          value={paymentRate}
+          label={t("summary", { paid: paidCount, total: members.length })}
+          className="mt-4"
+        />
       </div>
 
       {members.length === 0 ? (
@@ -108,14 +136,14 @@ export default async function PaymentsPage({
         </div>
       ) : (
         <ul className="space-y-2">
-          {members.map((m) => {
+          {orderedMembers.map((m) => {
             const payment = paidById.get(m.id);
             const isPaid = Boolean(payment);
             const amount = DEFAULT_AMOUNT[m.section] ?? 0;
             return (
               <li
                 key={m.id}
-                className="flex flex-col gap-3 rounded-lg border border-border bg-card p-4 sm:flex-row sm:items-center sm:justify-between"
+                className="grid gap-4 rounded-lg border border-border bg-card p-4 transition-colors hover:border-foreground/40 sm:grid-cols-[1fr_auto]"
               >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
@@ -147,7 +175,7 @@ export default async function PaymentsPage({
                   memberId={m.id}
                   period={period}
                   isPaid={isPaid}
-                  amount={amount}
+                  amount={Number(payment?.amount) || amount}
                 />
               </li>
             );

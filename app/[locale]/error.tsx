@@ -9,6 +9,7 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 
 export default function LocaleError({
   error,
@@ -32,7 +33,7 @@ export default function LocaleError({
       <div className="flex flex-wrap justify-center gap-3">
         <Button onClick={reset}>Reintentar</Button>
         <Button asChild variant="outline">
-          <a href="/">Volver al inicio</a>
+          <Link href="/">Volver al inicio</Link>
         </Button>
       </div>
       {error.digest ? (

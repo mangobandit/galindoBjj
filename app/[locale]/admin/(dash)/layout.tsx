@@ -49,7 +49,7 @@ export default async function DashLayout({
 
   return (
     <div className="min-h-dvh">
-      <header className="border-b border-border bg-card/40">
+      <header className="sticky top-0 z-40 border-b border-border bg-card/80 backdrop-blur">
         <div className="container flex h-16 items-center justify-between gap-4">
           <Link
             href="/admin"
@@ -74,13 +74,13 @@ export default async function DashLayout({
         </div>
       </header>
 
-      <div className="border-b border-border/70 bg-background">
+      <div className="sticky top-16 z-30 border-b border-border/70 bg-background/95 backdrop-blur">
         <div className="container py-3">
           <AdminNav newSignups={newSignups ?? 0} />
         </div>
       </div>
 
-      <main className="container py-8">{children}</main>
+      <main className="container pb-14 pt-8">{children}</main>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default async function EditMemberPage({
   const member = data as Member;
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6">
       <Link
         href="/admin/members"
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
