@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import { Plus, CalendarDays, MapPin, Users, Pencil, EyeOff } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Link } from "@/i18n/navigation";
@@ -64,34 +65,45 @@ export default async function AdminSeminarsPage({
                 key={s.id}
                 className="flex flex-col gap-3 rounded-lg border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between"
               >
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-lg font-semibold">{s.title}</span>
-                    {past ? <Badge variant="muted">{t("past")}</Badge> : null}
-                    {!s.published ? (
-                      <Badge variant="warning">
-                        <EyeOff className="size-3" />
-                        {t("draft")}
-                      </Badge>
-                    ) : null}
-                  </div>
-                  <div className="mt-1.5 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
-                    <span className="inline-flex items-center gap-1.5">
-                      <CalendarDays className="size-4" />
-                      {formatDateTime(s.starts_at, locale)}
-                    </span>
-                    {s.location ? (
+                <div className="flex min-w-0 gap-3">
+                  {s.poster_url ? (
+                    <Image
+                      src={s.poster_url}
+                      alt=""
+                      width={48}
+                      height={64}
+                      className="h-16 w-12 shrink-0 rounded-md border border-border bg-background object-cover"
+                    />
+                  ) : null}
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-lg font-semibold">{s.title}</span>
+                      {past ? <Badge variant="muted">{t("past")}</Badge> : null}
+                      {!s.published ? (
+                        <Badge variant="warning">
+                          <EyeOff className="size-3" />
+                          {t("draft")}
+                        </Badge>
+                      ) : null}
+                    </div>
+                    <div className="mt-1.5 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
                       <span className="inline-flex items-center gap-1.5">
-                        <MapPin className="size-4" />
-                        {s.location}
+                        <CalendarDays className="size-4" />
+                        {formatDateTime(s.starts_at, locale)}
                       </span>
-                    ) : null}
-                    <span className="inline-flex items-center gap-1.5">
-                      <Users className="size-4" />
-                      {s.capacity != null
-                        ? t("attendingOf", { going, cap: s.capacity })
-                        : t("attending", { going })}
-                    </span>
+                      {s.location ? (
+                        <span className="inline-flex items-center gap-1.5">
+                          <MapPin className="size-4" />
+                          {s.location}
+                        </span>
+                      ) : null}
+                      <span className="inline-flex items-center gap-1.5">
+                        <Users className="size-4" />
+                        {s.capacity != null
+                          ? t("attendingOf", { going, cap: s.capacity })
+                          : t("attending", { going })}
+                      </span>
+                    </div>
                   </div>
                 </div>
 

@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { CalendarDays, MapPin, Users, Tag, ArrowLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
@@ -18,10 +19,24 @@ export async function generateMetadata({
   if (!supabase) return {};
   const { data } = await supabase
     .from("seminars")
-    .select("title")
+    .select("title, poster_url")
     .eq("id", id)
     .maybeSingle();
-  return { title: data?.title };
+  return {
+    title: data?.title,
+    openGraph: data?.poster_url
+      ? {
+          title: data.title ?? undefined,
+          images: [{ url: data.poster_url, alt: data.title ?? "" }],
+        }
+      : undefined,
+    twitter: data?.poster_url
+      ? {
+          card: "summary_large_image",
+          images: [data.poster_url],
+        }
+      : undefined,
+  };
 }
 
 export default async function SeminarDetailPage({
@@ -75,6 +90,21 @@ export default async function SeminarDetailPage({
 
       <p className="kicker mt-6">{t("kicker")}</p>
       <h1 className="mt-3 text-4xl font-bold sm:text-5xl">{seminar.title}</h1>
+
+      {seminar.poster_url ? (
+        <div className="mt-6 overflow-hidden rounded-xl border border-border bg-card p-2">
+          <div className="relative aspect-[4/5] max-h-[75vh] rounded-lg bg-background">
+            <Image
+              src={seminar.poster_url}
+              alt={seminar.title}
+              fill
+              sizes="(min-width: 768px) 42rem, 100vw"
+              className="object-contain"
+              priority
+            />
+          </div>
+        </div>
+      ) : null}
 
       <div className="mt-6 grid gap-2 sm:grid-cols-2">
         {details.map(({ Icon, value }, i) => (

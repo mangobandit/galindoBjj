@@ -13,6 +13,14 @@ import type {
   Section,
 } from "@/lib/supabase/types";
 
+const SEMINAR_POSTER_BUCKET = "seminar-posters";
+const SEMINAR_POSTER_MAX_BYTES = 8 * 1024 * 1024;
+const SEMINAR_POSTER_TYPES = {
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "image/webp": "webp",
+} as const;
+
 async function client() {
   const supabase = await createClient();
   if (!supabase) throw new Error("Supabase is not configured.");
@@ -234,8 +242,75 @@ export async function convertSignup(formData: FormData) {
 // ── Seminars ────────────────────────────────────────────────────────────
 export type SaveSeminarState = {
   status: "idle" | "success" | "error";
-  error?: string;
+  error?:
+    | "required"
+    | "notConfigured"
+    | "posterType"
+    | "posterSize"
+    | "posterUpload"
+    | "generic";
 };
+
+type SupabaseServerClient = NonNullable<Awaited<ReturnType<typeof createClient>>>;
+
+function posterFile(formData: FormData): File | null {
+  const file = formData.get("poster");
+  if (!file || typeof file === "string" || file.size === 0) return null;
+  return file;
+}
+
+function posterPathFromPublicUrl(url: string | null): string | null {
+  if (!url) return null;
+  const marker = `/storage/v1/object/public/${SEMINAR_POSTER_BUCKET}/`;
+  const markerIndex = url.indexOf(marker);
+  if (markerIndex === -1) return null;
+  const path = url.slice(markerIndex + marker.length).split("?")[0];
+  return path ? decodeURIComponent(path) : null;
+}
+
+async function uploadSeminarPoster(
+  supabase: SupabaseServerClient,
+  file: File,
+): Promise<
+  | { status: "success"; path: string; url: string }
+  | { status: "error"; error: SaveSeminarState["error"] }
+> {
+  const extension =
+    SEMINAR_POSTER_TYPES[file.type as keyof typeof SEMINAR_POSTER_TYPES];
+
+  if (!extension) return { status: "error", error: "posterType" };
+  if (file.size > SEMINAR_POSTER_MAX_BYTES) {
+    return { status: "error", error: "posterSize" };
+  }
+
+  const baseName =
+    file.name
+      .replace(/\.[^.]+$/, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "")
+      .slice(0, 48) || "poster";
+  const path = `${new Date().getUTCFullYear()}/${crypto.randomUUID()}-${baseName}.${extension}`;
+
+  const { error } = await supabase.storage
+    .from(SEMINAR_POSTER_BUCKET)
+    .upload(path, file, {
+      cacheControl: "31536000",
+      contentType: file.type,
+      upsert: false,
+    });
+
+  if (error) {
+    console.error("uploadSeminarPoster failed:", error.message);
+    return { status: "error", error: "posterUpload" };
+  }
+
+  const { data } = supabase.storage
+    .from(SEMINAR_POSTER_BUCKET)
+    .getPublicUrl(path);
+
+  return { status: "success", path, url: data.publicUrl };
+}
 
 export async function saveSeminar(
   _prev: SaveSeminarState,
@@ -247,6 +322,8 @@ export async function saveSeminar(
   const id = String(formData.get("id") || "");
   const title = String(formData.get("title") || "").trim();
   const startsAtRaw = String(formData.get("starts_at") || "").trim();
+  const existingPosterUrl = String(formData.get("existing_poster_url") || "");
+  const removePoster = String(formData.get("remove_poster") || "") === "1";
 
   if (!title) return { status: "error", error: "required" };
   if (!startsAtRaw) return { status: "error", error: "required" };
@@ -268,6 +345,19 @@ export async function saveSeminar(
     return Number.isFinite(n) ? n : null;
   };
 
+  const file = posterFile(formData);
+  const uploadedPoster = file ? await uploadSeminarPoster(supabase, file) : null;
+  if (uploadedPoster?.status === "error") {
+    return { status: "error", error: uploadedPoster.error };
+  }
+
+  const poster_url =
+    uploadedPoster?.status === "success"
+      ? uploadedPoster.url
+      : removePoster
+        ? null
+        : existingPosterUrl || null;
+
   const payload = {
     title,
     starts_at: startsAt.toISOString(),
@@ -276,6 +366,7 @@ export async function saveSeminar(
     capacity: num("capacity"),
     price: num("price"),
     published: String(formData.get("published")) === "1",
+    poster_url,
   };
 
   const { error } = id
@@ -283,8 +374,25 @@ export async function saveSeminar(
     : await supabase.from("seminars").insert(payload);
 
   if (error) {
+    if (uploadedPoster?.status === "success") {
+      await supabase.storage
+        .from(SEMINAR_POSTER_BUCKET)
+        .remove([uploadedPoster.path]);
+    }
     console.error("saveSeminar failed:", error.message);
     return { status: "error", error: "generic" };
+  }
+
+  if ((removePoster || uploadedPoster?.status === "success") && existingPosterUrl) {
+    const oldPath = posterPathFromPublicUrl(existingPosterUrl);
+    if (oldPath) {
+      const { error: removeError } = await supabase.storage
+        .from(SEMINAR_POSTER_BUCKET)
+        .remove([oldPath]);
+      if (removeError) {
+        console.warn("remove old seminar poster failed:", removeError.message);
+      }
+    }
   }
 
   revalidateAdmin();

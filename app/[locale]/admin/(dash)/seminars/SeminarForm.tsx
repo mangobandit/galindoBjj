@@ -1,7 +1,12 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
-import { Trash2 } from "lucide-react";
+import {
+  useActionState,
+  useEffect,
+  useState,
+  type ChangeEvent,
+} from "react";
+import { ImageIcon, Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
@@ -34,6 +39,10 @@ export function SeminarForm({ seminar }: { seminar?: Seminar }) {
   const router = useRouter();
   const locale = useLocale();
   const [state, formAction] = useActionState(saveSeminar, INITIAL);
+  const [posterPreview, setPosterPreview] = useState<string | null>(
+    seminar?.poster_url ?? null,
+  );
+  const [removePoster, setRemovePoster] = useState(false);
 
   useEffect(() => {
     if (state.status === "success") {
@@ -42,19 +51,53 @@ export function SeminarForm({ seminar }: { seminar?: Seminar }) {
     }
   }, [state.status, router]);
 
+  useEffect(() => {
+    return () => {
+      if (posterPreview?.startsWith("blob:")) {
+        URL.revokeObjectURL(posterPreview);
+      }
+    };
+  }, [posterPreview]);
+
+  const handlePosterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) {
+      setPosterPreview(seminar?.poster_url ?? null);
+      return;
+    }
+
+    setRemovePoster(false);
+    const nextPreview = URL.createObjectURL(file);
+    setPosterPreview((current) => {
+      if (current?.startsWith("blob:")) URL.revokeObjectURL(current);
+      return nextPreview;
+    });
+  };
+
   const errorMessage =
     state.status === "error"
       ? state.error === "required"
         ? t("required")
         : state.error === "notConfigured"
           ? tcommon("notConfigured")
-          : tcommon("saveError")
+          : state.error === "posterType"
+            ? t("posterTypeError")
+            : state.error === "posterSize"
+              ? t("posterSizeError")
+              : state.error === "posterUpload"
+                ? t("posterUploadError")
+                : tcommon("saveError")
       : null;
 
   return (
     <div className="space-y-6">
-      <form action={formAction} className="space-y-6">
+      <form action={formAction} encType="multipart/form-data" className="space-y-6">
         {seminar ? <input type="hidden" name="id" value={seminar.id} /> : null}
+        <input
+          type="hidden"
+          name="existing_poster_url"
+          value={seminar?.poster_url ?? ""}
+        />
 
         <div className="space-y-2">
           <Label htmlFor="title">{t("title")}</Label>
@@ -133,6 +176,51 @@ export function SeminarForm({ seminar }: { seminar?: Seminar }) {
               <option value="1">{t("published")}</option>
               <option value="0">{t("draft")}</option>
             </Select>
+          </div>
+        </div>
+
+        <div className="grid gap-4 rounded-lg border border-border bg-card/40 p-4 sm:grid-cols-[1fr_12rem]">
+          <div className="space-y-2">
+            <Label htmlFor="poster" optional={t("optional")}>
+              {t("poster")}
+            </Label>
+            <Input
+              id="poster"
+              name="poster"
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              onChange={handlePosterChange}
+              className="h-auto cursor-pointer file:mr-4 file:rounded-md file:border-0 file:bg-secondary file:px-3 file:py-2 file:text-sm file:font-medium file:text-secondary-foreground"
+            />
+            <p className="text-sm text-muted-foreground">{t("posterHelp")}</p>
+            {seminar?.poster_url ? (
+              <label className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+                <input
+                  type="checkbox"
+                  name="remove_poster"
+                  value="1"
+                  checked={removePoster}
+                  onChange={(event) => setRemovePoster(event.target.checked)}
+                  className="size-4 rounded border-border bg-background"
+                />
+                {t("removePoster")}
+              </label>
+            ) : null}
+          </div>
+          <div className="flex min-h-40 items-center justify-center overflow-hidden rounded-md border border-border bg-background">
+            {posterPreview && !removePoster ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={posterPreview}
+                alt={seminar?.title ?? t("posterPreview")}
+                className="h-full max-h-56 w-full object-contain"
+              />
+            ) : (
+              <div className="flex flex-col items-center gap-2 px-4 text-center text-sm text-muted-foreground">
+                <ImageIcon className="size-7" />
+                {t("posterPreview")}
+              </div>
+            )}
           </div>
         </div>
 

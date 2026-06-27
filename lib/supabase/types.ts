@@ -70,6 +70,7 @@ export type Seminar = {
   capacity: number | null;
   price: number | null;
   published: boolean;
+  poster_url: string | null;
   created_at: string;
 }
 
