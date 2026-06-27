@@ -52,6 +52,12 @@
       "kids": "Kids",
       "adults": "Adults"
     },
+    "seminars": {
+      "kicker": "Seminars",
+      "title": "Special events",
+      "body": "Every now and then we run seminars and open mats: guest classes and themed sessions. See what's coming up and reserve your spot.",
+      "cta": "See seminars"
+    },
     "about": {
       "title": "The Professor",
       "body": "Galindo has spent years on the mat — first competing, and for a long time now teaching. Simple, safe classes: solid fundamentals, purposeful repetition and a good atmosphere. Here it's only Jiu-Jitsu, done well.",

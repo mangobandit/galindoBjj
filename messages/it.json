@@ -52,6 +52,12 @@
       "kids": "Bambini",
       "adults": "Adulti"
     },
+    "seminars": {
+      "kicker": "Seminari",
+      "title": "Eventi speciali",
+      "body": "Ogni tanto organizziamo seminari e open mat: lezioni con ospiti e sessioni a tema. Guarda i prossimi e riserva il tuo posto.",
+      "cta": "Vedi i seminari"
+    },
     "about": {
       "title": "Il Maestro",
       "body": "Galindo è da anni sul tatami — prima da agonista, da tempo come insegnante. Lezioni semplici e sicure: fondamentali solidi, ripetizione con criterio e un buon ambiente. Qui si fa solo Jiu-Jitsu, fatto bene.",

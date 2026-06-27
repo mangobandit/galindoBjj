@@ -100,6 +100,25 @@ export default function HomePage() {
         </p>
       </section>
 
+      {/* Seminars — quiet pointer to one-off events */}
+      <section className="border-t border-border/70 bg-card/30">
+        <div className="container max-w-2xl py-14 text-center md:py-16">
+          <p className="kicker">{t("seminars.kicker")}</p>
+          <h2 className="mt-3 text-2xl font-bold sm:text-3xl">
+            {t("seminars.title")}
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-pretty text-muted-foreground">
+            {t("seminars.body")}
+          </p>
+          <Button asChild variant="outline" className="mt-7">
+            <Link href="/seminars">
+              {t("seminars.cta")}
+              <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
       {/* About the Professor — short and honest */}
       <section className="border-t border-border/70 bg-card/30">
         <div className="container max-w-2xl py-14 text-center md:py-16">

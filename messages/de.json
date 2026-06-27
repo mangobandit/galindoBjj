@@ -52,6 +52,12 @@
       "kids": "Kinder",
       "adults": "Erwachsene"
     },
+    "seminars": {
+      "kicker": "Seminare",
+      "title": "Besondere Events",
+      "body": "Ab und zu veranstalten wir Seminare und Open Mats: Gaststunden und thematische Sessions. Sieh dir die nächsten Termine an und sichere dir deinen Platz.",
+      "cta": "Seminare ansehen"
+    },
     "about": {
       "title": "Der Professor",
       "body": "Galindo steht seit Jahren auf der Matte — erst als Wettkämpfer, seit Langem als Trainer. Einfache, sichere Stunden: solide Grundlagen, sinnvolle Wiederholung und gute Atmosphäre. Hier gibt es nur Jiu-Jitsu, richtig gemacht.",
