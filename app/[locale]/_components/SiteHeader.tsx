@@ -22,6 +22,12 @@ export function SiteHeader() {
             {t("nav.home")}
           </Link>
           <Link
+            href="/seminars"
+            className="transition-colors hover:text-foreground"
+          >
+            {t("nav.seminars")}
+          </Link>
+          <Link
             href="/contact"
             className="transition-colors hover:text-foreground"
           >

@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutGrid, Users, Wallet, Inbox } from "lucide-react";
+import { LayoutGrid, Users, Wallet, Inbox, CalendarDays } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,7 @@ const ITEMS = [
   { href: "/admin/members", key: "members", Icon: Users, exact: false },
   { href: "/admin/payments", key: "payments", Icon: Wallet, exact: false },
   { href: "/admin/signups", key: "signups", Icon: Inbox, exact: false },
+  { href: "/admin/seminars", key: "seminars", Icon: CalendarDays, exact: false },
 ] as const;
 
 export function AdminNav({ newSignups = 0 }: { newSignups?: number }) {

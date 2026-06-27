@@ -67,3 +67,25 @@ insert into signups (id, name, contact, language, section_interest, message, par
   ('5160117a-0000-0000-0000-000000000003', 'Chloé Martin', 'chloe.martin@example.com','en', 'adults',
      'Visiting Marbella for a few months — can I drop in for classes?', null, null, false, '2026-06-26 09:05:00+02')
 on conflict (id) do nothing;
+
+-- ── Seminars (one-off events) ───────────────────────────────────────────
+-- Two upcoming (public), one already past (history). Dates relative to June 2026.
+insert into seminars (id, title, description, starts_at, location, capacity, price, published) values
+  ('5e000000-0000-0000-0000-000000000001', 'Open Mat con cinturón negro invitado',
+     E'Tarde de open mat con un cinturón negro invitado de Fusion BJJ. Rondas abiertas, preguntas y un par de detalles técnicos. Abierto a todos los niveles — trae Gi y No-Gi si tienes.',
+     '2026-07-12 11:00:00+02', 'Academia Galindo, Marbella', 30, 0, true),
+  ('5e000000-0000-0000-0000-000000000002', 'Seminario de guardia y pases',
+     E'Dos horas centradas en sistema de guardia y pases de presión. Nivel intermedio, pensado para quien ya entrena con regularidad. Plazas limitadas para cuidar el ritmo.',
+     '2026-08-09 10:30:00+02', 'Academia Galindo, Marbella', 20, 25, true),
+  ('5e000000-0000-0000-0000-000000000003', 'Iniciación al No-Gi',
+     E'Sesión introductoria de No-Gi: agarres, control sin kimono y primeras transiciones. Para principiantes.',
+     '2026-06-07 11:00:00+02', 'Academia Galindo, Marbella', null, 0, true)
+on conflict (id) do nothing;
+
+-- A few attendees so the Professor's list isn't empty in a demo.
+insert into seminar_signups (id, seminar_id, name, contact, language, belt_rank, message, created_at) values
+  ('5e515000-0000-0000-0000-000000000001', '5e000000-0000-0000-0000-000000000001', 'Carlos Mendoza', '+34 611 223 344', 'es', 'Azul',   null, '2026-06-25 19:10:00+02'),
+  ('5e515000-0000-0000-0000-000000000002', '5e000000-0000-0000-0000-000000000001', 'Marco Rossi',    'marco.rossi@example.it', 'it', 'Morada', 'Porto un amico, va bene?', '2026-06-26 08:30:00+02'),
+  ('5e515000-0000-0000-0000-000000000003', '5e000000-0000-0000-0000-000000000001', 'Sofía Ramírez',  '+34 666 778 899', 'es', 'Marrón', null, '2026-06-26 21:02:00+02'),
+  ('5e515000-0000-0000-0000-000000000004', '5e000000-0000-0000-0000-000000000002', 'James O''Connor','james.oconnor@example.com', 'en', 'Azul', 'Looking forward to the passing details.', '2026-06-27 07:45:00+02')
+on conflict (id) do nothing;

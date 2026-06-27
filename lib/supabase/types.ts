@@ -61,6 +61,29 @@ export type MerchRequest = {
   created_at: string;
 }
 
+export type Seminar = {
+  id: string;
+  title: string;
+  description: string | null;
+  starts_at: string; // ISO timestamp
+  location: string | null;
+  capacity: number | null;
+  price: number | null;
+  published: boolean;
+  created_at: string;
+}
+
+export type SeminarSignup = {
+  id: string;
+  seminar_id: string;
+  name: string;
+  contact: string;
+  language: LanguagePref;
+  belt_rank: string | null;
+  message: string | null;
+  created_at: string;
+}
+
 // Generic helper: most columns are server-defaulted on insert.
 type Insertable<T, Required extends keyof T> = Partial<Omit<T, "id" | "created_at">> &
   Pick<T, Required>;
@@ -97,6 +120,16 @@ export type Database = {
         MerchRequest,
         Insertable<MerchRequest, "item">,
         Partial<MerchRequest>
+      >;
+      seminars: TableDef<
+        Seminar,
+        Insertable<Seminar, "title" | "starts_at">,
+        Partial<Seminar>
+      >;
+      seminar_signups: TableDef<
+        SeminarSignup,
+        Insertable<SeminarSignup, "seminar_id" | "name" | "contact">,
+        Partial<SeminarSignup>
       >;
     };
     Views: Record<string, never>;

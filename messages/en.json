@@ -5,6 +5,7 @@
     "nav": {
       "home": "Home",
       "signup": "Sign up",
+      "seminars": "Seminars",
       "contact": "Contact",
       "admin": "Log in"
     },
@@ -51,6 +52,12 @@
       "kids": "Kids",
       "adults": "Adults"
     },
+    "seminars": {
+      "kicker": "Seminars",
+      "title": "Special events",
+      "body": "Every now and then we run seminars and open mats: guest classes and themed sessions. See what's coming up and reserve your spot.",
+      "cta": "See seminars"
+    },
     "about": {
       "title": "The Professor",
       "body": "Galindo has spent years on the mat — first competing, and for a long time now teaching. Simple, safe classes: solid fundamentals, purposeful repetition and a good atmosphere. Here it's only Jiu-Jitsu, done well.",
@@ -94,6 +101,45 @@
       "title": "Got it — thank you!",
       "body": "We've saved your request. The Professor will write to you soon to say hello.",
       "again": "Send another request",
+      "home": "Back to home"
+    }
+  },
+  "seminars": {
+    "kicker": "Seminars",
+    "title": "Seminars & events",
+    "intro": "Special classes, guest masterclasses and open mats. Sign up to reserve your spot and let the Professor know you're coming.",
+    "empty": "No upcoming seminars right now. Check back soon.",
+    "free": "Free",
+    "limited": "Limited spots: {count}",
+    "attend": "Sign up",
+    "backToList": "All seminars",
+    "signUpHeading": "Reserve your spot",
+    "form": {
+      "name": "Full name",
+      "namePlaceholder": "Your name",
+      "contact": "Phone or email",
+      "contactPlaceholder": "So we can confirm with you",
+      "belt": "Belt",
+      "beltPlaceholder": "e.g. Blue",
+      "language": "Preferred language",
+      "message": "Message",
+      "messagePlaceholder": "Anything we should know?",
+      "optional": "optional",
+      "submit": "Reserve spot",
+      "submitting": "Sending…"
+    },
+    "validation": {
+      "name": "Please tell us your name.",
+      "contact": "We need a phone or email to confirm with you."
+    },
+    "errors": {
+      "generic": "We couldn't send that. Please try again in a moment.",
+      "notConfigured": "The form isn't connected to the database yet. Configure Supabase to enable it."
+    },
+    "success": {
+      "title": "Spot reserved!",
+      "body": "You're on the list for this seminar. The Professor is counting on you. If anything changes, we'll reach you at the contact you left.",
+      "more": "See more seminars",
       "home": "Back to home"
     }
   },

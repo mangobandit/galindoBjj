@@ -5,6 +5,7 @@
     "nav": {
       "home": "Start",
       "signup": "Anmelden",
+      "seminars": "Seminare",
       "contact": "Kontakt",
       "admin": "Login"
     },
@@ -51,6 +52,12 @@
       "kids": "Kinder",
       "adults": "Erwachsene"
     },
+    "seminars": {
+      "kicker": "Seminare",
+      "title": "Besondere Events",
+      "body": "Ab und zu veranstalten wir Seminare und Open Mats: Gaststunden und thematische Sessions. Sieh dir die nächsten Termine an und sichere dir deinen Platz.",
+      "cta": "Seminare ansehen"
+    },
     "about": {
       "title": "Der Professor",
       "body": "Galindo steht seit Jahren auf der Matte — erst als Wettkämpfer, seit Langem als Trainer. Einfache, sichere Stunden: solide Grundlagen, sinnvolle Wiederholung und gute Atmosphäre. Hier gibt es nur Jiu-Jitsu, richtig gemacht.",
@@ -94,6 +101,45 @@
       "title": "Angekommen — danke!",
       "body": "Wir haben deine Anfrage gespeichert. Der Professor schreibt dir bald zur Begrüßung.",
       "again": "Weitere Anfrage senden",
+      "home": "Zurück zur Startseite"
+    }
+  },
+  "seminars": {
+    "kicker": "Seminare",
+    "title": "Seminare & Events",
+    "intro": "Sonderstunden, Masterclasses mit Gästen und Open Mats. Melde dich an, um deinen Platz zu sichern und dem Professor Bescheid zu geben, dass du kommst.",
+    "empty": "Aktuell keine anstehenden Seminare. Schau bald wieder vorbei.",
+    "free": "Kostenlos",
+    "limited": "Begrenzte Plätze: {count}",
+    "attend": "Anmelden",
+    "backToList": "Alle Seminare",
+    "signUpHeading": "Sichere deinen Platz",
+    "form": {
+      "name": "Vollständiger Name",
+      "namePlaceholder": "Dein Name",
+      "contact": "Telefon oder E-Mail",
+      "contactPlaceholder": "Damit wir dir bestätigen können",
+      "belt": "Gürtel",
+      "beltPlaceholder": "z. B. Blau",
+      "language": "Bevorzugte Sprache",
+      "message": "Nachricht",
+      "messagePlaceholder": "Sollten wir etwas wissen?",
+      "optional": "optional",
+      "submit": "Platz sichern",
+      "submitting": "Wird gesendet…"
+    },
+    "validation": {
+      "name": "Bitte sag uns deinen Namen.",
+      "contact": "Wir brauchen Telefon oder E-Mail, um dir zu bestätigen."
+    },
+    "errors": {
+      "generic": "Das konnte nicht gesendet werden. Bitte versuche es gleich noch einmal.",
+      "notConfigured": "Das Formular ist noch nicht mit der Datenbank verbunden. Konfiguriere Supabase, um es zu aktivieren."
+    },
+    "success": {
+      "title": "Platz gesichert!",
+      "body": "Du stehst auf der Liste für dieses Seminar. Der Professor rechnet mit dir. Falls sich etwas ändert, melden wir uns unter dem von dir angegebenen Kontakt.",
+      "more": "Weitere Seminare ansehen",
       "home": "Zurück zur Startseite"
     }
   },

@@ -5,6 +5,7 @@
     "nav": {
       "home": "Inicio",
       "signup": "Apúntate",
+      "seminars": "Seminarios",
       "contact": "Contacto",
       "admin": "Acceso"
     },
@@ -50,6 +51,12 @@
       "note": "Horario orientativo. Confírmalo al apuntarte.",
       "kids": "Niños",
       "adults": "Adultos"
+    },
+    "seminars": {
+      "kicker": "Seminarios",
+      "title": "Eventos especiales",
+      "body": "De vez en cuando organizamos seminarios y open mats: clases con invitados y sesiones temáticas. Mira los próximos y reserva tu plaza.",
+      "cta": "Ver seminarios"
     },
     "about": {
       "title": "El Profesor",
@@ -97,6 +104,45 @@
       "home": "Volver al inicio"
     }
   },
+  "seminars": {
+    "kicker": "Seminarios",
+    "title": "Seminarios y eventos",
+    "intro": "Clases especiales, masterclass con invitados y open mats. Apúntate para reservar tu plaza y que el Profesor sepa que vienes.",
+    "empty": "No hay seminarios próximos por ahora. Vuelve pronto.",
+    "free": "Gratis",
+    "limited": "Plazas limitadas: {count}",
+    "attend": "Apúntate",
+    "backToList": "Todos los seminarios",
+    "signUpHeading": "Reserva tu plaza",
+    "form": {
+      "name": "Nombre completo",
+      "namePlaceholder": "Tu nombre",
+      "contact": "Teléfono o email",
+      "contactPlaceholder": "Para poder confirmarte",
+      "belt": "Cinturón",
+      "beltPlaceholder": "p. ej. Azul",
+      "language": "Idioma preferido",
+      "message": "Mensaje",
+      "messagePlaceholder": "¿Algo que debamos saber?",
+      "optional": "opcional",
+      "submit": "Reservar plaza",
+      "submitting": "Enviando…"
+    },
+    "validation": {
+      "name": "Dime tu nombre, por favor.",
+      "contact": "Necesito un teléfono o email para confirmarte."
+    },
+    "errors": {
+      "generic": "No se ha podido enviar. Vuelve a intentarlo en un momento.",
+      "notConfigured": "El formulario aún no está conectado a la base de datos. Configura Supabase para activarlo."
+    },
+    "success": {
+      "title": "¡Plaza reservada!",
+      "body": "Te hemos apuntado al seminario. El Profesor cuenta contigo. Si surge algo, te avisaremos por el contacto que dejaste.",
+      "more": "Ver más seminarios",
+      "home": "Volver al inicio"
+    }
+  },
   "contact": {
     "kicker": "Contacto",
     "title": "Hablemos",
@@ -119,6 +165,7 @@
       "members": "Miembros",
       "payments": "Pagos",
       "signups": "Solicitudes",
+      "seminars": "Seminarios",
       "logout": "Salir",
       "viewSite": "Ver la web"
     },
@@ -230,6 +277,46 @@
       "adults": "Adultos",
       "parentName": "Tutor",
       "emergency": "Emergencia"
+    },
+    "seminars": {
+      "title": "Seminarios",
+      "subtitle": "Crea eventos y controla quién se apunta.",
+      "new": "Nuevo seminario",
+      "empty": "Aún no hay seminarios. Crea el primero.",
+      "past": "Pasado",
+      "draft": "Borrador",
+      "manage": "Gestionar",
+      "attending": "{going} apuntados",
+      "attendingOf": "{going}/{cap} apuntados",
+      "attendees": "Apuntados",
+      "noAttendees": "Todavía no se ha apuntado nadie.",
+      "remove": "Quitar",
+      "editDetails": "Editar el seminario"
+    },
+    "seminarForm": {
+      "newTitle": "Nuevo seminario",
+      "title": "Título",
+      "titlePlaceholder": "p. ej. Open Mat con cinturón negro invitado",
+      "startsAt": "Fecha y hora",
+      "location": "Lugar",
+      "locationPlaceholder": "Dónde se celebra",
+      "capacity": "Plazas",
+      "capacityPlaceholder": "Sin límite",
+      "price": "Precio (€)",
+      "pricePlaceholder": "Gratis",
+      "visibility": "Visibilidad",
+      "published": "Publicado",
+      "draft": "Borrador",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Qué se va a hacer, nivel, qué traer…",
+      "optional": "opcional",
+      "save": "Guardar",
+      "saving": "Guardando…",
+      "cancel": "Cancelar",
+      "delete": "Eliminar seminario",
+      "deleteConfirm": "¿Eliminar este seminario y su lista de apuntados? No se puede deshacer.",
+      "back": "Volver a seminarios",
+      "required": "El título y la fecha son obligatorios."
     },
     "common": {
       "saveError": "Algo ha fallado. Inténtalo de nuevo.",
