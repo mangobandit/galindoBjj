@@ -37,6 +37,9 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <LanguageSwitcher />
+          <Button asChild variant="outline" size="sm" className="hidden sm:inline-flex">
+            <Link href="/admin/login">{t("nav.admin")}</Link>
+          </Button>
           <Button asChild size="sm" className="hidden sm:inline-flex">
             <Link href="/signup">{t("nav.signup")}</Link>
           </Button>
