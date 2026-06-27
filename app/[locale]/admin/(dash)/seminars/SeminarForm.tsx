@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import { Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +32,7 @@ export function SeminarForm({ seminar }: { seminar?: Seminar }) {
   const t = useTranslations("admin.seminarForm");
   const tcommon = useTranslations("admin.common");
   const router = useRouter();
+  const locale = useLocale();
   const [state, formAction] = useActionState(saveSeminar, INITIAL);
 
   useEffect(() => {
@@ -181,6 +182,7 @@ export function SeminarForm({ seminar }: { seminar?: Seminar }) {
           className="border-t border-border pt-6"
         >
           <input type="hidden" name="id" value={seminar.id} />
+          <input type="hidden" name="locale" value={locale} />
           <SubmitButton variant="destructive" size="sm">
             <Trash2 />
             {t("delete")}

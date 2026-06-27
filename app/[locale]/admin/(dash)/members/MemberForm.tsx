@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
@@ -38,6 +38,7 @@ export function MemberForm({ member }: { member?: Member }) {
   const tm = useTranslations("admin.members");
   const tcommon = useTranslations("admin.common");
   const router = useRouter();
+  const locale = useLocale();
   const [section, setSection] = useState<"adults" | "kids">(
     member?.section ?? "adults",
   );
@@ -221,6 +222,7 @@ export function MemberForm({ member }: { member?: Member }) {
           className="border-t border-border pt-6"
         >
           <input type="hidden" name="id" value={member.id} />
+          <input type="hidden" name="locale" value={locale} />
           <SubmitButton variant="destructive" size="sm">
             <Trash2 />
             {t("delete")}
