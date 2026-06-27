@@ -11,8 +11,7 @@ import {
   formatEuros,
   formatDate,
 } from "@/lib/format";
-import { togglePayment } from "../../actions";
-import { SubmitButton } from "../../_components/SubmitButton";
+import { PaymentToggleForm } from "./PaymentToggleForm";
 import type { Member, Payment } from "@/lib/supabase/types";
 
 const DEFAULT_AMOUNT = { adults: 45, kids: 35 } as const;
@@ -112,7 +111,7 @@ export default async function PaymentsPage({
           {members.map((m) => {
             const payment = paidById.get(m.id);
             const isPaid = Boolean(payment);
-            const amount = DEFAULT_AMOUNT[m.section];
+            const amount = DEFAULT_AMOUNT[m.section] ?? 0;
             return (
               <li
                 key={m.id}
@@ -144,25 +143,12 @@ export default async function PaymentsPage({
                   ) : null}
                 </div>
 
-                <form action={togglePayment} className="shrink-0">
-                  <input type="hidden" name="memberId" value={m.id} />
-                  <input type="hidden" name="period" value={period} />
-                  <input type="hidden" name="paid" value={isPaid ? "1" : "0"} />
-                  <input type="hidden" name="amount" value={amount} />
-                  <SubmitButton
-                    variant={isPaid ? "outline" : "success"}
-                    size="sm"
-                  >
-                    {isPaid ? (
-                      t("markDue")
-                    ) : (
-                      <>
-                        <Check />
-                        {t("markPaid")}
-                      </>
-                    )}
-                  </SubmitButton>
-                </form>
+                <PaymentToggleForm
+                  memberId={m.id}
+                  period={period}
+                  isPaid={isPaid}
+                  amount={amount}
+                />
               </li>
             );
           })}

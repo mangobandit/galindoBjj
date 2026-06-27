@@ -16,6 +16,23 @@ async function client() {
   return supabase;
 }
 
+/**
+ * Fail loudly on a swallowed Supabase write error. supabase-js resolves a
+ * rejected write (RLS denial, constraint, transient failure) as { error }
+ * instead of throwing, so without this a "save" can silently do nothing.
+ * Throwing here surfaces the dashboard error boundary (a real, retryable
+ * message) instead of pretending the action succeeded.
+ */
+function assertOk(
+  error: { message: string } | null,
+  where: string,
+): void {
+  if (error) {
+    console.error(`${where} failed:`, error.message);
+    throw new Error(`${where} failed: ${error.message}`);
+  }
+}
+
 function revalidateAdmin() {
   revalidatePath("/[locale]/admin", "page");
   revalidatePath("/[locale]/admin/members", "page");
@@ -25,48 +42,67 @@ function revalidateAdmin() {
 }
 
 // ── Payments ──────────────────────────────────────────────────────────────
-/** One-tap toggle for "paid this period". Progressive-enhancement friendly. */
-export async function togglePayment(formData: FormData) {
-  const supabase = await client();
+export type TogglePaymentState = {
+  status: "idle" | "success" | "error";
+};
+
+/**
+ * One-tap toggle for "paid this period". Returns a typed state (consumed via
+ * useActionState) so a failed write shows inline feedback instead of silently
+ * doing nothing — this is the coach's core daily action.
+ */
+export async function togglePayment(
+  _prev: TogglePaymentState,
+  formData: FormData,
+): Promise<TogglePaymentState> {
+  const supabase = await createClient();
+  if (!supabase) return { status: "error" };
+
   const memberId = String(formData.get("memberId"));
   const period = String(formData.get("period"));
   const isPaid = String(formData.get("paid")) === "1";
   const amount = Number(formData.get("amount")) || null;
-  const method = (String(formData.get("method") || "cash") as PaymentMethod);
+  const method = String(formData.get("method") || "cash") as PaymentMethod;
 
-  if (isPaid) {
-    // Currently paid → undo.
-    await supabase
-      .from("payments")
-      .delete()
-      .eq("member_id", memberId)
-      .eq("period", period);
-  } else {
-    await supabase.from("payments").upsert(
-      {
-        member_id: memberId,
-        period,
-        amount,
-        method,
-        paid_on: currentPeriod() === period
-          ? new Date().toISOString().slice(0, 10)
-          : `${period}-01`,
-        status: "paid",
-      },
-      { onConflict: "member_id,period" },
-    );
+  const { error } = isPaid
+    ? // Currently paid → undo.
+      await supabase
+        .from("payments")
+        .delete()
+        .eq("member_id", memberId)
+        .eq("period", period)
+    : await supabase.from("payments").upsert(
+        {
+          member_id: memberId,
+          period,
+          amount,
+          method,
+          paid_on:
+            currentPeriod() === period
+              ? new Date().toISOString().slice(0, 10)
+              : `${period}-01`,
+          status: "paid",
+        },
+        { onConflict: "member_id,period" },
+      );
+
+  if (error) {
+    console.error("togglePayment failed:", error.message);
+    return { status: "error" };
   }
 
   revalidateAdmin();
+  return { status: "success" };
 }
 
 // ── Members ─────────────────────────────────────────────────────────────
 export async function activateMember(formData: FormData) {
   const supabase = await client();
-  await supabase
+  const { error } = await supabase
     .from("members")
     .update({ status: "active" })
     .eq("id", String(formData.get("id")));
+  assertOk(error, "activateMember");
   revalidateAdmin();
 }
 
@@ -125,20 +161,22 @@ export async function saveMember(
 
 export async function deleteMember(formData: FormData) {
   const supabase = await client();
-  await supabase
+  const { error } = await supabase
     .from("members")
     .delete()
     .eq("id", String(formData.get("id")));
+  assertOk(error, "deleteMember");
   revalidateAdmin();
 }
 
 // ── Sign-ups inbox ────────────────────────────────────────────────────────
 export async function dismissSignup(formData: FormData) {
   const supabase = await client();
-  await supabase
+  const { error } = await supabase
     .from("signups")
     .update({ converted: true })
     .eq("id", String(formData.get("id")));
+  assertOk(error, "dismissSignup");
   revalidateAdmin();
 }
 
@@ -155,7 +193,7 @@ export async function convertSignup(formData: FormData) {
 
   if (!signup) return;
 
-  await supabase.from("members").insert({
+  const { error: insertError } = await supabase.from("members").insert({
     full_name: signup.name,
     section: signup.section_interest ?? "adults",
     language_pref: signup.language,
@@ -167,8 +205,13 @@ export async function convertSignup(formData: FormData) {
     parent_name: signup.parent_name,
     emergency_contact: signup.emergency_contact,
   });
+  assertOk(insertError, "convertSignup (insert member)");
 
-  await supabase.from("signups").update({ converted: true }).eq("id", id);
+  const { error: updateError } = await supabase
+    .from("signups")
+    .update({ converted: true })
+    .eq("id", id);
+  assertOk(updateError, "convertSignup (mark converted)");
   revalidateAdmin();
 }
 
@@ -234,19 +277,21 @@ export async function saveSeminar(
 
 export async function deleteSeminar(formData: FormData) {
   const supabase = await client();
-  await supabase
+  const { error } = await supabase
     .from("seminars")
     .delete()
     .eq("id", String(formData.get("id")));
+  assertOk(error, "deleteSeminar");
   revalidateAdmin();
 }
 
 /** Remove a single attendee from a seminar's list (e.g. a cancellation). */
 export async function removeAttendee(formData: FormData) {
   const supabase = await client();
-  await supabase
+  const { error } = await supabase
     .from("seminar_signups")
     .delete()
     .eq("id", String(formData.get("id")));
+  assertOk(error, "removeAttendee");
   revalidateAdmin();
 }

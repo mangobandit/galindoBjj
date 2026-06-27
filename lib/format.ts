@@ -19,8 +19,10 @@ export function recentPeriods(count = 12, from = currentPeriod()): string[] {
 
 /** Human label for a period, e.g. "junio 2026" in the given locale. */
 export function formatPeriod(period: string, locale = "es"): string {
-  const [y, m] = period.split("-").map(Number);
-  const d = new Date(y, m - 1, 1);
+  const [y, m] = (period ?? "").split("-").map(Number);
+  const d = new Date(y, (m || 1) - 1, 1);
+  // Never throw on malformed input — a bad value must not crash a render.
+  if (Number.isNaN(d.getTime())) return period ?? "—";
   return new Intl.DateTimeFormat(locale, {
     month: "long",
     year: "numeric",
@@ -29,32 +31,36 @@ export function formatPeriod(period: string, locale = "es"): string {
 
 /** Currency in euros for the given locale. */
 export function formatEuros(amount: number | null, locale = "es"): string {
-  if (amount == null) return "—";
+  if (amount == null || Number.isNaN(Number(amount))) return "—";
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: "EUR",
     maximumFractionDigits: 0,
-  }).format(amount);
+  }).format(Number(amount));
 }
 
-/** Short date, e.g. "12 jun 2026". */
+/** Short date, e.g. "12 jun 2026". Returns "—" for missing/invalid dates. */
 export function formatDate(iso: string | null, locale = "es"): string {
   if (!iso) return "—";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "—";
   return new Intl.DateTimeFormat(locale, {
     day: "numeric",
     month: "short",
     year: "numeric",
-  }).format(new Date(iso));
+  }).format(d);
 }
 
 /** Date + time, e.g. "12 jul 2026, 11:00" — used for seminars (one-off events). */
 export function formatDateTime(iso: string | null, locale = "es"): string {
   if (!iso) return "—";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "—";
   return new Intl.DateTimeFormat(locale, {
     day: "numeric",
     month: "short",
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-  }).format(new Date(iso));
+  }).format(d);
 }
