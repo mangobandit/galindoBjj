@@ -6,6 +6,7 @@
       "home": "Start",
       "signup": "Anmelden",
       "seminars": "Seminare",
+      "competitions": "Wettkämpfe",
       "contact": "Kontakt",
       "admin": "Login"
     },
@@ -141,6 +142,56 @@
       "body": "Du stehst auf der Liste für dieses Seminar. Der Professor rechnet mit dir. Falls sich etwas ändert, melden wir uns unter dem von dir angegebenen Kontakt.",
       "more": "Weitere Seminare ansehen",
       "home": "Zurück zur Startseite"
+    }
+  },
+  "competitions": {
+    "kicker": "Wettkämpfe",
+    "title": "Wettkampfteam",
+    "intro": "Verfolge die Fusion Galindo Starter: Divisionen, Zeiten, Ergebnisse und Medaillen. Namen von unter 18-Jährigen bleiben privat.",
+    "empty": "Noch keine Wettkämpfe veröffentlicht.",
+    "viewDetails": "Tracker ansehen",
+    "backToList": "Alle Wettkämpfe",
+    "smoothcomp": "Smoothcomp",
+    "registration": "Anmeldung",
+    "fighters": "Starter",
+    "medals": "Medaillen",
+    "medalsCount": "{count} Medaillen",
+    "matchLogs": "Kämpfe",
+    "noFighters": "Für diesen Wettkampf sind noch keine Starter veröffentlicht.",
+    "noMatches": "Noch keine Kämpfe eingetragen.",
+    "privateMinor": "Name privat, weil die Person unter 18 ist",
+    "firstMatch": "Erster Kampf",
+    "mat": "Matte",
+    "division": "Division",
+    "weight": "Gewicht",
+    "team": "Team",
+    "status": "Status",
+    "result": "Ergebnis",
+    "notes": "Notizen",
+    "divisionTbd": "Division offen",
+    "timeTbd": "Zeit offen",
+    "registrationStatus": {
+      "needs_signup": "Anmeldung fehlt",
+      "registered": "Angemeldet",
+      "confirmed": "Bestätigt",
+      "withdrawn": "Zurückgezogen"
+    },
+    "results": {
+      "pending": "Offen",
+      "gold": "Gold",
+      "silver": "Silber",
+      "bronze": "Bronze",
+      "no_medal": "Keine Medaille",
+      "withdrawn": "Zurückgezogen",
+      "win": "Sieg",
+      "loss": "Niederlage",
+      "draw": "Unentschieden",
+      "dq": "DQ"
+    },
+    "giNogiOptions": {
+      "both": "Gi & No-Gi",
+      "gi": "Gi",
+      "nogi": "No-Gi"
     }
   },
   "contact": {

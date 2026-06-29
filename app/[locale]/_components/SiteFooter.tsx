@@ -21,6 +21,9 @@ export function SiteFooter() {
           <Link href="/signup" className="hover:text-foreground">
             {t("nav.signup")}
           </Link>
+          <Link href="/competitions" className="hover:text-foreground">
+            {t("nav.competitions")}
+          </Link>
           <Link href="/contact" className="hover:text-foreground">
             {t("nav.contact")}
           </Link>

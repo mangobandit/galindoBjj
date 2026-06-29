@@ -6,6 +6,7 @@
       "home": "Home",
       "signup": "Sign up",
       "seminars": "Seminars",
+      "competitions": "Competitions",
       "contact": "Contact",
       "admin": "Log in"
     },
@@ -141,6 +142,56 @@
       "body": "You're on the list for this seminar. The Professor is counting on you. If anything changes, we'll reach you at the contact you left.",
       "more": "See more seminars",
       "home": "Back to home"
+    }
+  },
+  "competitions": {
+    "kicker": "Competitions",
+    "title": "Competition team",
+    "intro": "Track Fusion Galindo competitors: divisions, times, results and medals. Names for under-18 fighters stay private.",
+    "empty": "No competitions are published yet.",
+    "viewDetails": "View tracker",
+    "backToList": "All competitions",
+    "smoothcomp": "Smoothcomp",
+    "registration": "Registration",
+    "fighters": "Fighters",
+    "medals": "Medals",
+    "medalsCount": "{count} medals",
+    "matchLogs": "Matches",
+    "noFighters": "No fighters are published for this competition yet.",
+    "noMatches": "No matches have been logged yet.",
+    "privateMinor": "Name private because fighter is under 18",
+    "firstMatch": "First match",
+    "mat": "Mat",
+    "division": "Division",
+    "weight": "Weight",
+    "team": "Team",
+    "status": "Status",
+    "result": "Result",
+    "notes": "Notes",
+    "divisionTbd": "Division pending",
+    "timeTbd": "Time pending",
+    "registrationStatus": {
+      "needs_signup": "Needs signup",
+      "registered": "Registered",
+      "confirmed": "Confirmed",
+      "withdrawn": "Withdrawn"
+    },
+    "results": {
+      "pending": "Pending",
+      "gold": "Gold",
+      "silver": "Silver",
+      "bronze": "Bronze",
+      "no_medal": "No medal",
+      "withdrawn": "Withdrawn",
+      "win": "Win",
+      "loss": "Loss",
+      "draw": "Draw",
+      "dq": "DQ"
+    },
+    "giNogiOptions": {
+      "both": "Gi & No-Gi",
+      "gi": "Gi",
+      "nogi": "No-Gi"
     }
   },
   "contact": {

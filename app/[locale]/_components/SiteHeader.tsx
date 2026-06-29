@@ -28,6 +28,12 @@ export function SiteHeader() {
             {t("nav.seminars")}
           </Link>
           <Link
+            href="/competitions"
+            className="transition-colors hover:text-foreground"
+          >
+            {t("nav.competitions")}
+          </Link>
+          <Link
             href="/contact"
             className="transition-colors hover:text-foreground"
           >

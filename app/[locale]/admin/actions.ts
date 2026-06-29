@@ -7,7 +7,13 @@ import { serializeBeltRank } from "@/lib/belts";
 import { currentPeriod } from "@/lib/format";
 import { routing } from "@/i18n/routing";
 import type {
+  CompetitionGiNogi,
+  CompetitionPaymentStatus,
+  CompetitionRegistrationStatus,
+  CompetitionResult,
+  CompetitionWeighInStatus,
   LanguagePref,
+  MatchResult,
   MemberStatus,
   PaymentMethod,
   Section,
@@ -58,6 +64,33 @@ function revalidateAdmin() {
   revalidatePath("/[locale]/admin/payments", "page");
   revalidatePath("/[locale]/admin/signups", "page");
   revalidatePath("/[locale]/admin/seminars", "page");
+  revalidatePath("/[locale]/admin/competitions", "page");
+}
+
+function textValue(formData: FormData, key: string): string | null {
+  const value = String(formData.get(key) || "").trim();
+  return value.length ? value : null;
+}
+
+function numberValue(formData: FormData, key: string): number | null {
+  const value = String(formData.get(key) || "").trim();
+  if (!value.length) return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function datetimeValue(formData: FormData, key: string): string | null {
+  const value = String(formData.get(key) || "").trim();
+  if (!value.length) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+}
+
+function revalidateCompetitionPages() {
+  revalidateAdmin();
+  revalidatePath("/[locale]/admin/competitions/[id]", "page");
+  revalidatePath("/[locale]/competitions", "page");
+  revalidatePath("/[locale]/competitions/[id]", "page");
 }
 
 // ── Payments ──────────────────────────────────────────────────────────────
@@ -420,4 +453,170 @@ export async function removeAttendee(formData: FormData) {
     .eq("id", String(formData.get("id")));
   assertOk(error, "removeAttendee");
   revalidateAdmin();
+}
+
+// ── Competitions ──────────────────────────────────────────────────────────
+export type SaveCompetitionState = {
+  status: "idle" | "success" | "error";
+  id?: string;
+  error?: "required" | "notConfigured" | "generic";
+};
+
+export async function saveCompetition(
+  _prev: SaveCompetitionState,
+  formData: FormData,
+): Promise<SaveCompetitionState> {
+  const supabase = await createClient();
+  if (!supabase) return { status: "error", error: "notConfigured" };
+
+  const id = String(formData.get("id") || "");
+  const title = String(formData.get("title") || "").trim();
+  const startsOn = String(formData.get("starts_on") || "").trim();
+
+  if (!title || !startsOn) {
+    return { status: "error", error: "required" };
+  }
+
+  const payload = {
+    title,
+    starts_on: startsOn,
+    ends_on: textValue(formData, "ends_on"),
+    organizer: textValue(formData, "organizer"),
+    location: textValue(formData, "location"),
+    registration_url: textValue(formData, "registration_url"),
+    bracket_url: textValue(formData, "bracket_url"),
+    published: String(formData.get("published")) === "1",
+    notes: textValue(formData, "notes"),
+  };
+
+  if (id) {
+    const { error } = await supabase
+      .from("competitions")
+      .update(payload)
+      .eq("id", id);
+    if (error) {
+      console.error("saveCompetition update failed:", error.message);
+      return { status: "error", error: "generic" };
+    }
+    revalidateCompetitionPages();
+    return { status: "success", id };
+  }
+
+  const { data, error } = await supabase
+    .from("competitions")
+    .insert(payload)
+    .select("id")
+    .single();
+
+  if (error || !data) {
+    console.error("saveCompetition insert failed:", error?.message);
+    return { status: "error", error: "generic" };
+  }
+
+  revalidateCompetitionPages();
+  return { status: "success", id: data.id };
+}
+
+export async function deleteCompetition(formData: FormData) {
+  const supabase = await client();
+  const { error } = await supabase
+    .from("competitions")
+    .delete()
+    .eq("id", String(formData.get("id")));
+  assertOk(error, "deleteCompetition");
+  revalidateCompetitionPages();
+  redirect({ href: "/admin/competitions", locale: formLocale(formData) });
+}
+
+export async function saveCompetitionFighter(formData: FormData) {
+  const supabase = await client();
+  const id = String(formData.get("id") || "");
+  const competitionId = String(formData.get("competition_id") || "");
+  const fullName = String(formData.get("full_name") || "").trim();
+
+  if (!competitionId || !fullName) {
+    throw new Error("saveCompetitionFighter failed: missing required fields");
+  }
+
+  const payload = {
+    competition_id: competitionId,
+    member_id: textValue(formData, "member_id"),
+    full_name: fullName,
+    team: textValue(formData, "team") ?? "Fusion Galindo Jiu-Jitsu",
+    is_minor: String(formData.get("is_minor")) === "1",
+    age_group: textValue(formData, "age_group"),
+    belt_rank: textValue(formData, "belt_rank"),
+    division: textValue(formData, "division"),
+    weight_class: textValue(formData, "weight_class"),
+    gi_nogi: (textValue(formData, "gi_nogi") ?? "both") as CompetitionGiNogi,
+    registration_status: (textValue(formData, "registration_status") ??
+      "needs_signup") as CompetitionRegistrationStatus,
+    payment_status: (textValue(formData, "payment_status") ??
+      "unknown") as CompetitionPaymentStatus,
+    weigh_in_status: (textValue(formData, "weigh_in_status") ??
+      "unknown") as CompetitionWeighInStatus,
+    bracket_url: textValue(formData, "bracket_url"),
+    mat: textValue(formData, "mat"),
+    first_match_at: datetimeValue(formData, "first_match_at"),
+    result: (textValue(formData, "result") ?? "pending") as CompetitionResult,
+    placement: numberValue(formData, "placement"),
+    public_notes: textValue(formData, "public_notes"),
+    coach_notes: textValue(formData, "coach_notes"),
+  };
+
+  const { error } = id
+    ? await supabase.from("competition_fighters").update(payload).eq("id", id)
+    : await supabase.from("competition_fighters").insert(payload);
+
+  assertOk(error, "saveCompetitionFighter");
+  revalidateCompetitionPages();
+}
+
+export async function deleteCompetitionFighter(formData: FormData) {
+  const supabase = await client();
+  const { error } = await supabase
+    .from("competition_fighters")
+    .delete()
+    .eq("id", String(formData.get("id")));
+  assertOk(error, "deleteCompetitionFighter");
+  revalidateCompetitionPages();
+}
+
+export async function saveCompetitionMatch(formData: FormData) {
+  const supabase = await client();
+  const id = String(formData.get("id") || "");
+  const fighterId = String(formData.get("fighter_id") || "");
+  if (!fighterId) {
+    throw new Error("saveCompetitionMatch failed: missing fighter id");
+  }
+
+  const payload = {
+    fighter_id: fighterId,
+    match_order: numberValue(formData, "match_order") ?? 1,
+    opponent: textValue(formData, "opponent"),
+    scheduled_at: datetimeValue(formData, "scheduled_at"),
+    mat: textValue(formData, "mat"),
+    round: textValue(formData, "round"),
+    result: (textValue(formData, "result") ?? "pending") as MatchResult,
+    method: textValue(formData, "method"),
+    score: textValue(formData, "score"),
+    notes: textValue(formData, "notes"),
+  };
+
+  const { error } = id
+    ? await supabase.from("competition_matches").update(payload).eq("id", id)
+    : await supabase.from("competition_matches").insert(payload);
+
+  assertOk(error, "saveCompetitionMatch");
+  revalidateCompetitionPages();
+}
+
+export async function deleteCompetitionMatch(formData: FormData) {
+  const supabase = await client();
+  const { error } = await supabase
+    .from("competition_matches")
+    .delete()
+    .eq("id", String(formData.get("id")));
+  assertOk(error, "deleteCompetitionMatch");
+  revalidateCompetitionPages();
 }

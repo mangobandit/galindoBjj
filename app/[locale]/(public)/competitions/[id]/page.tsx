@@ -1,0 +1,319 @@
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+import {
+  ArrowLeft,
+  CalendarDays,
+  Clock,
+  ExternalLink,
+  MapPin,
+  Medal,
+  Shield,
+  Trophy,
+  Users,
+} from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
+import { Link } from "@/i18n/navigation";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { formatDate, formatDateTime } from "@/lib/format";
+import type {
+  Competition,
+  CompetitionRegistrationStatus,
+  CompetitionResult,
+  MatchResult,
+  PublicCompetitionFighter,
+  PublicCompetitionMatch,
+} from "@/lib/supabase/types";
+
+function registrationVariant(status: CompetitionRegistrationStatus) {
+  if (status === "confirmed") return "success" as const;
+  if (status === "registered") return "outline" as const;
+  if (status === "withdrawn") return "warning" as const;
+  return "muted" as const;
+}
+
+function resultVariant(result: CompetitionResult | MatchResult) {
+  if (result === "gold" || result === "win") return "success" as const;
+  if (result === "silver" || result === "bronze" || result === "draw") {
+    return "outline" as const;
+  }
+  if (result === "loss" || result === "dq" || result === "withdrawn") {
+    return "warning" as const;
+  }
+  return "muted" as const;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const supabase = await createClient();
+  if (!supabase) return {};
+  const { data } = await supabase
+    .from("competitions")
+    .select("title")
+    .eq("id", id)
+    .eq("published", true)
+    .maybeSingle();
+  return { title: data?.title };
+}
+
+export default async function CompetitionDetailPage({
+  params,
+}: {
+  params: Promise<{ locale: string; id: string }>;
+}) {
+  const { locale, id } = await params;
+  const t = await getTranslations({ locale, namespace: "competitions" });
+
+  const supabase = await createClient();
+  if (!supabase) notFound();
+
+  const { data: competitionData } = await supabase
+    .from("competitions")
+    .select("*")
+    .eq("id", id)
+    .eq("published", true)
+    .maybeSingle();
+
+  if (!competitionData) notFound();
+  const competition = competitionData as Competition;
+
+  const [{ data: fightersData }, { data: matchesData }] = await Promise.all([
+    supabase
+      .from("public_competition_fighters")
+      .select("*")
+      .eq("competition_id", id)
+      .order("first_match_at", { ascending: true, nullsFirst: false })
+      .order("display_name", { ascending: true }),
+    supabase
+      .from("public_competition_matches")
+      .select("*")
+      .eq("competition_id", id)
+      .order("match_order", { ascending: true }),
+  ]);
+
+  const fighters = (fightersData ?? []) as PublicCompetitionFighter[];
+  const matches = (matchesData ?? []) as PublicCompetitionMatch[];
+  const matchesByFighter = new Map<string, PublicCompetitionMatch[]>();
+  for (const match of matches) {
+    const next = matchesByFighter.get(match.fighter_id) ?? [];
+    next.push(match);
+    matchesByFighter.set(match.fighter_id, next);
+  }
+
+  const scheduled = fighters.filter((fighter) => fighter.first_match_at).length;
+  const medals = fighters.filter((fighter) =>
+    ["gold", "silver", "bronze"].includes(fighter.result),
+  ).length;
+
+  return (
+    <section className="container max-w-5xl py-16 md:py-20">
+      <Link
+        href="/competitions"
+        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+      >
+        <ArrowLeft className="size-4" />
+        {t("backToList")}
+      </Link>
+
+      <div className="mt-6 flex flex-wrap items-start justify-between gap-5">
+        <div className="min-w-0">
+          <p className="kicker">{t("kicker")}</p>
+          <h1 className="mt-3 text-4xl font-bold sm:text-5xl">
+            {competition.title}
+          </h1>
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-muted-foreground">
+            <span className="inline-flex items-center gap-1.5">
+              <CalendarDays className="size-4" />
+              {formatDate(competition.starts_on, locale)}
+            </span>
+            {competition.location ? (
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="size-4" />
+                {competition.location}
+              </span>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {competition.registration_url ? (
+            <Button asChild variant="outline">
+              <a
+                href={competition.registration_url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <ExternalLink />
+                {t("registration")}
+              </a>
+            </Button>
+          ) : null}
+          {competition.bracket_url ? (
+            <Button asChild>
+              <a href={competition.bracket_url} target="_blank" rel="noreferrer">
+                <ExternalLink />
+                {t("smoothcomp")}
+              </a>
+            </Button>
+          ) : null}
+        </div>
+      </div>
+
+      <div className="mt-8 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-lg border border-border bg-card p-5">
+          <Users className="size-5 text-muted-foreground" />
+          <div className="mt-3 text-3xl font-bold tabular-nums">
+            {fighters.length}
+          </div>
+          <p className="mt-1 text-sm text-muted-foreground">{t("fighters")}</p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-5">
+          <Clock className="size-5 text-muted-foreground" />
+          <div className="mt-3 text-3xl font-bold tabular-nums">
+            {scheduled}
+          </div>
+          <p className="mt-1 text-sm text-muted-foreground">{t("firstMatch")}</p>
+        </div>
+        <div className="rounded-lg border border-border bg-card p-5">
+          <Medal className="size-5 text-muted-foreground" />
+          <div className="mt-3 text-3xl font-bold tabular-nums">{medals}</div>
+          <p className="mt-1 text-sm text-muted-foreground">{t("medals")}</p>
+        </div>
+      </div>
+
+      <div className="mt-10 flex items-center gap-2">
+        <Trophy className="size-5" />
+        <h2 className="text-2xl font-bold">{t("fighters")}</h2>
+      </div>
+
+      {fighters.length === 0 ? (
+        <div className="mt-5 rounded-xl border border-dashed border-border bg-card/40 p-12 text-center text-muted-foreground">
+          {t("noFighters")}
+        </div>
+      ) : (
+        <ul className="mt-5 grid gap-4 lg:grid-cols-2">
+          {fighters.map((fighter) => {
+            const fighterMatches = matchesByFighter.get(fighter.id) ?? [];
+            return (
+              <li
+                key={fighter.id}
+                className="rounded-xl border border-border bg-card p-5"
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="text-xl font-bold">{fighter.display_name}</h3>
+                      {fighter.is_minor ? (
+                        <Badge variant="primary">
+                          <Shield className="size-3" />
+                          {t("privateMinor")}
+                        </Badge>
+                      ) : null}
+                    </div>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {fighter.team}
+                    </p>
+                  </div>
+                  <Badge variant={resultVariant(fighter.result)}>
+                    {t(`results.${fighter.result}`)}
+                  </Badge>
+                </div>
+
+                <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+                  <div className="rounded-md bg-secondary/50 p-3">
+                    <dt className="text-muted-foreground">{t("division")}</dt>
+                    <dd className="mt-1 font-medium">
+                      {fighter.division ?? t("divisionTbd")}
+                    </dd>
+                  </div>
+                  <div className="rounded-md bg-secondary/50 p-3">
+                    <dt className="text-muted-foreground">{t("firstMatch")}</dt>
+                    <dd className="mt-1 font-medium">
+                      {fighter.first_match_at
+                        ? formatDateTime(fighter.first_match_at, locale)
+                        : t("timeTbd")}
+                    </dd>
+                  </div>
+                  <div className="rounded-md bg-secondary/50 p-3">
+                    <dt className="text-muted-foreground">{t("weight")}</dt>
+                    <dd className="mt-1 font-medium">
+                      {fighter.weight_class ?? "—"}
+                    </dd>
+                  </div>
+                  <div className="rounded-md bg-secondary/50 p-3">
+                    <dt className="text-muted-foreground">{t("status")}</dt>
+                    <dd className="mt-1 font-medium">
+                      <Badge variant={registrationVariant(fighter.registration_status)}>
+                        {t(`registrationStatus.${fighter.registration_status}`)}
+                      </Badge>
+                    </dd>
+                  </div>
+                </dl>
+
+                {fighter.mat || fighter.public_notes ? (
+                  <div className="mt-4 space-y-2 text-sm text-muted-foreground">
+                    {fighter.mat ? (
+                      <p>
+                        {t("mat")}:{" "}
+                        <span className="text-foreground">{fighter.mat}</span>
+                      </p>
+                    ) : null}
+                    {fighter.public_notes ? (
+                      <p className="whitespace-pre-line">{fighter.public_notes}</p>
+                    ) : null}
+                  </div>
+                ) : null}
+
+                <div className="mt-5 border-t border-border pt-4">
+                  <h4 className="font-semibold">{t("matchLogs")}</h4>
+                  {fighterMatches.length === 0 ? (
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {t("noMatches")}
+                    </p>
+                  ) : (
+                    <ul className="mt-3 space-y-2">
+                      {fighterMatches.map((match) => (
+                        <li
+                          key={match.id}
+                          className="rounded-md border border-border bg-background p-3 text-sm"
+                        >
+                          <div className="flex flex-wrap items-center gap-2">
+                            <Badge variant={resultVariant(match.result)}>
+                              {t(`results.${match.result}`)}
+                            </Badge>
+                            <span className="font-medium">
+                              #{match.match_order}
+                            </span>
+                            {match.round ? <span>{match.round}</span> : null}
+                          </div>
+                          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-muted-foreground">
+                            {match.scheduled_at ? (
+                              <span>{formatDateTime(match.scheduled_at, locale)}</span>
+                            ) : null}
+                            {match.mat ? <span>{t("mat")}: {match.mat}</span> : null}
+                            {match.opponent ? <span>{match.opponent}</span> : null}
+                            {match.method ? <span>{match.method}</span> : null}
+                            {match.score ? <span>{match.score}</span> : null}
+                          </div>
+                          {match.notes ? (
+                            <p className="mt-2 whitespace-pre-line text-muted-foreground">
+                              {match.notes}
+                            </p>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </section>
+  );
+}
