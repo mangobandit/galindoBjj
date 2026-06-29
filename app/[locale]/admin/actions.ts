@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "@/i18n/navigation";
 import { serializeBeltRank } from "@/lib/belts";
+import { SMOOTHCOMP_TEAM_NAME } from "@/lib/competition-team";
 import { currentPeriod } from "@/lib/format";
 import { routing } from "@/i18n/routing";
 import type {
@@ -485,6 +486,7 @@ export async function saveCompetition(
     location: textValue(formData, "location"),
     registration_url: textValue(formData, "registration_url"),
     bracket_url: textValue(formData, "bracket_url"),
+    team_url: textValue(formData, "team_url"),
     published: String(formData.get("published")) === "1",
     notes: textValue(formData, "notes"),
   };
@@ -542,7 +544,7 @@ export async function saveCompetitionFighter(formData: FormData) {
     competition_id: competitionId,
     member_id: textValue(formData, "member_id"),
     full_name: fullName,
-    team: textValue(formData, "team") ?? "Fusion Galindo Jiu-Jitsu",
+    team: textValue(formData, "team") ?? SMOOTHCOMP_TEAM_NAME,
     is_minor: String(formData.get("is_minor")) === "1",
     age_group: textValue(formData, "age_group"),
     belt_rank: textValue(formData, "belt_rank"),

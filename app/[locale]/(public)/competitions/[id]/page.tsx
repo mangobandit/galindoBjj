@@ -219,6 +219,14 @@ export default async function CompetitionDetailPage({
               </a>
             </Button>
           ) : null}
+          {competition.team_url ? (
+            <Button asChild variant="outline">
+              <a href={competition.team_url} target="_blank" rel="noreferrer">
+                <ExternalLink />
+                {t("teamProfile")}
+              </a>
+            </Button>
+          ) : null}
         </div>
       </div>
 

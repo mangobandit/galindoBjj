@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { SMOOTHCOMP_TEAM_URL } from "@/lib/competition-team";
 import {
   deleteCompetition,
   saveCompetition,
@@ -113,7 +114,7 @@ export function CompetitionForm({ competition }: { competition?: Competition }) 
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-3">
           <div className="space-y-2">
             <Label htmlFor="registration_url" optional={t("optional")}>
               {t("registrationUrl")}
@@ -136,6 +137,18 @@ export function CompetitionForm({ competition }: { competition?: Competition }) 
               type="url"
               defaultValue={competition?.bracket_url ?? ""}
               placeholder="https://smoothcomp.com/..."
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="team_url" optional={t("optional")}>
+              {t("teamUrl")}
+            </Label>
+            <Input
+              id="team_url"
+              name="team_url"
+              type="url"
+              defaultValue={competition?.team_url ?? SMOOTHCOMP_TEAM_URL}
+              placeholder="https://smoothcomp.com/en/club/..."
             />
           </div>
         </div>

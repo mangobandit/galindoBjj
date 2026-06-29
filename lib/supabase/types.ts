@@ -110,6 +110,7 @@ export type Competition = {
   location: string | null;
   registration_url: string | null;
   bracket_url: string | null;
+  team_url: string | null;
   published: boolean;
   notes: string | null;
   created_at: string;

@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { SMOOTHCOMP_TEAM_NAME } from "@/lib/competition-team";
 import { formatDate, formatDateTime } from "@/lib/format";
 import { formatBeltRank } from "@/lib/belts";
 import { AdminMetric, PageHeader } from "../../../_components/AdminMetric";
@@ -174,7 +175,7 @@ function FighterFields({
           <Input
             id={`team-${id}`}
             name="team"
-            defaultValue={fighter?.team ?? "Fusion Galindo Jiu-Jitsu"}
+            defaultValue={fighter?.team ?? SMOOTHCOMP_TEAM_NAME}
           />
         </div>
         <div className="space-y-2">
@@ -697,13 +698,25 @@ export default async function AdminCompetitionDetailPage({
           </div>
         }
         action={
-          competition.bracket_url ? (
-            <Button asChild variant="outline">
-              <a href={competition.bracket_url} target="_blank" rel="noreferrer">
-                <ExternalLink />
-                {t("smoothcomp")}
-              </a>
-            </Button>
+          competition.bracket_url || competition.team_url ? (
+            <div className="flex flex-wrap gap-2">
+              {competition.team_url ? (
+                <Button asChild variant="outline">
+                  <a href={competition.team_url} target="_blank" rel="noreferrer">
+                    <ExternalLink />
+                    {t("teamProfile")}
+                  </a>
+                </Button>
+              ) : null}
+              {competition.bracket_url ? (
+                <Button asChild variant="outline">
+                  <a href={competition.bracket_url} target="_blank" rel="noreferrer">
+                    <ExternalLink />
+                    {t("smoothcomp")}
+                  </a>
+                </Button>
+              ) : null}
+            </div>
           ) : null
         }
       />
