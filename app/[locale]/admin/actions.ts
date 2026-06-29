@@ -620,3 +620,41 @@ export async function deleteCompetitionMatch(formData: FormData) {
   assertOk(error, "deleteCompetitionMatch");
   revalidateCompetitionPages();
 }
+
+export async function saveCompetitionMatStream(formData: FormData) {
+  const supabase = await client();
+  const id = String(formData.get("id") || "");
+  const competitionId = String(formData.get("competition_id") || "");
+  const matName = String(formData.get("mat_name") || "").trim();
+  const streamUrl = String(formData.get("stream_url") || "").trim();
+
+  if (!competitionId || !matName || !streamUrl) {
+    throw new Error("saveCompetitionMatStream failed: missing required fields");
+  }
+
+  const payload = {
+    competition_id: competitionId,
+    mat_name: matName,
+    stream_url: streamUrl,
+    stream_label: textValue(formData, "stream_label"),
+    sort_order: numberValue(formData, "sort_order") ?? 0,
+    notes: textValue(formData, "notes"),
+  };
+
+  const { error } = id
+    ? await supabase.from("competition_mat_streams").update(payload).eq("id", id)
+    : await supabase.from("competition_mat_streams").insert(payload);
+
+  assertOk(error, "saveCompetitionMatStream");
+  revalidateCompetitionPages();
+}
+
+export async function deleteCompetitionMatStream(formData: FormData) {
+  const supabase = await client();
+  const { error } = await supabase
+    .from("competition_mat_streams")
+    .delete()
+    .eq("id", String(formData.get("id")));
+  assertOk(error, "deleteCompetitionMatStream");
+  revalidateCompetitionPages();
+}

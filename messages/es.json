@@ -156,6 +156,11 @@
     "fighters": "Competidores",
     "medals": "Medallas",
     "medalsCount": "{count} medallas",
+    "liveStreams": "Directos por tatami",
+    "watchLive": "Ver directo",
+    "watchMat": "Ver directo {mat}",
+    "matSchedule": "En este tatami",
+    "noMatAssignments": "Aún no hay combates asignados.",
     "matchLogs": "Combates",
     "noFighters": "Todavía no hay competidores publicados para esta competición.",
     "noMatches": "Todavía no hay combates registrados.",
@@ -511,6 +516,24 @@
         "draw": "Empate",
         "dq": "DQ"
       }
+    },
+    "competitionStreams": {
+      "heading": "Directos por tatami",
+      "subtitle": "Configura cada tatami una vez. El seguimiento público mostrará el enlace correcto debajo de cada competidor y combate.",
+      "add": "Añadir directo",
+      "save": "Guardar directo",
+      "saving": "Guardando...",
+      "delete": "Eliminar directo",
+      "empty": "Aún no hay directos configurados.",
+      "matName": "Tatami",
+      "matPlaceholder": "Tatami 1",
+      "streamLabel": "Etiqueta",
+      "labelPlaceholder": "Cámara principal",
+      "streamUrl": "URL del directo",
+      "sortOrder": "Orden",
+      "notes": "Notas públicas",
+      "notesPlaceholder": "p. ej. cambia a este directo cuando anuncien la mesa",
+      "optional": "opcional"
     },
     "common": {
       "saveError": "Algo ha fallado. Inténtalo de nuevo.",

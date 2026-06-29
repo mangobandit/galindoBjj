@@ -10,6 +10,7 @@ import {
   Shield,
   Trash2,
   Trophy,
+  Video,
   UserCheck,
   Users,
 } from "lucide-react";
@@ -27,8 +28,10 @@ import { AdminMetric, PageHeader } from "../../../_components/AdminMetric";
 import { SubmitButton } from "../../../_components/SubmitButton";
 import {
   deleteCompetitionFighter,
+  deleteCompetitionMatStream,
   deleteCompetitionMatch,
   saveCompetitionFighter,
+  saveCompetitionMatStream,
   saveCompetitionMatch,
 } from "../../../actions";
 import { CompetitionForm } from "../CompetitionForm";
@@ -36,6 +39,7 @@ import type {
   Competition,
   CompetitionFighter,
   CompetitionGiNogi,
+  CompetitionMatStream,
   CompetitionMatch,
   CompetitionPaymentStatus,
   CompetitionRegistrationStatus,
@@ -506,6 +510,92 @@ function MatchForm({
   );
 }
 
+function MatStreamForm({
+  competitionId,
+  stream,
+  t,
+}: {
+  competitionId: string;
+  stream?: CompetitionMatStream;
+  t: Awaited<ReturnType<typeof getTranslations>>;
+}) {
+  const id = stream?.id ?? "new-stream";
+
+  return (
+    <form
+      action={saveCompetitionMatStream}
+      className="space-y-3 rounded-md border border-border bg-background p-4"
+    >
+      <input type="hidden" name="competition_id" value={competitionId} />
+      {stream ? <input type="hidden" name="id" value={stream.id} /> : null}
+
+      <div className="grid gap-3 sm:grid-cols-[9rem_1fr_1fr_6rem_auto]">
+        <div className="space-y-1">
+          <Label htmlFor={`stream-mat-${id}`}>{t("matName")}</Label>
+          <Input
+            id={`stream-mat-${id}`}
+            name="mat_name"
+            required
+            defaultValue={stream?.mat_name ?? ""}
+            placeholder={t("matPlaceholder")}
+          />
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor={`stream-label-${id}`} optional={t("optional")}>
+            {t("streamLabel")}
+          </Label>
+          <Input
+            id={`stream-label-${id}`}
+            name="stream_label"
+            defaultValue={stream?.stream_label ?? ""}
+            placeholder={t("labelPlaceholder")}
+          />
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor={`stream-url-${id}`}>{t("streamUrl")}</Label>
+          <Input
+            id={`stream-url-${id}`}
+            name="stream_url"
+            type="url"
+            required
+            defaultValue={stream?.stream_url ?? ""}
+            placeholder="https://..."
+          />
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor={`stream-order-${id}`} optional={t("optional")}>
+            {t("sortOrder")}
+          </Label>
+          <Input
+            id={`stream-order-${id}`}
+            name="sort_order"
+            type="number"
+            defaultValue={stream?.sort_order ?? ""}
+          />
+        </div>
+        <div className="flex items-end">
+          <SubmitButton size="sm" pendingLabel={t("saving")}>
+            {stream ? t("save") : t("add")}
+          </SubmitButton>
+        </div>
+      </div>
+
+      <div className="space-y-1">
+        <Label htmlFor={`stream-notes-${id}`} optional={t("optional")}>
+          {t("notes")}
+        </Label>
+        <Textarea
+          id={`stream-notes-${id}`}
+          name="notes"
+          rows={2}
+          defaultValue={stream?.notes ?? ""}
+          placeholder={t("notesPlaceholder")}
+        />
+      </div>
+    </form>
+  );
+}
+
 export default async function AdminCompetitionDetailPage({
   params,
 }: {
@@ -515,6 +605,7 @@ export default async function AdminCompetitionDetailPage({
   const t = await getTranslations({ locale, namespace: "admin.competitions" });
   const tf = await getTranslations({ locale, namespace: "admin.competitionFighter" });
   const tm = await getTranslations({ locale, namespace: "admin.competitionMatch" });
+  const ts = await getTranslations({ locale, namespace: "admin.competitionStreams" });
   const formT = await getTranslations({ locale, namespace: "admin.competitionForm" });
 
   const supabase = await createClient();
@@ -529,24 +620,35 @@ export default async function AdminCompetitionDetailPage({
   if (!competitionData) notFound();
   const competition = competitionData as Competition;
 
-  const [{ data: fightersData }, { data: matchesData }, { data: membersData }] =
-    await Promise.all([
-      supabase
-        .from("competition_fighters")
-        .select("*")
-        .eq("competition_id", id)
-        .order("first_match_at", { ascending: true, nullsFirst: false })
-        .order("full_name", { ascending: true }),
-      supabase
-        .from("competition_matches")
-        .select("*")
-        .order("match_order", { ascending: true }),
-      supabase.from("members").select("*").order("full_name", { ascending: true }),
-    ]);
+  const [
+    { data: fightersData },
+    { data: matchesData },
+    { data: membersData },
+    { data: matStreamsData },
+  ] = await Promise.all([
+    supabase
+      .from("competition_fighters")
+      .select("*")
+      .eq("competition_id", id)
+      .order("first_match_at", { ascending: true, nullsFirst: false })
+      .order("full_name", { ascending: true }),
+    supabase
+      .from("competition_matches")
+      .select("*")
+      .order("match_order", { ascending: true }),
+    supabase.from("members").select("*").order("full_name", { ascending: true }),
+    supabase
+      .from("competition_mat_streams")
+      .select("*")
+      .eq("competition_id", id)
+      .order("sort_order", { ascending: true })
+      .order("mat_name", { ascending: true }),
+  ]);
 
   const fighters = (fightersData ?? []) as CompetitionFighter[];
   const matches = (matchesData ?? []) as CompetitionMatch[];
   const members = (membersData ?? []) as Member[];
+  const matStreams = (matStreamsData ?? []) as CompetitionMatStream[];
   const matchesByFighter = new Map<string, CompetitionMatch[]>();
   for (const match of matches) {
     const next = matchesByFighter.get(match.fighter_id) ?? [];
@@ -627,6 +729,46 @@ export default async function AdminCompetitionDetailPage({
           tone="quiet"
         />
       </div>
+
+      <section className="space-y-4">
+        <div className="flex items-center gap-2">
+          <Video className="size-5" />
+          <h2 className="text-lg font-semibold">{ts("heading")}</h2>
+          <span className="rounded-full bg-secondary px-2.5 py-0.5 text-sm font-medium tabular-nums text-secondary-foreground">
+            {matStreams.length}
+          </span>
+        </div>
+        <p className="max-w-2xl text-sm text-muted-foreground">
+          {ts("subtitle")}
+        </p>
+
+        <MatStreamForm competitionId={competition.id} t={ts} />
+
+        {matStreams.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-border bg-card/40 p-6 text-center text-sm text-muted-foreground">
+            {ts("empty")}
+          </div>
+        ) : (
+          <ul className="space-y-3">
+            {matStreams.map((stream) => (
+              <li key={stream.id} className="space-y-2">
+                <MatStreamForm
+                  competitionId={competition.id}
+                  stream={stream}
+                  t={ts}
+                />
+                <form action={deleteCompetitionMatStream}>
+                  <input type="hidden" name="id" value={stream.id} />
+                  <SubmitButton variant="ghost" size="sm">
+                    <Trash2 />
+                    {ts("delete")}
+                  </SubmitButton>
+                </form>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
 
       <section className="space-y-4">
         <div className="flex items-center gap-2">

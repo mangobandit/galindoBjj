@@ -155,6 +155,17 @@ export type CompetitionMatch = {
   created_at: string;
 }
 
+export type CompetitionMatStream = {
+  id: string;
+  competition_id: string;
+  mat_name: string;
+  stream_url: string;
+  stream_label: string | null;
+  sort_order: number;
+  notes: string | null;
+  created_at: string;
+}
+
 export type PublicCompetitionFighter = Omit<
   CompetitionFighter,
   "full_name" | "member_id" | "payment_status" | "coach_notes"
@@ -165,6 +176,8 @@ export type PublicCompetitionFighter = Omit<
 export type PublicCompetitionMatch = CompetitionMatch & {
   competition_id: string;
 }
+
+export type PublicCompetitionMatStream = CompetitionMatStream;
 
 // Generic helper: most columns are server-defaulted on insert.
 type Insertable<T, Required extends keyof T> = Partial<Omit<T, "id" | "created_at">> &
@@ -233,10 +246,16 @@ export type Database = {
         Insertable<CompetitionMatch, "fighter_id">,
         Partial<CompetitionMatch>
       >;
+      competition_mat_streams: TableDef<
+        CompetitionMatStream,
+        Insertable<CompetitionMatStream, "competition_id" | "mat_name" | "stream_url">,
+        Partial<CompetitionMatStream>
+      >;
     };
     Views: {
       public_competition_fighters: ViewDef<PublicCompetitionFighter>;
       public_competition_matches: ViewDef<PublicCompetitionMatch>;
+      public_competition_mat_streams: ViewDef<PublicCompetitionMatStream>;
     };
     Functions: Record<string, never>;
     Enums: {
