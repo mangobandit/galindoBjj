@@ -1,0 +1,223 @@
+{
+  "common": {
+    "brand": "Galindo Jiu-Jitsu",
+    "tagline": "Jiu-Jitsu Brésilien · Gi & No-Gi · Marbella",
+    "nav": {
+      "home": "Accueil",
+      "signup": "S'inscrire",
+      "seminars": "Stages",
+      "competitions": "Compétitions",
+      "contact": "Contact",
+      "admin": "Connexion"
+    },
+    "languageLabel": "Langue",
+    "languages": {
+      "es": "Español",
+      "en": "English",
+      "de": "Deutsch",
+      "it": "Italiano",
+      "pt": "Português",
+      "fr": "Français",
+      "ca": "Català",
+      "ar": "العربية",
+      "ro": "Română"
+    },
+    "days": {
+      "mon": "Lundi",
+      "tue": "Mardi",
+      "wed": "Mercredi",
+      "thu": "Jeudi",
+      "fri": "Vendredi",
+      "sat": "Samedi"
+    },
+    "footer": {
+      "tagline": "Le tatami t'attend.",
+      "rights": "Tous droits réservés.",
+      "note": "Fait avec respect pour l'art."
+    }
+  },
+  "home": {
+    "hero": {
+      "kicker": "Jiu-Jitsu Brésilien",
+      "title": "Viens t'entraîner sur le tatami.",
+      "subtitle": "Seulement du Jiu-Jitsu, bien enseigné. Gi et No-Gi, pour enfants et adultes de tous niveaux. Le premier cours est un essai, sans engagement.",
+      "ctaPrimary": "S'inscrire",
+      "ctaSecondary": "Contact"
+    },
+    "offer": {
+      "title": "Ce que nous travaillons",
+      "gi": "Avec Gi",
+      "giDesc": "Le kimono traditionnel : grips, contrôle et base technique solide.",
+      "nogi": "No-Gi",
+      "nogiDesc": "Sans kimono : plus rapide et dynamique, avec beaucoup de transitions."
+    },
+    "schedule": {
+      "kicker": "Horaires",
+      "title": "Quand nous nous entraînons",
+      "note": "Les horaires sont indicatifs. Confirme-les au moment de t'inscrire.",
+      "kids": "Enfants",
+      "adults": "Adultes"
+    },
+    "seminars": {
+      "kicker": "Stages",
+      "title": "Événements spéciaux",
+      "body": "De temps en temps, nous organisons des stages et des open mats : cours avec invités et sessions thématiques. Découvre les prochains événements et réserve ta place.",
+      "cta": "Voir les stages"
+    },
+    "about": {
+      "title": "Le Professeur",
+      "body": "Galindo passe des années sur le tatami, d'abord en compétition puis depuis longtemps comme enseignant. Des cours simples et sûrs : bases solides, répétition utile et bonne ambiance. Ici, on pratique seulement le Jiu-Jitsu, bien fait.",
+      "lineage": "Formé chez Fusion BJJ"
+    }
+  },
+  "signup": {
+    "kicker": "Inscription",
+    "title": "Réserve ton premier cours",
+    "intro": "Laisse-nous tes coordonnées et le Professeur te contactera. Sans engagement.",
+    "form": {
+      "name": "Nom complet",
+      "namePlaceholder": "Ton nom",
+      "contact": "Téléphone ou email",
+      "contactPlaceholder": "Pour que nous puissions te répondre",
+      "section": "Pour qui est-ce ?",
+      "sectionAdults": "Adultes",
+      "sectionKids": "Enfants",
+      "sectionHelp": "Choisis « Enfants » si tu inscris un mineur.",
+      "language": "Langue préférée",
+      "parentName": "Nom du parent ou tuteur",
+      "parentNamePlaceholder": "Qui est responsable du mineur",
+      "emergency": "Contact d'urgence",
+      "emergencyPlaceholder": "Nom et téléphone",
+      "message": "Message",
+      "messagePlaceholder": "Une question ou quelque chose à savoir ?",
+      "optional": "optionnel",
+      "submit": "Envoyer la demande",
+      "submitting": "Envoi…"
+    },
+    "validation": {
+      "name": "Dis-nous ton nom, s'il te plaît.",
+      "contact": "Nous avons besoin d'un téléphone ou d'un email pour te répondre.",
+      "section": "Choisis adultes ou enfants."
+    },
+    "errors": {
+      "generic": "Impossible d'envoyer. Réessaie dans un instant.",
+      "notConfigured": "Le formulaire n'est pas encore connecté à la base de données. Configure Supabase pour l'activer."
+    },
+    "success": {
+      "title": "Bien reçu — merci !",
+      "body": "Nous avons enregistré ta demande. Le Professeur t'écrira bientôt.",
+      "again": "Envoyer une autre demande",
+      "home": "Retour à l'accueil"
+    }
+  },
+  "seminars": {
+    "kicker": "Stages",
+    "title": "Stages et événements",
+    "intro": "Cours spéciaux, masterclasses avec invités et open mats. Inscris-toi pour réserver ta place et prévenir le Professeur que tu viens.",
+    "empty": "Aucun stage à venir pour le moment. Reviens bientôt.",
+    "free": "Gratuit",
+    "limited": "Places limitées : {count}",
+    "attend": "S'inscrire",
+    "backToList": "Tous les stages",
+    "signUpHeading": "Réserve ta place",
+    "form": {
+      "name": "Nom complet",
+      "namePlaceholder": "Ton nom",
+      "contact": "Téléphone ou email",
+      "contactPlaceholder": "Pour que nous puissions confirmer",
+      "belt": "Ceinture",
+      "beltPlaceholder": "ex. Bleue",
+      "language": "Langue préférée",
+      "message": "Message",
+      "messagePlaceholder": "Quelque chose à savoir ?",
+      "optional": "optionnel",
+      "submit": "Réserver une place",
+      "submitting": "Envoi…"
+    },
+    "validation": {
+      "name": "Dis-nous ton nom, s'il te plaît.",
+      "contact": "Nous avons besoin d'un téléphone ou d'un email pour confirmer."
+    },
+    "errors": {
+      "generic": "Impossible d'envoyer. Réessaie dans un instant.",
+      "notConfigured": "Le formulaire n'est pas encore connecté à la base de données. Configure Supabase pour l'activer."
+    },
+    "success": {
+      "title": "Place réservée !",
+      "body": "Tu es sur la liste pour ce stage. Le Professeur compte sur toi. Si quelque chose change, nous te contacterons avec les coordonnées laissées.",
+      "more": "Voir plus de stages",
+      "home": "Retour à l'accueil"
+    }
+  },
+  "competitions": {
+    "kicker": "Compétitions",
+    "title": "Équipe de compétition",
+    "intro": "Suis les compétiteurs Fusion Galindo : divisions, horaires, résultats et médailles. Les noms des moins de 18 ans restent privés.",
+    "empty": "Aucune compétition n'est encore publiée.",
+    "viewDetails": "Voir le suivi",
+    "backToList": "Toutes les compétitions",
+    "smoothcomp": "Smoothcomp",
+    "teamProfile": "Équipe Smoothcomp",
+    "registration": "Inscription",
+    "fighters": "Combattants",
+    "medals": "Médailles",
+    "medalsCount": "{count} médailles",
+    "liveStreams": "Lives par tatami",
+    "watchLive": "Regarder en direct",
+    "watchMat": "Regarder {mat} en direct",
+    "matSchedule": "Sur ce tatami",
+    "noMatAssignments": "Aucun combat assigné pour le moment.",
+    "matchLogs": "Combats",
+    "noFighters": "Aucun compétiteur n'est encore publié pour cette compétition.",
+    "noMatches": "Aucun combat n'a encore été enregistré.",
+    "privateMinor": "Nom privé car le combattant a moins de 18 ans",
+    "firstMatch": "Premier combat",
+    "mat": "Tatami",
+    "division": "Division",
+    "weight": "Poids",
+    "team": "Équipe",
+    "status": "Statut",
+    "result": "Résultat",
+    "notes": "Notes",
+    "divisionTbd": "Division à confirmer",
+    "timeTbd": "Horaire à confirmer",
+    "registrationStatus": {
+      "needs_signup": "Inscription à faire",
+      "registered": "Inscrit",
+      "confirmed": "Confirmé",
+      "withdrawn": "Retiré"
+    },
+    "results": {
+      "pending": "En attente",
+      "gold": "Or",
+      "silver": "Argent",
+      "bronze": "Bronze",
+      "no_medal": "Pas de médaille",
+      "withdrawn": "Retiré",
+      "win": "Victoire",
+      "loss": "Défaite",
+      "draw": "Match nul",
+      "dq": "DQ"
+    },
+    "giNogiOptions": {
+      "both": "Gi et No-Gi",
+      "gi": "Gi",
+      "nogi": "No-Gi"
+    }
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Parlons-en",
+    "intro": "Des questions avant de t'inscrire ? Écris-nous ou passe à l'académie.",
+    "emailLabel": "Email",
+    "phoneLabel": "Téléphone",
+    "addressLabel": "Où nous sommes",
+    "hoursLabel": "Horaires",
+    "email": "hola@galindobjj.es",
+    "phone": "+34 600 000 000",
+    "address": "Marbella, Espagne",
+    "hours": "Le soir, pendant les cours",
+    "note": "Pour t'inscrire, utilise le formulaire — c'est le plus rapide.",
+    "ctaSignup": "Aller au formulaire"
+  }
+}

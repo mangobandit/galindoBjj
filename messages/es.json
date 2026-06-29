@@ -15,7 +15,12 @@
       "es": "Español",
       "en": "English",
       "de": "Deutsch",
-      "it": "Italiano"
+      "it": "Italiano",
+      "pt": "Português",
+      "fr": "Français",
+      "ca": "Català",
+      "ar": "العربية",
+      "ro": "Română"
     },
     "days": {
       "mon": "Lunes",

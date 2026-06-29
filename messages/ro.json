@@ -1,0 +1,223 @@
+{
+  "common": {
+    "brand": "Galindo Jiu-Jitsu",
+    "tagline": "Jiu-Jitsu Brazilian · Gi & No-Gi · Marbella",
+    "nav": {
+      "home": "Acasă",
+      "signup": "Înscriere",
+      "seminars": "Seminarii",
+      "competitions": "Competiții",
+      "contact": "Contact",
+      "admin": "Autentificare"
+    },
+    "languageLabel": "Limbă",
+    "languages": {
+      "es": "Español",
+      "en": "English",
+      "de": "Deutsch",
+      "it": "Italiano",
+      "pt": "Português",
+      "fr": "Français",
+      "ca": "Català",
+      "ar": "العربية",
+      "ro": "Română"
+    },
+    "days": {
+      "mon": "Luni",
+      "tue": "Marți",
+      "wed": "Miercuri",
+      "thu": "Joi",
+      "fri": "Vineri",
+      "sat": "Sâmbătă"
+    },
+    "footer": {
+      "tagline": "Tatamiul te așteaptă.",
+      "rights": "Toate drepturile rezervate.",
+      "note": "Făcut cu respect pentru artă."
+    }
+  },
+  "home": {
+    "hero": {
+      "kicker": "Jiu-Jitsu Brazilian",
+      "title": "Vino să te antrenezi pe tatami.",
+      "subtitle": "Doar Jiu-Jitsu, predat bine. Gi și No-Gi, pentru copii și adulți de toate nivelurile. Prima clasă este de probă, fără obligații.",
+      "ctaPrimary": "Înscriere",
+      "ctaSecondary": "Contact"
+    },
+    "offer": {
+      "title": "Ce antrenăm",
+      "gi": "Cu Gi",
+      "giDesc": "Kimono-ul tradițional: prize, control și o bază tehnică solidă.",
+      "nogi": "No-Gi",
+      "nogiDesc": "Fără kimono: mai rapid și mai dinamic, cu multe tranziții."
+    },
+    "schedule": {
+      "kicker": "Program",
+      "title": "Când ne antrenăm",
+      "note": "Orele sunt orientative. Confirmă-le când te înscrii.",
+      "kids": "Copii",
+      "adults": "Adulți"
+    },
+    "seminars": {
+      "kicker": "Seminarii",
+      "title": "Evenimente speciale",
+      "body": "Din când în când organizăm seminarii și open mats: cursuri cu invitați și sesiuni tematice. Vezi ce urmează și rezervă-ți locul.",
+      "cta": "Vezi seminarii"
+    },
+    "about": {
+      "title": "Profesorul",
+      "body": "Galindo a petrecut ani pe tatami, mai întâi ca sportiv, iar de mult timp ca instructor. Clase simple și sigure: fundamente solide, repetiție cu sens și atmosferă bună. Aici facem doar Jiu-Jitsu, făcut bine.",
+      "lineage": "Format la Fusion BJJ"
+    }
+  },
+  "signup": {
+    "kicker": "Înscriere",
+    "title": "Rezervă prima ta clasă",
+    "intro": "Lasă-ne datele tale și Profesorul te va contacta. Fără obligații.",
+    "form": {
+      "name": "Nume complet",
+      "namePlaceholder": "Numele tău",
+      "contact": "Telefon sau email",
+      "contactPlaceholder": "Ca să îți putem răspunde",
+      "section": "Pentru cine este?",
+      "sectionAdults": "Adulți",
+      "sectionKids": "Copii",
+      "sectionHelp": "Alege «Copii» dacă înscrii un minor.",
+      "language": "Limba preferată",
+      "parentName": "Numele părintelui sau tutorelui",
+      "parentNamePlaceholder": "Cine este responsabil pentru minor",
+      "emergency": "Contact de urgență",
+      "emergencyPlaceholder": "Nume și telefon",
+      "message": "Mesaj",
+      "messagePlaceholder": "Ai întrebări sau ceva ce ar trebui să știm?",
+      "optional": "opțional",
+      "submit": "Trimite cererea",
+      "submitting": "Se trimite…"
+    },
+    "validation": {
+      "name": "Spune-ne numele tău, te rugăm.",
+      "contact": "Avem nevoie de telefon sau email ca să îți răspundem.",
+      "section": "Alege adulți sau copii."
+    },
+    "errors": {
+      "generic": "Nu s-a putut trimite. Încearcă din nou peste puțin timp.",
+      "notConfigured": "Formularul nu este încă legat la baza de date. Configurează Supabase pentru activare."
+    },
+    "success": {
+      "title": "Am primit — mulțumim!",
+      "body": "Am salvat cererea ta. Profesorul îți va scrie în curând.",
+      "again": "Trimite o altă cerere",
+      "home": "Înapoi acasă"
+    }
+  },
+  "seminars": {
+    "kicker": "Seminarii",
+    "title": "Seminarii și evenimente",
+    "intro": "Clase speciale, masterclass-uri cu invitați și open mats. Înscrie-te ca să îți rezervi locul și să anunți Profesorul că vii.",
+    "empty": "Nu sunt seminarii viitoare momentan. Revino curând.",
+    "free": "Gratuit",
+    "limited": "Locuri limitate: {count}",
+    "attend": "Înscriere",
+    "backToList": "Toate seminariile",
+    "signUpHeading": "Rezervă-ți locul",
+    "form": {
+      "name": "Nume complet",
+      "namePlaceholder": "Numele tău",
+      "contact": "Telefon sau email",
+      "contactPlaceholder": "Ca să putem confirma",
+      "belt": "Centură",
+      "beltPlaceholder": "ex. Albastră",
+      "language": "Limba preferată",
+      "message": "Mesaj",
+      "messagePlaceholder": "Ceva ce ar trebui să știm?",
+      "optional": "opțional",
+      "submit": "Rezervă loc",
+      "submitting": "Se trimite…"
+    },
+    "validation": {
+      "name": "Spune-ne numele tău, te rugăm.",
+      "contact": "Avem nevoie de telefon sau email ca să confirmăm."
+    },
+    "errors": {
+      "generic": "Nu s-a putut trimite. Încearcă din nou peste puțin timp.",
+      "notConfigured": "Formularul nu este încă legat la baza de date. Configurează Supabase pentru activare."
+    },
+    "success": {
+      "title": "Loc rezervat!",
+      "body": "Ești pe listă pentru acest seminar. Profesorul contează pe tine. Dacă se schimbă ceva, te contactăm la datele lăsate.",
+      "more": "Vezi mai multe seminarii",
+      "home": "Înapoi acasă"
+    }
+  },
+  "competitions": {
+    "kicker": "Competiții",
+    "title": "Echipa de competiție",
+    "intro": "Urmărește competitorii Fusion Galindo: divizii, ore, rezultate și medalii. Numele celor sub 18 ani rămân private.",
+    "empty": "Nu există competiții publicate încă.",
+    "viewDetails": "Vezi trackerul",
+    "backToList": "Toate competițiile",
+    "smoothcomp": "Smoothcomp",
+    "teamProfile": "Echipa Smoothcomp",
+    "registration": "Înscriere",
+    "fighters": "Competitori",
+    "medals": "Medalii",
+    "medalsCount": "{count} medalii",
+    "liveStreams": "Live-uri pe tatami",
+    "watchLive": "Vezi live",
+    "watchMat": "Vezi {mat} live",
+    "matSchedule": "Pe acest tatami",
+    "noMatAssignments": "Nu sunt meciuri atribuite încă.",
+    "matchLogs": "Meciuri",
+    "noFighters": "Nu există încă sportivi publicați pentru această competiție.",
+    "noMatches": "Nu au fost înregistrate meciuri încă.",
+    "privateMinor": "Nume privat deoarece sportivul are sub 18 ani",
+    "firstMatch": "Primul meci",
+    "mat": "Tatami",
+    "division": "Divizie",
+    "weight": "Greutate",
+    "team": "Echipă",
+    "status": "Status",
+    "result": "Rezultat",
+    "notes": "Note",
+    "divisionTbd": "Divizie în așteptare",
+    "timeTbd": "Oră în așteptare",
+    "registrationStatus": {
+      "needs_signup": "Trebuie înscris",
+      "registered": "Înscris",
+      "confirmed": "Confirmat",
+      "withdrawn": "Retras"
+    },
+    "results": {
+      "pending": "În așteptare",
+      "gold": "Aur",
+      "silver": "Argint",
+      "bronze": "Bronz",
+      "no_medal": "Fără medalie",
+      "withdrawn": "Retras",
+      "win": "Victorie",
+      "loss": "Înfrângere",
+      "draw": "Egal",
+      "dq": "DQ"
+    },
+    "giNogiOptions": {
+      "both": "Gi și No-Gi",
+      "gi": "Gi",
+      "nogi": "No-Gi"
+    }
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Hai să vorbim",
+    "intro": "Ai întrebări înainte să te înscrii? Scrie-ne sau treci pe la academie.",
+    "emailLabel": "Email",
+    "phoneLabel": "Telefon",
+    "addressLabel": "Unde suntem",
+    "hoursLabel": "Program",
+    "email": "hola@galindobjj.es",
+    "phone": "+34 600 000 000",
+    "address": "Marbella, Spania",
+    "hours": "Seara, în timpul claselor",
+    "note": "Pentru înscriere, folosește formularul — este cel mai rapid.",
+    "ctaSignup": "Mergi la formular"
+  }
+}

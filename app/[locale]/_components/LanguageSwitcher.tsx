@@ -43,7 +43,7 @@ export function LanguageSwitcher({
         value={locale}
         disabled={isPending}
         onChange={(e) => onChange(e.target.value)}
-        className="h-9 w-auto min-w-[7.5rem] pr-8 text-sm"
+        className="h-9 w-auto min-w-[8.75rem] pr-8 text-sm"
       >
         {routing.locales.map((loc) => (
           <option key={loc} value={loc}>

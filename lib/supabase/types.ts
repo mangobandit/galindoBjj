@@ -5,7 +5,16 @@
 
 export type Section = "kids" | "adults";
 export type MemberStatus = "prospect" | "active" | "inactive";
-export type LanguagePref = "es" | "en" | "de" | "it";
+export type LanguagePref =
+  | "es"
+  | "en"
+  | "de"
+  | "it"
+  | "pt"
+  | "fr"
+  | "ca"
+  | "ar"
+  | "ro";
 export type PaymentMethod = "cash" | "transfer" | "other";
 export type PaymentStatus = "paid" | "due";
 export type MerchStatus = "new" | "fulfilled";
