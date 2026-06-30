@@ -76,7 +76,7 @@ export function MemberForm({ member }: { member?: Member }) {
           />
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-3">
           <div className="space-y-2">
             <Label htmlFor="section">{t("section")}</Label>
             <Select
@@ -99,6 +99,25 @@ export function MemberForm({ member }: { member?: Member }) {
               <option value="prospect">{tm("prospect")}</option>
               <option value="active">{tm("active")}</option>
               <option value="inactive">{tm("inactive")}</option>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="weekly_sessions">{tm("weekly")}</Label>
+            <Select
+              id="weekly_sessions"
+              name="weekly_sessions"
+              defaultValue={
+                member?.weekly_sessions != null
+                  ? String(member.weekly_sessions)
+                  : ""
+              }
+            >
+              <option value="">{tm("weeklyNone")}</option>
+              {[1, 2, 3, 4, 5, 6, 7].map((n) => (
+                <option key={n} value={n}>
+                  {tm("timesPerWeek", { count: n })}
+                </option>
+              ))}
             </Select>
           </div>
         </div>

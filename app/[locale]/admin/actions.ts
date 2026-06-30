@@ -196,6 +196,10 @@ export async function saveMember(
       String(formData.get("belt_degree") || "0"),
     ),
     status: (String(formData.get("status") || "active") as MemberStatus),
+    weekly_sessions: (() => {
+      const n = parseInt(String(formData.get("weekly_sessions") || ""), 10);
+      return Number.isFinite(n) && n > 0 ? n : null;
+    })(),
     date_joined: text("date_joined") ?? new Date().toISOString().slice(0, 10),
     notes: text("notes"),
     parent_name: section === "kids" ? text("parent_name") : null,

@@ -44,6 +44,7 @@ export type Member = {
   section: Section;
   belt_rank: string | null;
   status: MemberStatus;
+  weekly_sessions: number | null; // how many days/week they train
   date_joined: string; // ISO date
   notes: string | null;
   parent_name: string | null;

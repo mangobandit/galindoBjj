@@ -1,5 +1,14 @@
 import { getTranslations } from "next-intl/server";
-import { FilterX, Mail, Pencil, Phone, Plus, Search, Users } from "lucide-react";
+import {
+  CalendarDays,
+  FilterX,
+  Mail,
+  Pencil,
+  Phone,
+  Plus,
+  Search,
+  Users,
+} from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
@@ -163,6 +172,12 @@ export default async function MembersPage({
                   <span>
                     {t("joined")} {formatDate(m.date_joined, locale)}
                   </span>
+                  {m.weekly_sessions ? (
+                    <span className="flex items-center gap-1 text-foreground">
+                      <CalendarDays className="size-3.5" />
+                      {t("timesPerWeek", { count: m.weekly_sessions })}
+                    </span>
+                  ) : null}
                 </div>
               </div>
 
