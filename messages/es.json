@@ -55,6 +55,7 @@
       "kicker": "Horario",
       "title": "Cuándo entrenamos",
       "note": "Horario orientativo. Confírmalo al apuntarte.",
+      "giNote": "Con Gi o sin Gi (No-Gi) según lo que entrene el Profe ese día.",
       "kids": "Niños",
       "adults": "Adultos"
     },

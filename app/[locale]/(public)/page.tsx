@@ -12,12 +12,10 @@ type ScheduleRow = {
 };
 
 const SCHEDULE: ScheduleRow[] = [
-  { day: "mon", time: "17:30 – 18:30", section: "kids" },
-  { day: "mon", time: "19:30 – 21:00", section: "adults" },
-  { day: "wed", time: "17:30 – 18:30", section: "kids" },
-  { day: "wed", time: "19:30 – 21:00", section: "adults" },
-  { day: "fri", time: "19:30 – 21:00", section: "adults" },
-  { day: "sat", time: "11:00 – 12:30", section: "adults" },
+  { day: "tue", time: "18:00 – 20:00", section: "kids" },
+  { day: "tue", time: "20:00 – 22:00", section: "adults" },
+  { day: "thu", time: "18:00 – 20:00", section: "kids" },
+  { day: "thu", time: "20:00 – 22:00", section: "adults" },
 ];
 
 export default function HomePage() {
@@ -97,6 +95,9 @@ export default function HomePage() {
         </div>
         <p className="mt-4 text-sm text-muted-foreground">
           {t("schedule.note")}
+        </p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {t("schedule.giNote")}
         </p>
       </section>
 

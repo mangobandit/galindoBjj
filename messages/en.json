@@ -55,6 +55,7 @@
       "kicker": "Schedule",
       "title": "When we train",
       "note": "Times are a guide. Confirm them when you sign up.",
+      "giNote": "Gi or No-Gi depending on what Profe is teaching that day.",
       "kids": "Kids",
       "adults": "Adults"
     },

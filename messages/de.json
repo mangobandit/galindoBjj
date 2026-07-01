@@ -55,6 +55,7 @@
       "kicker": "Trainingszeiten",
       "title": "Wann wir trainieren",
       "note": "Die Zeiten sind ein Richtwert. Bestätige sie bei der Anmeldung.",
+      "giNote": "Mit oder ohne Gi (No-Gi), je nachdem, was Profe an dem Tag trainiert.",
       "kids": "Kinder",
       "adults": "Erwachsene"
     },

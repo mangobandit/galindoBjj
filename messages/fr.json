@@ -55,6 +55,7 @@
       "kicker": "Horaires",
       "title": "Quand nous nous entraînons",
       "note": "Les horaires sont indicatifs. Confirme-les au moment de t'inscrire.",
+      "giNote": "Avec ou sans Gi (No-Gi) selon ce que le Prof travaille ce jour-là.",
       "kids": "Enfants",
       "adults": "Adultes"
     },

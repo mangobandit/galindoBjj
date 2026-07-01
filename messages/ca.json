@@ -55,6 +55,7 @@
       "kicker": "Horari",
       "title": "Quan entrenem",
       "note": "Els horaris són orientatius. Confirma'ls quan t'apuntis.",
+      "giNote": "Amb Gi o sense Gi (No-Gi) segons el que entreni el Profe aquell dia.",
       "kids": "Infants",
       "adults": "Adults"
     },
