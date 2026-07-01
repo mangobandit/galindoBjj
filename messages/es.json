@@ -169,6 +169,8 @@
     "matSchedule": "En este tatami",
     "noMatAssignments": "Aún no hay combates asignados.",
     "matchLogs": "Combates",
+    "livestream": "Retransmisión",
+    "noStreamYet": "Sin retransmisión todavía",
     "noFighters": "Todavía no hay competidores publicados para esta competición.",
     "noMatches": "Todavía no hay combates registrados.",
     "privateMinor": "Nombre privado por ser menor de 18",

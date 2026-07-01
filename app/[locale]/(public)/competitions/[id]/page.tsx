@@ -7,7 +7,6 @@ import {
   ExternalLink,
   MapPin,
   Medal,
-  Shield,
   Trophy,
   Users,
   Video,
@@ -339,7 +338,6 @@ export default async function CompetitionDetailPage({
       ) : (
         <ul className="mt-5 grid gap-4 lg:grid-cols-2">
           {fighters.map((fighter) => {
-            const fighterMatches = matchesByFighter.get(fighter.id) ?? [];
             const fighterStream = fighter.mat
               ? streamByMat.get(normalizeMat(fighter.mat))
               : null;
@@ -352,12 +350,6 @@ export default async function CompetitionDetailPage({
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
                       <h3 className="text-xl font-bold">{fighter.display_name}</h3>
-                      {fighter.is_minor ? (
-                        <Badge variant="primary">
-                          <Shield className="size-3" />
-                          {t("privateMinor")}
-                        </Badge>
-                      ) : null}
                     </div>
                     <p className="mt-1 text-sm text-muted-foreground">
                       {fighter.team}
@@ -413,80 +405,23 @@ export default async function CompetitionDetailPage({
                   </div>
                 ) : null}
 
-                {fighterStream ? (
-                  <Button asChild variant="outline" size="sm" className="mt-4">
-                    <a
-                      href={fighterStream.stream_url}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <Video />
-                      {t("watchMat", { mat: fighterStream.mat_name })}
-                    </a>
-                  </Button>
-                ) : null}
-
                 <div className="mt-5 border-t border-border pt-4">
-                  <h4 className="font-semibold">{t("matchLogs")}</h4>
-                  {fighterMatches.length === 0 ? (
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      {t("noMatches")}
-                    </p>
+                  <h4 className="font-semibold">{t("livestream")}</h4>
+                  {fighterStream ? (
+                    <Button asChild variant="outline" size="sm" className="mt-3">
+                      <a
+                        href={fighterStream.stream_url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Video />
+                        {t("watchMat", { mat: fighterStream.mat_name })}
+                      </a>
+                    </Button>
                   ) : (
-                    <ul className="mt-3 space-y-2">
-                      {fighterMatches.map((match) => {
-                        const matchStream = match.mat
-                          ? streamByMat.get(normalizeMat(match.mat))
-                          : null;
-                        return (
-                          <li
-                            key={match.id}
-                            className="rounded-md border border-border bg-background p-3 text-sm"
-                          >
-                            <div className="flex flex-wrap items-center gap-2">
-                              <Badge variant={resultVariant(match.result)}>
-                                {t(`results.${match.result}`)}
-                              </Badge>
-                              <span className="font-medium">
-                                #{match.match_order}
-                              </span>
-                              {match.round ? <span>{match.round}</span> : null}
-                            </div>
-                            <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-muted-foreground">
-                              {match.scheduled_at ? (
-                                <span>{formatDateTime(match.scheduled_at, locale)}</span>
-                              ) : null}
-                              {match.mat ? <span>{t("mat")}: {match.mat}</span> : null}
-                              {match.opponent ? <span>{match.opponent}</span> : null}
-                              {match.method ? <span>{match.method}</span> : null}
-                              {match.score ? <span>{match.score}</span> : null}
-                            </div>
-                            {matchStream ? (
-                              <Button
-                                asChild
-                                variant="ghost"
-                                size="sm"
-                                className="mt-2 px-0"
-                              >
-                                <a
-                                  href={matchStream.stream_url}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
-                                  <Video />
-                                  {t("watchLive")}
-                                </a>
-                              </Button>
-                            ) : null}
-                            {match.notes ? (
-                              <p className="mt-2 whitespace-pre-line text-muted-foreground">
-                                {match.notes}
-                              </p>
-                            ) : null}
-                          </li>
-                        );
-                      })}
-                    </ul>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      {t("noStreamYet")}
+                    </p>
                   )}
                 </div>
               </li>
