@@ -39,6 +39,10 @@ export function formatEuros(amount: number | null, locale = "es"): string {
   }).format(Number(amount));
 }
 
+// The academy is in Spain, and pages are server-rendered (the server runs in
+// UTC), so times must be pinned to Spain's timezone or they'd print 2h early.
+const APP_TIME_ZONE = "Europe/Madrid";
+
 /** Short date, e.g. "12 jun 2026". Returns "—" for missing/invalid dates. */
 export function formatDate(iso: string | null, locale = "es"): string {
   if (!iso) return "—";
@@ -48,10 +52,11 @@ export function formatDate(iso: string | null, locale = "es"): string {
     day: "numeric",
     month: "short",
     year: "numeric",
+    timeZone: APP_TIME_ZONE,
   }).format(d);
 }
 
-/** Date + time, e.g. "12 jul 2026, 11:00" — used for seminars (one-off events). */
+/** Date + time, e.g. "12 jul 2026, 11:00" — used for seminars + competitions. */
 export function formatDateTime(iso: string | null, locale = "es"): string {
   if (!iso) return "—";
   const d = new Date(iso);
@@ -62,5 +67,6 @@ export function formatDateTime(iso: string | null, locale = "es"): string {
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: APP_TIME_ZONE,
   }).format(d);
 }
