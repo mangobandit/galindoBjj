@@ -59,32 +59,84 @@ on conflict (id) do nothing;
 
 -- ── Competition fighters (Kimura Cup Malaga 2026 roster) ────────────────
 -- The Fusion roster entered in the seeded Kimura Cup, linked back to members.
+-- Divisions, belts, weights, mats and first-match times come from the
+-- Smoothcomp matchlist (event 31264, club 20763, Day 1 = 2026-07-04).
 -- Team defaults to 'Fusión BJJ - España.'.
 insert into public.competition_fighters (
   competition_id, member_id, full_name, is_minor, age_group, belt_rank,
-  gi_nogi, registration_status, result
+  division, weight_class, gi_nogi, registration_status, weigh_in_status,
+  mat, first_match_at, public_notes, result
 )
 select
   c.id, f.member_id, f.full_name, f.is_minor, f.age_group, f.belt_rank,
-  f.gi_nogi, f.registration_status, f.result
+  f.division, f.weight_class, f.gi_nogi, 'confirmed', 'pending',
+  f.mat, f.first_match_at::timestamptz, f.public_notes, 'pending'
 from public.competitions c
 cross join (values
-  ('a0000000-0000-0000-0000-000000000001'::uuid, 'Manuel Cabeza García',              false, 'adult', null,      'both', 'registered', 'pending'),
-  ('a0000000-0000-0000-0000-000000000002'::uuid, 'Julio Cuadrado Payan',              false, 'adult', 'white:0', 'both', 'registered', 'pending'),
-  ('a0000000-0000-0000-0000-000000000003'::uuid, 'Manuel Santiago Rodriguez Colchon', false, 'adult', 'white:0', 'both', 'registered', 'pending'),
-  ('a0000000-0000-0000-0000-000000000004'::uuid, 'Eduardo García',                    false, 'adult', null,      'both', 'registered', 'pending'),
-  ('c0000000-0000-0000-0000-000000000001'::uuid, 'Paula Maria Cabeza Alba',           true,  'kids',  null,      'gi',   'registered', 'pending'),
-  ('c0000000-0000-0000-0000-000000000002'::uuid, 'Yohana Moreno Salado',              true,  'kids',  null,      'gi',   'registered', 'pending'),
-  ('c0000000-0000-0000-0000-000000000003'::uuid, 'Thiago Toscano Pardo',              true,  'kids',  null,      'gi',   'registered', 'pending'),
-  ('c0000000-0000-0000-0000-000000000004'::uuid, 'Francisco Vicente Nande Fernández', true,  'kids',  null,      'gi',   'registered', 'pending'),
-  ('c0000000-0000-0000-0000-000000000005'::uuid, 'Adonay Medina Martel',              true,  'kids',  null,      'gi',   'registered', 'pending'),
-  ('c0000000-0000-0000-0000-000000000006'::uuid, 'Hugo Falcón Sánchez',               true,  'kids',  null,      'gi',   'registered', 'pending'),
-  ('c0000000-0000-0000-0000-000000000007'::uuid, 'Corayma Valdés Cabeza De Vaca',     true,  'kids',  null,      'gi',   'registered', 'pending'),
-  ('c0000000-0000-0000-0000-000000000008'::uuid, 'Neiva Aragón Lobo',                 true,  'kids',  null,      'gi',   'registered', 'pending')
-) as f(member_id, full_name, is_minor, age_group, belt_rank, gi_nogi, registration_status, result)
+  ('a0000000-0000-0000-0000-000000000001'::uuid, 'Manuel Cabeza García',              false, 'Master 3 (41+)', 'Blue',
+     'Male Gi / Blue / Master 3 (41+) / -69 kg (Light)',        '-69 kg', 'gi',   '1',  '2026-07-04 13:19+02', null),
+  ('a0000000-0000-0000-0000-000000000002'::uuid, 'Julio Cuadrado Payan',              false, 'Master 1 (30+)', 'White',
+     'Male Gi / White / Master 1 (30+) / -69 kg (Light)',       '-69 kg', 'both', '9',  '2026-07-04 14:51+02', 'No-Gi: White / Master 1 / -69 kg — 17:31, Mat 8'),
+  ('a0000000-0000-0000-0000-000000000003'::uuid, 'Manuel Santiago Rodriguez Colchon', false, 'Master 1 (30+)', 'White',
+     'Male Gi / White / Master 1 (30+) / -62 kg (Feather)',     '-62 kg', 'both', '6',  '2026-07-04 14:37+02', 'No-Gi: White / Adult / -62 kg — 17:04, Mat 9'),
+  ('a0000000-0000-0000-0000-000000000004'::uuid, 'Eduardo García',                    false, 'Master 1 (30+)', 'Blue',
+     'Male Gi / Blue / Master 1 (30+) / -69 kg (Light)',        '-69 kg', 'both', '1',  '2026-07-04 12:43+02', 'No-Gi: Blue / Master 1 / -69 kg — 16:07, Mat 5'),
+  ('c0000000-0000-0000-0000-000000000001'::uuid, 'Paula Maria Cabeza Alba',           true,  'Infant',         'Yellow-Grey',
+     'Girls Gi / Yellow-Grey / Combined / -28 kg',              '-28 kg', 'both', '9',  '2026-07-04 10:06+02', 'No-Gi: Yellow-Grey / -32 kg — 11:29, Mat 3 · Orange / -36 kg — 11:35, Mat 6'),
+  ('c0000000-0000-0000-0000-000000000002'::uuid, 'Yohana Moreno Salado',              true,  'Junior',         'Grey',
+     'Girls Gi / Grey / Junior / -44 kg',                       '-44 kg', 'both', '9',  '2026-07-04 10:23+02', 'No-Gi: Grey / -44 kg — 11:35, Mat 10'),
+  ('c0000000-0000-0000-0000-000000000003'::uuid, 'Thiago Toscano Pardo',              true,  'kids 3',         'White',
+     'Boys Gi / White / kids 3 / -30 kg',                       '-30 kg', 'both', '10', '2026-07-04 10:03+02', 'No-Gi: White / -27 kg — 11:18, Mat 6'),
+  ('c0000000-0000-0000-0000-000000000004'::uuid, 'Francisco Vicente Nande Fernández', true,  'kids 2',         'White',
+     'Boys Gi / White / kids 2 / -23 kg',                       '-23 kg', 'both', '2',  '2026-07-04 10:03+02', 'No-Gi: White / -23 kg — 11:23, Mat 3'),
+  ('c0000000-0000-0000-0000-000000000005'::uuid, 'Adonay Medina Martel',              true,  'kids 3',         'Grey',
+     'Boys Gi / Grey / kids 3 / -30 kg',                        '-30 kg', 'both', '8',  '2026-07-04 10:11+02', 'No-Gi: Grey / -27 kg — 11:26, Mat 7'),
+  ('c0000000-0000-0000-0000-000000000006'::uuid, 'Hugo Falcón Sánchez',               true,  'kids 3',         'White',
+     'Boys Gi / White / kids 3 / -30 kg',                       '-30 kg', 'both', '10', '2026-07-04 10:00+02', 'No-Gi: White / -30 kg — 11:26, Mat 2'),
+  ('c0000000-0000-0000-0000-000000000007'::uuid, 'Corayma Valdés Cabeza De Vaca',     true,  'Infant',         'White',
+     'Girls Gi / White / Infant / -40 kg',                      '-40 kg', 'both', '7',  '2026-07-04 10:15+02', 'No-Gi: White / -40 kg — 11:27, Mat 9'),
+  ('c0000000-0000-0000-0000-000000000008'::uuid, 'Neiva Aragón Lobo',                 true,  'Youth',          'White',
+     'Juvenile Girls Gi / White / Youth / -52 kg',              '-52 kg', 'both', '3',  '2026-07-04 11:09+02', 'No-Gi: White / -52 kg — 12:10, Mat 7')
+) as f(member_id, full_name, is_minor, age_group, belt_rank, division, weight_class, gi_nogi, mat, first_match_at, public_notes)
 where c.title = 'Kimura Cup Malaga 2026'
   and not exists (
     select 1 from public.competition_fighters existing
     where existing.competition_id = c.id
       and existing.full_name = f.full_name
   );
+
+-- ── Competition matches (Smoothcomp matchlist, Day 1) ───────────────────
+-- One row per scheduled match; opponents include their club. Guarded so a
+-- fighter who already has matches is left untouched.
+insert into public.competition_matches (fighter_id, match_order, opponent, scheduled_at, mat, notes)
+select cf.id, v.ord, v.opp, v.at::timestamptz, v.mat, v.notes
+from (values
+  ('Manuel Cabeza García',              1, 'Aurelio Palomo Suárez (Atitude BJJ Málaga)',                 '2026-07-04 13:19+02', '1',  'Gi · Smoothcomp 1-44'),
+  ('Julio Cuadrado Payan',              1, 'Carlos De Cea (OCTO Team Málaga)',                           '2026-07-04 14:51+02', '9',  'Gi · Smoothcomp 9-62'),
+  ('Julio Cuadrado Payan',              2, 'Alexis Molina (Crazy Team)',                                 '2026-07-04 17:31+02', '8',  'No-Gi · Smoothcomp 8-89'),
+  ('Manuel Santiago Rodriguez Colchon', 1, 'Jesús Serrano Muñoz (Carceglia Team)',                       '2026-07-04 14:37+02', '6',  'Gi · Smoothcomp 6-59'),
+  ('Manuel Santiago Rodriguez Colchon', 2, 'Sergio Cortes (TropicalSquadbjj)',                           '2026-07-04 17:04+02', '9',  'No-Gi · Smoothcomp 9-84'),
+  ('Eduardo García',                    1, 'Ignacio García Velasco (Next Level Jiu-jitsu)',              '2026-07-04 12:43+02', '1',  'Gi · Smoothcomp 1-38'),
+  ('Eduardo García',                    2, 'Antonio Peralta Ramirez (The Flow Academy)',                 '2026-07-04 16:07+02', '5',  'No-Gi · Smoothcomp 5-73'),
+  ('Paula Maria Cabeza Alba',           1, 'Yrsa Carlsson Nytomt (The Flow Academy)',                    '2026-07-04 10:06+02', '9',  'Gi · Smoothcomp 9-3'),
+  ('Paula Maria Cabeza Alba',           2, 'Farah Benyoussef Royo (Angry Chill BJJ)',                    '2026-07-04 11:29+02', '3',  'No-Gi -32 kg · Smoothcomp 3-24'),
+  ('Paula Maria Cabeza Alba',           3, 'Vega Lobo Cervantes (CAI Club La Línea)',                    '2026-07-04 11:35+02', '6',  'No-Gi -36 kg · Smoothcomp 6-26'),
+  ('Yohana Moreno Salado',              1, 'Noa Iglesias (Bittan Academy Spain)',                        '2026-07-04 10:23+02', '9',  'Gi · Smoothcomp 9-8'),
+  ('Yohana Moreno Salado',              2, 'Fátima Sofía Villalba Mondragón (PlayJitsu)',                '2026-07-04 11:35+02', '10', 'No-Gi · Smoothcomp 10-25'),
+  ('Thiago Toscano Pardo',              1, 'Enzo Núñez Barea (Bittan Academy Spain)',                    '2026-07-04 10:03+02', '10', 'Gi · Smoothcomp 10-2'),
+  ('Thiago Toscano Pardo',              2, 'Ezra Hanglin Bonnici (Angry Chill BJJ)',                     '2026-07-04 11:18+02', '6',  'No-Gi · Smoothcomp 6-21'),
+  ('Francisco Vicente Nande Fernández', 1, 'José Maria Lagos Campos (OCTO Team Málaga)',                 '2026-07-04 10:03+02', '2',  'Gi · Smoothcomp 2-2'),
+  ('Francisco Vicente Nande Fernández', 2, 'Antonio Lagos Campos (OCTO Team Málaga)',                    '2026-07-04 11:23+02', '3',  'No-Gi · Smoothcomp 3-22'),
+  ('Adonay Medina Martel',              1, 'Thiago Fernández Banffi (Leo Galati JiuJitsu & MMA Marbella)','2026-07-04 10:11+02', '8', 'Gi · Smoothcomp 8-4'),
+  ('Adonay Medina Martel',              2, 'Leo Alba (The Honorable Academy)',                           '2026-07-04 11:26+02', '7',  'No-Gi · Smoothcomp 7-23'),
+  ('Hugo Falcón Sánchez',               1, 'Matheus Flores (Newaza JiuJitsu Academy)',                   '2026-07-04 10:00+02', '10', 'Gi · Smoothcomp 10-1'),
+  ('Hugo Falcón Sánchez',               2, 'Enzo Núñez Barea (Bittan Academy Spain)',                    '2026-07-04 11:26+02', '2',  'No-Gi · Smoothcomp 2-22'),
+  ('Corayma Valdés Cabeza De Vaca',     1, 'Martina Solar (Academia Ikigai)',                            '2026-07-04 10:15+02', '7',  'Gi · Smoothcomp 7-6'),
+  ('Corayma Valdés Cabeza De Vaca',     2, 'Martina Solar (Academia Ikigai)',                            '2026-07-04 11:27+02', '9',  'No-Gi · Smoothcomp 9-24'),
+  ('Neiva Aragón Lobo',                 1, 'Por determinar (perdedora de 3-17)',                         '2026-07-04 11:09+02', '3',  'Gi · Smoothcomp 3-19'),
+  ('Neiva Aragón Lobo',                 2, 'Por determinar (perdedora de 7-32)',                         '2026-07-04 12:10+02', '7',  'No-Gi · Smoothcomp 7-34')
+) as v(full_name, ord, opp, at, mat, notes)
+join public.competition_fighters cf on cf.full_name = v.full_name
+where not exists (
+  select 1 from public.competition_matches cm where cm.fighter_id = cf.id
+);
