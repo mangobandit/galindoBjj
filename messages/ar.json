@@ -1,7 +1,7 @@
 {
   "common": {
     "brand": "Galindo Jiu-Jitsu",
-    "tagline": "جوجيتسو برازيلية · Gi و No-Gi · ماربيا",
+    "tagline": "جوجيتسو برازيلية · Gi و No-Gi · تشيكلانا دي لا فرونتيرا",
     "nav": {
       "home": "الرئيسية",
       "signup": "التسجيل",
@@ -204,7 +204,31 @@
       "both": "Gi و No-Gi",
       "gi": "Gi",
       "nogi": "No-Gi"
-    }
+    },
+    "autoUpdating": "Live",
+    "updated": "Updated",
+    "liveNow": "Live now",
+    "upNext": "Up next",
+    "upcoming": "Upcoming",
+    "podium": "Podium",
+    "winRate": "Win rate",
+    "wins": "wins",
+    "searchPlaceholder": "Search fighters…",
+    "allSections": "All sections",
+    "adults": "Adults",
+    "kids": "Kids",
+    "allResults": "All results",
+    "onlyMedals": "Medals only",
+    "onlyPending": "In progress",
+    "sortTime": "By match time",
+    "sortName": "By name",
+    "sortResult": "By result",
+    "noResultsFilter": "No fighters match your filters.",
+    "versus": "vs",
+    "share": "Share",
+    "linkCopied": "Copied",
+    "livestream": "Livestream",
+    "noStreamYet": "No stream yet"
   },
   "contact": {
     "kicker": "تواصل",
@@ -216,7 +240,7 @@
     "hoursLabel": "الأوقات",
     "email": "hola@galindobjj.es",
     "phone": "+34 600 000 000",
-    "address": "ماربيا، إسبانيا",
+    "address": "تشيكلانا دي لا فرونتيرا، إسبانيا",
     "hours": "مساءً، أثناء أوقات الحصص",
     "note": "للتسجيل، استخدم النموذج — فهو أسرع طريقة.",
     "ctaSignup": "اذهب إلى النموذج"

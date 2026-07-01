@@ -1,7 +1,7 @@
 {
   "common": {
     "brand": "Galindo Jiu-Jitsu",
-    "tagline": "Jiu-Jitsu Brazilian · Gi & No-Gi · Marbella",
+    "tagline": "Jiu-Jitsu Brazilian · Gi & No-Gi · Chiclana de la Frontera",
     "nav": {
       "home": "Acasă",
       "signup": "Înscriere",
@@ -204,7 +204,31 @@
       "both": "Gi și No-Gi",
       "gi": "Gi",
       "nogi": "No-Gi"
-    }
+    },
+    "autoUpdating": "Live",
+    "updated": "Updated",
+    "liveNow": "Live now",
+    "upNext": "Up next",
+    "upcoming": "Upcoming",
+    "podium": "Podium",
+    "winRate": "Win rate",
+    "wins": "wins",
+    "searchPlaceholder": "Search fighters…",
+    "allSections": "All sections",
+    "adults": "Adults",
+    "kids": "Kids",
+    "allResults": "All results",
+    "onlyMedals": "Medals only",
+    "onlyPending": "In progress",
+    "sortTime": "By match time",
+    "sortName": "By name",
+    "sortResult": "By result",
+    "noResultsFilter": "No fighters match your filters.",
+    "versus": "vs",
+    "share": "Share",
+    "linkCopied": "Copied",
+    "livestream": "Livestream",
+    "noStreamYet": "No stream yet"
   },
   "contact": {
     "kicker": "Contact",
@@ -216,7 +240,7 @@
     "hoursLabel": "Program",
     "email": "hola@galindobjj.es",
     "phone": "+34 600 000 000",
-    "address": "Marbella, Spania",
+    "address": "Chiclana de la Frontera, Spania",
     "hours": "Seara, în timpul claselor",
     "note": "Pentru înscriere, folosește formularul — este cel mai rapid.",
     "ctaSignup": "Mergi la formular"
