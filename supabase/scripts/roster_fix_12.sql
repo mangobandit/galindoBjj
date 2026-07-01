@@ -1,7 +1,8 @@
 -- Live-DB roster correction → members AND competitors = these 12 people.
 -- Recreates the 11 previously-deleted people; keeps Manuel Santiago (already present).
 -- Removes the 7 currently-present people who are not on the list.
--- One transaction (atomic).
+-- One transaction (atomic). Idempotent: re-running is a no-op.
+-- APPLIED to production (yenpyoicnesjsicnoxnl) on 2026-07-01 → 12 members / 12 competitors.
 
 begin;
 
@@ -35,7 +36,7 @@ select (select count(*) from del_f) as fighters_removed,
 -- 2. Recreate the 11 missing members (Manuel Santiago already exists → ON CONFLICT skip by name is not unique,
 --    so guard each with NOT EXISTS on full_name).
 insert into public.members (full_name, language_pref, section, belt_rank, status)
-select v.full_name, 'es', v.section, v.belt_rank, 'active'
+select v.full_name, 'es'::language_pref, v.section::section, v.belt_rank, 'active'::member_status
 from (values
   ('Manuel Cabeza García',              'adults', null::text),
   ('Julio Cuadrado Payan',              'adults', 'white:0'),
