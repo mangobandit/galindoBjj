@@ -1,7 +1,7 @@
 {
   "common": {
     "brand": "Galindo Jiu-Jitsu",
-    "tagline": "Jiu-Jitsu Brasiler · Gi i No-Gi · Marbella",
+    "tagline": "Jiu-Jitsu Brasiler · Gi i No-Gi · Chiclana de la Frontera",
     "nav": {
       "home": "Inici",
       "signup": "Apunta-t'hi",
@@ -240,7 +240,7 @@
     "hoursLabel": "Horari",
     "email": "hola@galindobjj.es",
     "phone": "+34 600 000 000",
-    "address": "Marbella, Espanya",
+    "address": "Chiclana de la Frontera, Espanya",
     "hours": "A la tarda, durant les classes",
     "note": "Per apuntar-te, fes servir el formulari — és la manera més ràpida.",
     "ctaSignup": "Anar al formulari"

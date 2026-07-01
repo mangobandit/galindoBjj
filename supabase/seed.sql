@@ -33,7 +33,7 @@ insert into signups (id, name, contact, language, section_interest, message, par
   ('5160117a-0000-0000-0000-000000000002', 'Thomas Weber', '+34 600 444 111',        'de', 'kids',
      'Mein Sohn (8) möchte anfangen. Sprecht ihr Deutsch?', 'Thomas Weber', '+34 600 444 222', false, '2026-06-25 18:40:00+02'),
   ('5160117a-0000-0000-0000-000000000003', 'Chloé Martin', 'chloe.martin@example.com','en', 'adults',
-     'Visiting Marbella for a few months — can I drop in for classes?', null, null, false, '2026-06-26 09:05:00+02')
+     'Visiting Chiclana for a few months — can I drop in for classes?', null, null, false, '2026-06-26 09:05:00+02')
 on conflict (id) do nothing;
 
 -- ── Seminars (one-off events) ───────────────────────────────────────────
@@ -41,13 +41,13 @@ on conflict (id) do nothing;
 insert into seminars (id, title, description, starts_at, location, capacity, price, published) values
   ('5e000000-0000-0000-0000-000000000001', 'Open Mat con cinturón negro invitado',
      E'Tarde de open mat con un cinturón negro invitado de Fusion BJJ. Rondas abiertas, preguntas y un par de detalles técnicos. Abierto a todos los niveles — trae Gi y No-Gi si tienes.',
-     '2026-07-12 11:00:00+02', 'Academia Galindo, Marbella', 30, 0, true),
+     '2026-07-12 11:00:00+02', 'Academia Galindo, Chiclana de la Frontera', 30, 0, true),
   ('5e000000-0000-0000-0000-000000000002', 'Seminario de guardia y pases',
      E'Dos horas centradas en sistema de guardia y pases de presión. Nivel intermedio, pensado para quien ya entrena con regularidad. Plazas limitadas para cuidar el ritmo.',
-     '2026-08-09 10:30:00+02', 'Academia Galindo, Marbella', 20, 25, true),
+     '2026-08-09 10:30:00+02', 'Academia Galindo, Chiclana de la Frontera', 20, 25, true),
   ('5e000000-0000-0000-0000-000000000003', 'Iniciación al No-Gi',
      E'Sesión introductoria de No-Gi: agarres, control sin kimono y primeras transiciones. Para principiantes.',
-     '2026-06-07 11:00:00+02', 'Academia Galindo, Marbella', null, 0, true)
+     '2026-06-07 11:00:00+02', 'Academia Galindo, Chiclana de la Frontera', null, 0, true)
 on conflict (id) do nothing;
 
 -- A few attendees so the Professor's list isn't empty in a demo.
