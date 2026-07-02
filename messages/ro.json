@@ -153,7 +153,7 @@
   "competitions": {
     "kicker": "Competiții",
     "title": "Echipa de competiție",
-    "intro": "Urmărește competitorii Fusion Galindo: divizii, ore, rezultate și medalii. Numele celor sub 18 ani rămân private.",
+    "intro": "Urmărește competitorii Fusion Galindo: divizii, ore, rezultate și medalii.",
     "empty": "Nu există competiții publicate încă.",
     "viewDetails": "Vezi trackerul",
     "backToList": "Toate competițiile",
@@ -171,7 +171,6 @@
     "matchLogs": "Meciuri",
     "noFighters": "Nu există încă sportivi publicați pentru această competiție.",
     "noMatches": "Nu au fost înregistrate meciuri încă.",
-    "privateMinor": "Nume privat deoarece sportivul are sub 18 ani",
     "firstMatch": "Primul meci",
     "mat": "Tatami",
     "division": "Divizie",

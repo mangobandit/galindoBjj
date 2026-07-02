@@ -153,7 +153,7 @@
   "competitions": {
     "kicker": "Competições",
     "title": "Equipa de competição",
-    "intro": "Acompanha os atletas Fusion Galindo: divisões, horários, resultados e medalhas. Os nomes de menores de 18 anos ficam privados.",
+    "intro": "Acompanha os atletas Fusion Galindo: divisões, horários, resultados e medalhas.",
     "empty": "Ainda não há competições publicadas.",
     "viewDetails": "Ver acompanhamento",
     "backToList": "Todas as competições",
@@ -171,7 +171,6 @@
     "matchLogs": "Combates",
     "noFighters": "Ainda não há atletas publicados para esta competição.",
     "noMatches": "Ainda não há combates registados.",
-    "privateMinor": "Nome privado por ser menor de 18",
     "firstMatch": "Primeiro combate",
     "mat": "Tatami",
     "division": "Divisão",
