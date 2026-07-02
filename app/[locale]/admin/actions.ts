@@ -90,6 +90,7 @@ function datetimeValue(formData: FormData, key: string): string | null {
 function revalidateCompetitionPages() {
   revalidateAdmin();
   revalidatePath("/[locale]/admin/competitions/[id]", "page");
+  revalidatePath("/[locale]/admin/competitions/[id]/focus", "page");
   revalidatePath("/[locale]/competitions", "page");
   revalidatePath("/[locale]/competitions/[id]", "page");
 }
@@ -614,6 +615,47 @@ export async function saveCompetitionMatch(formData: FormData) {
     : await supabase.from("competition_matches").insert(payload);
 
   assertOk(error, "saveCompetitionMatch");
+  revalidateCompetitionPages();
+}
+
+// ── Focus mode (event-day one-tap results) ────────────────────────────────
+const quickMatchResults: MatchResult[] = ["pending", "win", "loss", "draw", "dq"];
+const quickFighterResults: CompetitionResult[] = [
+  "pending",
+  "gold",
+  "silver",
+  "bronze",
+  "no_medal",
+  "withdrawn",
+];
+
+export async function setMatchResultQuick(formData: FormData) {
+  const supabase = await client();
+  const id = String(formData.get("id") || "");
+  const result = String(formData.get("result") || "") as MatchResult;
+  if (!id || !quickMatchResults.includes(result)) {
+    throw new Error("setMatchResultQuick failed: invalid input");
+  }
+  const { error } = await supabase
+    .from("competition_matches")
+    .update({ result })
+    .eq("id", id);
+  assertOk(error, "setMatchResultQuick");
+  revalidateCompetitionPages();
+}
+
+export async function setFighterResultQuick(formData: FormData) {
+  const supabase = await client();
+  const id = String(formData.get("id") || "");
+  const result = String(formData.get("result") || "") as CompetitionResult;
+  if (!id || !quickFighterResults.includes(result)) {
+    throw new Error("setFighterResultQuick failed: invalid input");
+  }
+  const { error } = await supabase
+    .from("competition_fighters")
+    .update({ result })
+    .eq("id", id);
+  assertOk(error, "setFighterResultQuick");
   revalidateCompetitionPages();
 }
 

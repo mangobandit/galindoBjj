@@ -56,6 +56,18 @@ export function formatDate(iso: string | null, locale = "es"): string {
   }).format(d);
 }
 
+/** Time only, e.g. "10:23" — used for event-day views like focus mode. */
+export function formatTime(iso: string | null, locale = "es"): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "—";
+  return new Intl.DateTimeFormat(locale, {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: APP_TIME_ZONE,
+  }).format(d);
+}
+
 /** Date + time, e.g. "12 jul 2026, 11:00" — used for seminars + competitions. */
 export function formatDateTime(iso: string | null, locale = "es"): string {
   if (!iso) return "—";

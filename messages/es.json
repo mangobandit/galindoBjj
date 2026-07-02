@@ -433,7 +433,8 @@
       "scheduled": "{count} con hora",
       "smoothcomp": "Smoothcomp",
       "manage": "Gestionar",
-      "editDetails": "Editar la competición"
+      "editDetails": "Editar la competición",
+      "focusMode": "Modo focus"
     },
     "competitionForm": {
       "newTitle": "Nueva competición",
@@ -569,6 +570,17 @@
       "notes": "Notas públicas",
       "notesPlaceholder": "p. ej. cambia a este directo cuando anuncien la mesa",
       "optional": "opcional"
+    },
+    "focus": {
+      "title": "Modo focus",
+      "subtitle": "Resultados en dos toques desde el tatami. La web pública se actualiza sola.",
+      "back": "Volver a la competición",
+      "inPlay": "En juego",
+      "done": "Terminados",
+      "finalResult": "Resultado final",
+      "reset": "Deshacer",
+      "noMatches": "Sin combates registrados.",
+      "noFighters": "No hay competidores en esta competición."
     },
     "common": {
       "saveError": "Algo ha fallado. Inténtalo de nuevo.",
