@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   CalendarDays,
   Clock,
+  Crosshair,
   ExternalLink,
   MapPin,
   Medal,
@@ -698,26 +699,30 @@ export default async function AdminCompetitionDetailPage({
           </div>
         }
         action={
-          competition.bracket_url || competition.team_url ? (
-            <div className="flex flex-wrap gap-2">
-              {competition.team_url ? (
-                <Button asChild variant="outline">
-                  <a href={competition.team_url} target="_blank" rel="noreferrer">
-                    <ExternalLink />
-                    {t("teamProfile")}
-                  </a>
-                </Button>
-              ) : null}
-              {competition.bracket_url ? (
-                <Button asChild variant="outline">
-                  <a href={competition.bracket_url} target="_blank" rel="noreferrer">
-                    <ExternalLink />
-                    {t("smoothcomp")}
-                  </a>
-                </Button>
-              ) : null}
-            </div>
-          ) : null
+          <div className="flex flex-wrap gap-2">
+            <Button asChild>
+              <Link href={`/admin/competitions/${competition.id}/focus`}>
+                <Crosshair />
+                {t("focusMode")}
+              </Link>
+            </Button>
+            {competition.team_url ? (
+              <Button asChild variant="outline">
+                <a href={competition.team_url} target="_blank" rel="noreferrer">
+                  <ExternalLink />
+                  {t("teamProfile")}
+                </a>
+              </Button>
+            ) : null}
+            {competition.bracket_url ? (
+              <Button asChild variant="outline">
+                <a href={competition.bracket_url} target="_blank" rel="noreferrer">
+                  <ExternalLink />
+                  {t("smoothcomp")}
+                </a>
+              </Button>
+            ) : null}
+          </div>
         }
       />
 
