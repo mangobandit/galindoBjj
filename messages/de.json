@@ -153,7 +153,7 @@
   "competitions": {
     "kicker": "Wettkämpfe",
     "title": "Wettkampfteam",
-    "intro": "Verfolge die Fusion Galindo Starter: Divisionen, Zeiten, Ergebnisse und Medaillen. Namen von unter 18-Jährigen bleiben privat.",
+    "intro": "Verfolge die Fusion Galindo Starter: Divisionen, Zeiten, Ergebnisse und Medaillen.",
     "empty": "Noch keine Wettkämpfe veröffentlicht.",
     "viewDetails": "Tracker ansehen",
     "backToList": "Alle Wettkämpfe",
@@ -171,7 +171,6 @@
     "matchLogs": "Kämpfe",
     "noFighters": "Für diesen Wettkampf sind noch keine Starter veröffentlicht.",
     "noMatches": "Noch keine Kämpfe eingetragen.",
-    "privateMinor": "Name privat, weil die Person unter 18 ist",
     "firstMatch": "Erster Kampf",
     "mat": "Matte",
     "division": "Division",

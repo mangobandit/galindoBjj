@@ -153,7 +153,7 @@
   "competitions": {
     "kicker": "Competicions",
     "title": "Equip de competició",
-    "intro": "Segueix els competidors de Fusion Galindo: divisions, horaris, resultats i medalles. Els noms dels menors de 18 anys es mantenen privats.",
+    "intro": "Segueix els competidors de Fusion Galindo: divisions, horaris, resultats i medalles.",
     "empty": "Encara no hi ha competicions publicades.",
     "viewDetails": "Veure seguiment",
     "backToList": "Totes les competicions",
@@ -171,7 +171,6 @@
     "matchLogs": "Combats",
     "noFighters": "Encara no hi ha competidors publicats per a aquesta competició.",
     "noMatches": "Encara no hi ha combats registrats.",
-    "privateMinor": "Nom privat perquè el competidor és menor de 18 anys",
     "firstMatch": "Primer combat",
     "mat": "Tatami",
     "division": "Divisió",

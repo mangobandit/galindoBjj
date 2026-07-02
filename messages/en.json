@@ -153,7 +153,7 @@
   "competitions": {
     "kicker": "Competitions",
     "title": "Competition team",
-    "intro": "Track Fusion Galindo competitors: divisions, times, results and medals. Names for under-18 fighters stay private.",
+    "intro": "Track Fusion Galindo competitors: divisions, times, results and medals.",
     "empty": "No competitions are published yet.",
     "viewDetails": "View tracker",
     "backToList": "All competitions",
@@ -171,7 +171,6 @@
     "matchLogs": "Matches",
     "noFighters": "No fighters are published for this competition yet.",
     "noMatches": "No matches have been logged yet.",
-    "privateMinor": "Name private because fighter is under 18",
     "firstMatch": "First match",
     "mat": "Mat",
     "division": "Division",
