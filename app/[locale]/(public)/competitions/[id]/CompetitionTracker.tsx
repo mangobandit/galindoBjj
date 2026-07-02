@@ -21,6 +21,7 @@ import { Select } from "@/components/ui/select";
 import { createClient } from "@/lib/supabase/client";
 import { hasSupabaseEnv } from "@/lib/supabase/env";
 import { formatDateTime } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import type {
   CompetitionRegistrationStatus,
   CompetitionResult,
@@ -117,6 +118,26 @@ export function CompetitionTracker({
   const [section, setSection] = useState<"all" | "adults" | "kids">("all");
   const [result, setResult] = useState<"all" | "medals" | "pending">("all");
   const [sort, setSort] = useState<"time" | "name" | "result">("time");
+  const [highlightId, setHighlightId] = useState<string | null>(null);
+
+  // Jump from "Live now" / "Up next" to the fighter's full card. Filters are
+  // reset first so the card is guaranteed to be rendered, then the scroll runs
+  // after that re-render via the effect below.
+  const goToFighter = (id: string) => {
+    setQuery("");
+    setSection("all");
+    setResult("all");
+    setHighlightId(id);
+  };
+
+  useEffect(() => {
+    if (!highlightId) return;
+    document
+      .getElementById(`fighter-card-${highlightId}`)
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const timer = setTimeout(() => setHighlightId(null), 2_500);
+    return () => clearTimeout(timer);
+  }, [highlightId]);
 
   // A wall clock that advances so countdowns and the "live now" window move on
   // their own, even between data polls.
@@ -411,21 +432,24 @@ export function CompetitionTracker({
               </div>
               <ul className="mt-3 space-y-2">
                 {liveNow.map((f) => (
-                  <li
-                    key={f.id}
-                    className="flex items-center justify-between gap-3 rounded-md bg-secondary/60 p-2.5 text-sm"
-                  >
-                    <span className="min-w-0">
-                      <span className="block truncate font-semibold">
-                        {f.display_name}
-                      </span>
-                      {f.division ? (
-                        <span className="block truncate text-muted-foreground">
-                          {f.division}
+                  <li key={f.id}>
+                    <button
+                      type="button"
+                      onClick={() => goToFighter(f.id)}
+                      className="flex w-full items-center justify-between gap-3 rounded-md bg-secondary/60 p-2.5 text-left text-sm transition-colors hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+                    >
+                      <span className="min-w-0">
+                        <span className="block truncate font-semibold">
+                          {f.display_name}
                         </span>
-                      ) : null}
-                    </span>
-                    {f.mat ? <Badge variant="success">{f.mat}</Badge> : null}
+                        {f.division ? (
+                          <span className="block truncate text-muted-foreground">
+                            {f.division}
+                          </span>
+                        ) : null}
+                      </span>
+                      {f.mat ? <Badge variant="success">{f.mat}</Badge> : null}
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -439,23 +463,26 @@ export function CompetitionTracker({
               </div>
               <ul className="mt-3 space-y-2">
                 {upNext.map((f) => (
-                  <li
-                    key={f.id}
-                    className="flex items-center justify-between gap-3 rounded-md bg-secondary/50 p-2.5 text-sm"
-                  >
-                    <span className="min-w-0">
-                      <span className="block truncate font-semibold">
-                        {f.display_name}
-                      </span>
-                      {f.mat ? (
-                        <span className="block truncate text-muted-foreground">
-                          {t("mat")} {f.mat}
+                  <li key={f.id}>
+                    <button
+                      type="button"
+                      onClick={() => goToFighter(f.id)}
+                      className="flex w-full items-center justify-between gap-3 rounded-md bg-secondary/50 p-2.5 text-left text-sm transition-colors hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring"
+                    >
+                      <span className="min-w-0">
+                        <span className="block truncate font-semibold">
+                          {f.display_name}
                         </span>
-                      ) : null}
-                    </span>
-                    <span className="shrink-0 text-right text-muted-foreground">
-                      {relLabel(rtf, new Date(f.first_match_at as string).getTime(), now)}
-                    </span>
+                        {f.mat ? (
+                          <span className="block truncate text-muted-foreground">
+                            {t("mat")} {f.mat}
+                          </span>
+                        ) : null}
+                      </span>
+                      <span className="shrink-0 text-right text-muted-foreground">
+                        {relLabel(rtf, new Date(f.first_match_at as string).getTime(), now)}
+                      </span>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -653,7 +680,13 @@ export function CompetitionTracker({
             return (
               <li
                 key={fighter.id}
-                className="rounded-xl border border-border bg-card p-5"
+                id={`fighter-card-${fighter.id}`}
+                className={cn(
+                  "scroll-mt-24 rounded-xl border bg-card p-5 transition-colors duration-500",
+                  highlightId === fighter.id
+                    ? "border-foreground ring-2 ring-foreground/50"
+                    : "border-border",
+                )}
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
